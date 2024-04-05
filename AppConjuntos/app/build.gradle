@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.appconjuntos'
+    namespace 'com.resisafe.appconjuntos'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.appconjuntos"
+        applicationId "com.resisafe.appconjuntos"
         minSdk 21
         targetSdk 33
         versionCode 1
