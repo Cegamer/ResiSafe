@@ -7,12 +7,14 @@
     tools:context=".activityUserRegister">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:background="#0E2954"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/BackgroundColor"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageView4"
@@ -57,14 +59,14 @@
                 tools:text="Nombre" />
 
             <EditText
-                android:id="@+id/editTextNumber6"
+                android:id="@+id/nombreField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/login_inputs"
                 android:ems="10"
                 android:hint="Nombre"
-                android:inputType="number" />
+                android:inputType="text" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -75,14 +77,14 @@
                 tools:text="Apellido" />
 
             <EditText
-                android:id="@+id/editTextNumber7"
+                android:id="@+id/apellidoField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/login_inputs"
                 android:ems="10"
                 android:hint="Apellido"
-                android:inputType="number" />
+                android:inputType="text" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -93,7 +95,7 @@
                 tools:text="Contraseña" />
 
             <EditText
-                android:id="@+id/editTextNumber8"
+                android:id="@+id/contrasenaField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
