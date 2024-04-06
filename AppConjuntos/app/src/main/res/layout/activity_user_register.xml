@@ -101,8 +101,8 @@
                 android:layout_gravity="center"
                 android:background="@drawable/login_inputs"
                 android:ems="10"
+                android:hint="Contraseña"
                 android:inputType="textPassword"
-                android:text="Contraseña"
                 android:textColor="@color/color1" />
 
             <Button

@@ -6,3 +6,8 @@ data class UsuarioRegisterModel (
         val cedula: Int,
         val contraseña: String
 )
+
+data class UsuarioLoginModel(
+        val cedula:Int,
+        val contraseña:String
+)

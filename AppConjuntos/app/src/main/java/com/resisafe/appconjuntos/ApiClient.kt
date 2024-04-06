@@ -1,14 +1,12 @@
 package com.resisafe.appconjuntos
 
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
-    object RetrofitClient {
+object RetrofitClient {
         private const val BASE_URL = "https://more-molly-honest.ngrok-free.app/api/"
 
         val apiService: ApiService by lazy {
@@ -22,8 +20,20 @@ import retrofit2.http.POST
     }
 
 interface ApiService {
-    @POST("Users")
-    fun createPost(@Body usuarioRegister: UsuarioRegisterModel): Call<ApiResponse>
+    @POST("Users/Register")
+    fun registerUser(@Body usuarioRegister: UsuarioRegisterModel): Call<ApiResponse>
+    @POST("Users/Login")
+    fun loginUser(@Body usuarioLogin: UsuarioLoginModel): Call<LoginResponse>
+    @GET("Users/{id}")
+    fun getUserData(@Path("id") userId: Int,@Header("Authorization") token: String): Call<UserData>
+
 }
 
 data class ApiResponse(val message: String)
+data class LoginResponse(val token: String, val userID :Int)
+data class ErrorResponse(val title: String, val status: Int, val detail: String)
+data class UserData(  val idUsuario: Int,
+                      val nombre: String,
+                      val apellido: String,
+                      val cedula: Int,
+                      val contraseña: String)

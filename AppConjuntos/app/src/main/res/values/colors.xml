@@ -12,4 +12,5 @@
     <color name="color3">#2E8A99</color>
     <color name="color4">#84A7A1</color>
     <color name="BackgroundColor">#0E2954</color>
+    <color name="ErrorTextColor">#ff1100</color>
 </resources>

@@ -22,63 +22,81 @@
             android:layout_height="317dp"
             app:srcCompat="@drawable/ic_launcher_foreground" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="19dp" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="328dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            tools:text="Cedula" />
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editTextNumber"
-            android:layout_width="328dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/login_inputs"
-            android:ems="10"
-            android:hint="C.C"
-            android:inputType="number" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="19dp" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="12dp" />
+            <TextView
+                android:id="@+id/errorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/ErrorTextColor" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="328dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            tools:text="Contraseña" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="19dp" />
 
-        <EditText
-            android:id="@+id/editTextNumber2"
-            android:layout_width="328dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/login_inputs"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:text="Contraseña" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="328dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                tools:text="Cedula" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="26dp" />
+            <EditText
+                android:id="@+id/cedulaFieldLogin"
+                android:layout_width="328dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/login_inputs"
+                android:ems="10"
+                android:hint="C.C"
+                android:inputType="number" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="194dp"
-            android:layout_height="61dp"
-            android:layout_gravity="center"
-            android:backgroundTint="#2E8A99"
-            android:text="Iniciar Sesion"
-            app:cornerRadius="10dp"
-            app:rippleColor="#FFE1E1" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="12dp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="328dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                tools:text="Contraseña" />
+
+            <EditText
+                android:id="@+id/contrasenaFieldLogin"
+                android:layout_width="328dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/login_inputs"
+                android:ems="10"
+                android:hint="Contraseña"
+                android:inputType="textPassword" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="26dp" />
+
+            <Button
+                android:id="@+id/botonIniciarSesion"
+                android:layout_width="194dp"
+                android:layout_height="61dp"
+                android:layout_gravity="center"
+                android:backgroundTint="#2E8A99"
+                android:text="Iniciar Sesion"
+                app:cornerRadius="10dp"
+                app:rippleColor="#FFE1E1" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -1,4 +1,8 @@
-﻿using System.Security.Cryptography;
+﻿using APIConjuntos.Models;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace APIConjuntos.Utilities
@@ -23,6 +27,34 @@ namespace APIConjuntos.Utilities
                 return sb.ToString();
             }
         
+        }
+
+
+        private static readonly string _key = "calculadora94audifono43svaso12";
+
+
+        public static string GenerateAuthToken(int userId)
+        {
+            appContext dbcontext = new appContext();
+
+            Usuario userData = dbcontext.Usuarios.First(u => u.IdUsuario == userId);
+ 
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_key);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                new Claim(ClaimTypes.NameIdentifier, userData.IdUsuario.ToString()),
+                new Claim(ClaimTypes.Name, userData.Cedula.ToString())
+            }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
     }
 }

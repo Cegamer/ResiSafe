@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,11 +30,15 @@ class activityUserRegister : AppCompatActivity() {
             )
             val apiService = RetrofitClient.apiService
 
-            apiService.createPost(userData).enqueue(object : Callback<ApiResponse> {
+            apiService.registerUser(userData).enqueue(object : Callback<ApiResponse> {
                 override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                     if (response.isSuccessful) {
-                        val message = response.body()?.message ?: "Response body is null"
-                        Log.d("Tag", message)
+                        val responseBody = response.body()
+                        if (responseBody != null) {
+                            Log.d("Tag", responseBody.toString())
+                        } else {
+                            Log.e("Tag", "Response body is null")
+                        }
                     } else {
                         Log.e("Tag", "Unsuccessful response: ${response.code()}")
                     }
