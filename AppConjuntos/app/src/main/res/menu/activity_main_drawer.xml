@@ -3,18 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/opcionesUsuari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/nav_profileSelectorFragment"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="Perfiles" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/nav_userInfoFragment"
+            android:icon="@drawable/ic_baseline_badge_24"
+            android:title="Mi información" />
+    </group>
+    <group android:id="@+id/OpcionesSesion">
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_userLoginActivity"
+            android:icon="@drawable/ic_baseline_logout_24"
+            android:title="Cerrar Sesión" />
     </group>
 </menu>

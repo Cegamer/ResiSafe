@@ -26,7 +26,8 @@ interface ApiService {
     fun loginUser(@Body usuarioLogin: UsuarioLoginModel): Call<LoginResponse>
     @GET("Users/{id}")
     fun getUserData(@Path("id") userId: Int,@Header("Authorization") token: String): Call<UserData>
-
+    @POST("Perfiles/CrearPerfil")
+    fun createProfile(@Header("Authorization") token: String) : Call<ProfileData>
 }
 
 data class ApiResponse(val message: String)
@@ -37,3 +38,4 @@ data class UserData(  val idUsuario: Int,
                       val apellido: String,
                       val cedula: Int,
                       val contraseña: String)
+data class ProfileData(val idPerfil: Int,val idUsuario: Int,val idConjunto: Int,val idTipoperfil: Int )

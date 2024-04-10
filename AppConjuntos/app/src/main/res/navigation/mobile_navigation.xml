@@ -3,23 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/nav_profileSelectorFragment">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.resisafe.appconjuntos.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
+        android:id="@+id/nav_profileSelectorFragment"
+        android:name="com.resisafe.appconjuntos.ProfileSelectorFragment"
+        android:label="fragment_profile_selector"
+        tools:layout="@layout/fragment_profile_selector" />
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.resisafe.appconjuntos.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_userInfoFragment"
+        android:name="com.resisafe.appconjuntos.UserInfoFragment"
+        android:label="fragment_user_info"
+        tools:layout="@layout/fragment_user_info" />
+    <activity
+        android:id="@+id/nav_userLoginActivity"
+        android:name="com.resisafe.appconjuntos.UserLoginActivity"
+        android:label="activity_user_login"
+        tools:layout="@layout/activity_user_login" />
 
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.resisafe.appconjuntos.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
 </navigation>

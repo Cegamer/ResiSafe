@@ -119,7 +119,7 @@ namespace APIConjuntos.Controllers
             }
 
 
-            string token = UserUtilities.GenerateAuthToken(validLogin.IdUsuario);
+            string token = UserUtilities.GenerateAuthToken(validLogin.IdUsuario,0);
             return new JsonResult(new { Token = token, userID = validLogin.IdUsuario });
 
         }

@@ -33,7 +33,7 @@ namespace APIConjuntos.Utilities
         private static readonly string _key = "calculadora94audifono43svaso12";
 
 
-        public static string GenerateAuthToken(int userId)
+        public static string GenerateAuthToken(int userId,int profileId)
         {
             appContext dbcontext = new appContext();
 
@@ -47,7 +47,8 @@ namespace APIConjuntos.Utilities
                 Subject = new ClaimsIdentity(new[]
                 {
                 new Claim(ClaimTypes.NameIdentifier, userData.IdUsuario.ToString()),
-                new Claim(ClaimTypes.Name, userData.Cedula.ToString())
+                new Claim(ClaimTypes.Name, userData.Cedula.ToString()),
+                new Claim(ClaimTypes.Role, profileId.ToString())
             }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

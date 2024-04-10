@@ -32,18 +32,14 @@ class UsuarioActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarUsuario.toolbar)
 
-        binding.appBarUsuario.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_content_usuario)
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_profileSelectorFragment, R.id.nav_userInfoFragment, R.id.nav_userLoginActivity
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -65,7 +61,7 @@ class UsuarioActivity : AppCompatActivity() {
                     Log.d("Tag", "Enviada Peticion Get con token ${tokenResponse.token} y userId ${tokenResponse.userID}")
                     if (response.isSuccessful) {
                         val post = response.body()
-                        val a : TextView = findViewById(R.id.text_home)
+                        val a : TextView = findViewById(R.id.headerMenuName)
                         if (post != null) {
                             a.text = "${post.cedula} , ${post.nombre}, ${post.apellido}"
                         }
@@ -83,6 +79,8 @@ class UsuarioActivity : AppCompatActivity() {
             })
         }
 
+        var addProfileBtn = 
+
 
     }
 
@@ -93,7 +91,7 @@ class UsuarioActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_usuario)
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }
