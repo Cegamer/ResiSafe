@@ -79,7 +79,6 @@ class UsuarioActivity : AppCompatActivity() {
             })
         }
 
-        var addProfileBtn = 
 
 
     }

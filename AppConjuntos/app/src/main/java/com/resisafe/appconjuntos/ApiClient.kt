@@ -28,6 +28,8 @@ interface ApiService {
     fun getUserData(@Path("id") userId: Int,@Header("Authorization") token: String): Call<UserData>
     @POST("Perfiles/CrearPerfil")
     fun createProfile(@Header("Authorization") token: String) : Call<ProfileData>
+    @GET("Perfiles/DatosPerfil/{id}")
+    fun obtenerDatosPerfiles(@Path("id") userId: Int,@Header("Authorization") token: String) : Call<List<CardItem>>
 }
 
 data class ApiResponse(val message: String)
@@ -39,3 +41,4 @@ data class UserData(  val idUsuario: Int,
                       val cedula: Int,
                       val contraseña: String)
 data class ProfileData(val idPerfil: Int,val idUsuario: Int,val idConjunto: Int,val idTipoperfil: Int )
+data class CardItem(val idPerfil:Int,val nombreConjunto:String,val nombreTipoPerfil:String)

@@ -26,7 +26,8 @@ namespace APIConjuntos.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            if (perfil == null) {
+            if (perfil == null)
+            {
                 var problemDetails = new ProblemDetails
                 {
                     Status = (int)HttpStatusCode.BadRequest,
@@ -49,7 +50,8 @@ namespace APIConjuntos.Controllers
                 return new JsonResult(new { message = "Perfil ya existe" });
             }
 
-            else {
+            else
+            {
                 var problemDetails = new ProblemDetails
                 {
                     Status = (int)HttpStatusCode.Unauthorized,
@@ -60,12 +62,48 @@ namespace APIConjuntos.Controllers
             }
         }
 
-        bool PerfilExiste(Perfil perfil) {
-            if (dbContext.Perfils.FirstOrDefault(p => p.IdUsuario == perfil.IdUsuario && p.IdConjunto == perfil.IdConjunto && p.IdTipoPerfil == perfil.IdTipoPerfil) != null) 
+        bool PerfilExiste(Perfil perfil)
+        {
+            if (dbContext.Perfils.FirstOrDefault(p => p.IdUsuario == perfil.IdUsuario && p.IdConjunto == perfil.IdConjunto && p.IdTipoPerfil == perfil.IdTipoPerfil) != null)
                 return true;
             return false;
         }
 
-      
+        [HttpGet]
+        [Authorize]
+        [Route("DatosPerfil/{idUsuario}")]
+        public IActionResult ObtenerPerfiles([FromRoute] int idUsuario)
+        {
+ 
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (idUsuario == Convert.ToInt32(userId))
+            {
+
+                var perfiles = dbContext.Perfils
+                                        .Where(p => p.IdUsuario == idUsuario)
+                                        .Select(p => new
+                                        {
+                                            IdPerfil = p.IdPerfil,
+                                            NombreConjunto = dbContext.Conjuntos.FirstOrDefault(c => c.IdConjunto == p.IdConjunto).Nombre,
+                                            NombreTipoPerfil = dbContext.TiposDePerfils.FirstOrDefault(tp => tp.IdTipo == p.IdTipoPerfil).NombreTipo
+                                        })
+                                        .ToList();
+                return new JsonResult(perfiles);
+
+
+            }
+            else
+            {
+                var problemDetails = new ProblemDetails
+                {
+                    Status = (int)HttpStatusCode.Unauthorized,
+                    Title = "No tiene acceso al recurso",
+                    Detail = "LOGIN-03",
+                };
+                return Unauthorized(problemDetails);
+            }
+
+
+        }
     }
 }

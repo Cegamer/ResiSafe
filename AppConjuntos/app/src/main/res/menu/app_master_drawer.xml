@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/opciones_conjuntos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkableBehavior="single">
+        <item android:title="Conjuntos">
+            <menu>
+                <item
+                    android:id="@+id/nav_lista_conjuntos"
+                    android:icon="@drawable/ic_baseline_person_24"
+                    android:title="Lista de Conjuntos"/>
+                <item
+                    android:id="@+id/nav_registar_conjunto"
+                    android:icon="@drawable/ic_baseline_person_24"
+                    android:title="Registrar Conjunto"/>
+                <item
+                    android:id="@+id/nav_userInfoFragment"
+                    android:icon="@drawable/ic_baseline_badge_24"
+                    android:title="Agregar Administradores"/>
+            </menu>
+        </item>
+    </group>
+
+
+    <group android:id="@+id/opciones_Usuarios">
+        <item android:title="Usuarios">
+            <menu>
+                <item
+                    android:id="@+id/nav_lista_usuarios"
+                    android:icon="@drawable/ic_baseline_logout_24"
+                    android:title="Lista Usuarios" />
+                <item
+                    android:id="@+id/nav_lista_perfiles"
+                    android:icon="@drawable/ic_baseline_logout_24"
+                    android:title="Lista Perfiles" />
+            </menu>
+        </item>
+    </group>
+
+    <group android:id="@+id/OpcionesSesion">
+        <item
+            android:id="@+id/nav_usuarioActivity"
+            android:icon="@drawable/ic_baseline_logout_24"
+            android:title="Cerrar Perfil" />
+    </group>
+</menu>
