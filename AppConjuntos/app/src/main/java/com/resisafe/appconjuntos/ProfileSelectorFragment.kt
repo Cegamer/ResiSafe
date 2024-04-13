@@ -12,6 +12,7 @@ import android.widget.GridView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.gridlayout.widget.GridLayout
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -86,8 +87,46 @@ class ProfileSelectorFragment : Fragment() {
                                 //AppMaster
                                 "AppMaster" -> {
                                     cardView.setOnClickListener{
-                                        val intent = Intent(context, AppMasterActivity::class.java)
-                                        startActivity(intent)
+
+                                        val apiService = RetrofitClient.apiService
+                                        val idText : TextView = cardView.findViewById(R.id.idPerfil)
+                                        val idPerfil = idText.text.toString().toInt()
+                                        val tokenResponse = ManejadorDeTokens.cargarTokenUsuario(context)
+
+                                        if (tokenResponse != null) {
+                                            apiService.loginProfile(idPerfil, tokenResponse.token).enqueue(object : Callback<LoginResponse> {
+                                                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                                                    if (response.isSuccessful) {
+                                                        val responseBody = response.body()
+                                                        if (responseBody != null) {
+                                                            val token = responseBody.token
+                                                            val userId = responseBody.userID
+                                                            Log.d("Tag", "Token: $token, UserID: $userId")
+                                                            ManejadorDeTokens.guardarTokenUsuario(context,responseBody)
+                                                            Log.d("Tag", "Token Guardado")
+                                                            val intent = Intent(context, AppMasterActivity::class.java)
+                                                            startActivity(intent)
+
+                                                        } else {
+                                                            Log.e("Tag", "Response body is null")
+                                                        }
+                                                    } else {
+                                                        try {
+                                                            val errorBody = response.errorBody()?.string()
+                                                            val errorJson = Gson().fromJson(errorBody, ErrorResponse::class.java)
+                                                            Log.e("Tag", "Unsuccessful response: ${response.code()}, Title: ${errorJson.title}, Detail: ${errorJson.detail}")
+                                                        } catch (e: Exception) {
+                                                            Log.e("Tag", "Failed to parse error response: ${e.message}", e)
+                                                        }
+                                                    }
+                                                }
+
+                                                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                                                    Log.e("Tag", "Failed to make request: ${t.message}", t)
+                                                }
+
+                                            })
+                                        }
                                     }
                                 }
                             }

@@ -3,6 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+
+    <group android:id="@+id/homeGrupo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkableBehavior="single">
+                <item
+                android:id="@+id/appmasterHomeFragment"
+                android:icon="@drawable/ic_baseline_home_24"
+                android:title="Home"/>
+    </group>
     <group
         android:id="@+id/opciones_conjuntos"
         android:layout_width="wrap_content"
@@ -11,11 +21,11 @@
         <item android:title="Conjuntos">
             <menu>
                 <item
-                    android:id="@+id/nav_lista_conjuntos"
+                    android:id="@+id/nav_appmasterListaConjuntosFragment"
                     android:icon="@drawable/ic_baseline_person_24"
                     android:title="Lista de Conjuntos"/>
                 <item
-                    android:id="@+id/nav_registar_conjunto"
+                    android:id="@+id/nav_registrar_conjunto"
                     android:icon="@drawable/ic_baseline_person_24"
                     android:title="Registrar Conjunto"/>
                 <item

@@ -21,8 +21,6 @@ namespace APIConjuntos
 
 
 
-            string _key = "calculadora94audifono43svaso12";
-
         builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => 
             {
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters

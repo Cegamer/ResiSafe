@@ -1,5 +1,6 @@
 ﻿using APIConjuntos.DTO;
 using APIConjuntos.Models;
+using APIConjuntos.Utilities;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -67,6 +68,39 @@ namespace APIConjuntos.Controllers
             if (dbContext.Perfils.FirstOrDefault(p => p.IdUsuario == perfil.IdUsuario && p.IdConjunto == perfil.IdConjunto && p.IdTipoPerfil == perfil.IdTipoPerfil) != null)
                 return true;
             return false;
+        }
+
+
+        [HttpPost]
+        [Authorize]
+        [Route("IniciarPerfil/{id}")]
+        public IActionResult IniciarPerfil([FromRoute] int id)
+        {
+            var usuarioId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            var perfil = dbContext.Perfils.Find(id);
+
+            if (perfil == null)
+            {
+                var problemDetails = new ProblemDetails
+                {
+                    Status = (int)HttpStatusCode.BadRequest,
+                    Title = "El perfil no existe",
+                    Detail = "PF-01"
+                };
+
+                return BadRequest(problemDetails);
+            }
+
+            if (Convert.ToInt32(usuarioId) == perfil.IdUsuario)
+            {
+                string token = UserUtilities.GenerateAuthToken(Convert.ToInt32(usuarioId), perfil.IdPerfil);
+                return new JsonResult(new { Token = token, userID = Convert.ToInt32(usuarioId) });
+            }
+
+            else
+                return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+            
         }
 
         [HttpGet]

@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation2"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/nav_home">
 
     <fragment
         android:id="@+id/nav_home"
         android:name="com.resisafe.appconjuntos.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_appmaster_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
@@ -27,4 +27,14 @@
         android:name="com.resisafe.appconjuntos.UsuarioActivity"
         android:label="app_bar_usuario"
         tools:layout="@layout/app_bar_usuario" />
+    <fragment
+        android:id="@+id/nav_registrar_conjunto"
+        android:name="com.resisafe.appconjuntos.AppmasterRegistrarConjuntoFragment"
+        android:label="fragment_appmaster_registrar_conjunto"
+        tools:layout="@layout/fragment_appmaster_registrar_conjunto" />
+    <fragment
+        android:id="@+id/nav_appmasterListaConjuntosFragment"
+        android:name="com.resisafe.appconjuntos.AppmasterListaConjuntosFragment"
+        android:label="fragment_appmaster_lista_conjuntos"
+        tools:layout="@layout/fragment_appmaster_lista_conjuntos" />
 </navigation>
