@@ -9,7 +9,14 @@
         android:id="@+id/nav_home"
         android:name="com.resisafe.appconjuntos.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_appmaster_home" />
+        tools:layout="@layout/fragment_appmaster_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_registrar_conjunto"
+            app:destination="@id/nav_registrar_conjunto" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_appmasterListaConjuntosFragment"
+            app:destination="@id/nav_appmasterListaConjuntosFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
@@ -36,5 +43,9 @@
         android:id="@+id/nav_appmasterListaConjuntosFragment"
         android:name="com.resisafe.appconjuntos.AppmasterListaConjuntosFragment"
         android:label="fragment_appmaster_lista_conjuntos"
-        tools:layout="@layout/fragment_appmaster_lista_conjuntos" />
+        tools:layout="@layout/fragment_appmaster_lista_conjuntos" >
+        <action
+            android:id="@+id/action_nav_appmasterListaConjuntosFragment_to_nav_registrar_conjunto"
+            app:destination="@id/nav_registrar_conjunto" />
+    </fragment>
 </navigation>

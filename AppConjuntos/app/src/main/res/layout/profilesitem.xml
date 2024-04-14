@@ -35,7 +35,7 @@
                 android:src="@drawable/ic_baseline_person_24" />
 
             <TextView
-                android:id="@+id/ProfileText"
+                android:id="@+id/conjuntoId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

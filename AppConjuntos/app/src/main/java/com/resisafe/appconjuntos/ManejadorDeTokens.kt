@@ -21,9 +21,7 @@ object  ManejadorDeTokens {
         val archivoDatos = File(directorioAlmacenamientoInterno, "datos.json")
 
         try {
-            if (archivoDatos.exists()) {
-                archivoDatos.delete()
-            }
+            eliminarTokenUsuario(context)
             archivoDatos.writeText(jsonString)
             Log.d("Ruta", archivoDatos.absolutePath)
         } catch (e: Exception) {
@@ -44,5 +42,11 @@ object  ManejadorDeTokens {
 
         val bearer = "Bearer $token"
         return LoginResponse(bearer, userID)
+    }
+    fun eliminarTokenUsuario(context: Context) {
+        val archivoDatos = File(context.filesDir, "datos.json")
+        if (archivoDatos.exists()) {
+            archivoDatos.delete()
+        }
     }
 }

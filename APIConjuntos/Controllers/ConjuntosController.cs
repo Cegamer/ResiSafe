@@ -28,8 +28,7 @@ namespace APIConjuntos.Controllers
 
             Perfil perfil = dbContext.Perfils.First(p => p.IdPerfil == userProfile);
 
-            var conjuntoExiste = dbContext.Conjuntos.First(c => c.Nombre == conjunto.Nombre);
-            if(conjuntoExiste != null) {
+            if(dbContext.Conjuntos.Any(c => c.Nombre == conjunto.Nombre)) {
                 var problemDetails = new ProblemDetails
                 {
                     Status = (int)HttpStatusCode.BadRequest,

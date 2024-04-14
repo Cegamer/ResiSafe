@@ -32,6 +32,8 @@ interface ApiService {
     fun obtenerDatosPerfiles(@Path("id") userId: Int,@Header("Authorization") token: String) : Call<List<CardItem>>
     @POST("Conjuntos/CrearConjunto")
     fun crearConjunto(@Body conjunto: Conjunto, @Header("Authorization") token: String) : Call<ApiResponse>
+    @GET("Conjuntos")
+    fun obtenerConjuntos(@Header("Authorization") token:String) : Call<List<Conjunto>>
 
     @POST("Perfiles/IniciarPerfil/{id}")
     fun loginProfile(@Path("id") perfilId:Int,@Header("Authorization") token: String): Call<LoginResponse>

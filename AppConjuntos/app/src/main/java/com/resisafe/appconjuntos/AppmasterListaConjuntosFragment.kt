@@ -1,10 +1,23 @@
 package com.resisafe.appconjuntos
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.navigation.findNavController
+import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +48,62 @@ class AppmasterListaConjuntosFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_appmaster_lista_conjuntos, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val tokenResponse = ManejadorDeTokens.cargarTokenUsuario(this.requireContext())
+        val apiService = RetrofitClient.apiService
+        val context = this.requireContext()
+
+        val boton = view.findViewById<Button>(R.id.buttonNuevoConjunto)
+        boton.setOnClickListener(){
+            view.findNavController().navigate(R.id.action_nav_appmasterListaConjuntosFragment_to_nav_registrar_conjunto)
+        }
+
+        val layout = view.findViewById<LinearLayout>(R.id.layoutListaConjuntos)
+
+        if (tokenResponse != null) {
+            Log.d("Tag", "Token: ${tokenResponse.token}, UserID: ${tokenResponse.userID}")
+
+            apiService.obtenerConjuntos(tokenResponse.token).enqueue(object :
+                Callback<List<Conjunto>> {
+                override fun onResponse(
+                    call: Call<List<Conjunto>>,
+                    response: Response<List<Conjunto>>
+                ) {
+                    if (response.isSuccessful) {
+                        val datos = response.body()!!
+
+                        for (conjunto in datos) {
+                            val cardView = LayoutInflater.from(requireContext()).inflate(R.layout.conjuntositem, null) as CardView
+                            val textViewId = cardView.findViewById<TextView>(R.id.conjuntoId)
+                            val textViewNombre = cardView.findViewById<TextView>(R.id.conjuntoNombre)
+                            val textViewDireccion: TextView = cardView.findViewById(R.id.conjuntoDireccion)
+                            val boton = cardView.findViewById<ImageButton>(R.id.imageButton)
+
+
+                            textViewId.text = conjunto.idConjunto.toString()
+                            textViewNombre.text = conjunto.nombre
+                            textViewDireccion.text = conjunto.direccion
+
+                            layout.addView(cardView)
+                            boton.setOnClickListener(){
+                            }
+
+
+                        }
+                    } else {
+                        Log.e("Tag", "Response body is null")
+                    }
+                }
+
+                override fun onFailure(call: Call<List<Conjunto>>, t: Throwable) {
+                    Log.e("Tag", "Response body is dsafadfafdasf")
+                }
+            })
+        }
+
     }
 
     companion object {

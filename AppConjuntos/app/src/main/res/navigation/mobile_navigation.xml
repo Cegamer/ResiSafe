@@ -15,10 +15,5 @@
         android:name="com.resisafe.appconjuntos.UserInfoFragment"
         android:label="fragment_user_info"
         tools:layout="@layout/fragment_user_info" />
-    <activity
-        android:id="@+id/nav_userLoginActivity"
-        android:name="com.resisafe.appconjuntos.UserLoginActivity"
-        android:label="activity_user_login"
-        tools:layout="@layout/activity_user_login" />
 
 </navigation>
