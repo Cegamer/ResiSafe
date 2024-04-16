@@ -94,7 +94,7 @@ class UsuarioActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<UserData>, t: Throwable) {
-                        Log.e("Tag", "Response body is dsafadfafdasf")
+                        Log.e("Tag", "FalloPeticion")
 
                     }
                 })

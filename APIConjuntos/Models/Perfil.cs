@@ -19,6 +19,7 @@ namespace APIConjuntos.Models
         public int IdUsuario { get; set; }
         public int IdConjunto { get; set; }
         public int IdTipoPerfil { get; set; }
+        public sbyte Activo { get; set; }
 
         public virtual Conjunto IdConjuntoNavigation { get; set; } = null!;
         public virtual TiposDePerfil IdTipoPerfilNavigation { get; set; } = null!;

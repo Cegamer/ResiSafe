@@ -14,6 +14,7 @@ namespace APIConjuntos.Models
         public int IdConjunto { get; set; }
         public string Nombre { get; set; } = null!;
         public string Direccion { get; set; } = null!;
+        public sbyte Activo { get; set; }
 
         public virtual ICollection<Perfil> Perfils { get; set; }
         public virtual ICollection<Zonacomun> Zonacomuns { get; set; }

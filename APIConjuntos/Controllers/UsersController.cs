@@ -145,6 +145,30 @@ namespace APIConjuntos.Controllers
             return Unauthorized(problemDetails);
         }
 
+        [Authorize]
+        [HttpGet("BuscarCedula/{cedula}")]
+        public IActionResult GetByCedula([FromRoute]int cedula)
+        {
+            var perfilid = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
+            Perfil perfil = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == perfilid);
+
+
+            if(perfil != null)
+            {
+                if (perfil.IdTipoPerfil == 4) {
+                    Usuario usuario = dbContext.Usuarios.FirstOrDefault(u => u.Cedula == cedula);
+                    if (usuario != null)
+                    {
+                        return new JsonResult(mapper.Map<UsuariosDTO>(usuario));
+                    }
+                    return NotFound();
+                }
+            }
+            return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+        }
+
+
+
         // PUT api/<UsersController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] UsuariosDTO usuario)

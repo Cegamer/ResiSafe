@@ -1,10 +1,16 @@
 package com.resisafe.appconjuntos
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +41,42 @@ class UserInfoFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user_info, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val tokenResponse = ManejadorDeTokens.cargarTokenUsuario(view.context)
+        val apiService = RetrofitClient.apiService
+
+        if (tokenResponse != null) {
+            apiService.getUserData(tokenResponse.userID, tokenResponse.token)
+                .enqueue(object : Callback<UserData> {
+                    override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
+                        if (response.isSuccessful) {
+                            val usuario = response.body()
+                            val textoCedula: TextView = view.findViewById(R.id.textoCedula)
+                            val textoNombre: TextView = view.findViewById(R.id.textoNombre)
+                            val textoApellido: TextView = view.findViewById(R.id.textoApellido)
+                            val textoContraseña: TextView = view.findViewById(R.id.textoContraseña)
+                            if (usuario != null) {
+                                textoCedula.text = usuario.cedula.toString()
+                                textoNombre.text = usuario.nombre
+                                textoApellido.text = usuario.apellido
+                                textoContraseña.text = usuario.contraseña
+                            }
+
+
+                        } else {
+                            Log.e("Tag", "Response body is null")
+
+                        }
+                    }
+                    override fun onFailure(call: Call<UserData>, t: Throwable) {
+                        Log.e("Tag", "Response body is dsafadfafdasf")
+                    }
+                })
+        }
+        super.onViewCreated(view, savedInstanceState)
     }
 
     companion object {

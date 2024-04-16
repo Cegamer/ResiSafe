@@ -17,7 +17,7 @@ namespace APIConjuntos.Controllers
     {
         Mapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<Conjunto, ConjuntoDTO>().ReverseMap()));
         appContext dbContext = new appContext();
-      
+
         // POST: ConjuntosController/Create
         [HttpPost]
         [Authorize]
@@ -28,18 +28,20 @@ namespace APIConjuntos.Controllers
 
             Perfil perfil = dbContext.Perfils.First(p => p.IdPerfil == userProfile);
 
-            if(dbContext.Conjuntos.Any(c => c.Nombre == conjunto.Nombre)) {
+            if (dbContext.Conjuntos.Any(c => c.Nombre == conjunto.Nombre))
+            {
                 var problemDetails = new ProblemDetails
                 {
                     Status = (int)HttpStatusCode.BadRequest,
                     Title = "Conjunto Ya existe",
                     Detail = "Conjunto ya existe"
                 };
-                return Conflict(problemDetails); }
+                return Conflict(problemDetails);
+            }
 
             if (conjunto == null)
                 return BadRequest(ErrorsUtilities.datosNulos);
-            
+
             if (perfil.IdTipoPerfil == 4)
             {
                 Conjunto conjuntoRegistrar = mapper.Map<ConjuntoDTO, Conjunto>(conjunto);
@@ -53,33 +55,40 @@ namespace APIConjuntos.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public ActionResult getConjuntos()
         {
-            var userProfile = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
 
-            Perfil perfil = dbContext.Perfils.First(p => p.IdPerfil == userProfile);
-
-            if (perfil.IdTipoPerfil == 4)
-            {
                 List<ConjuntoDTO> conjuntos = mapper.Map<List<Conjunto>, List<ConjuntoDTO>>(dbContext.Conjuntos.ToList());
                 return new JsonResult(conjuntos);
-            }
+        }
+        [HttpGet]
+        [Authorize]
+        [Route("{idConjunto}")]
+        public IActionResult getConjunto([FromRoute] int idConjunto)
+        {
+            var userProfile = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
+            Perfil perfil = dbContext.Perfils.First(p => p.IdPerfil == userProfile);
 
-            else
-                return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+            if (LogeadoComoAdministradorOAppmaster(idConjunto, perfil))
+            {
+                ConjuntoDTO conjunto = mapper.Map<ConjuntoDTO>(dbContext.Conjuntos.First(c => c.IdConjunto == idConjunto));
+                if (conjunto != null)
+                    return new JsonResult(conjunto);
+                else return NotFound();
+            }
+            return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
         }
 
         [HttpGet]
         [Authorize]
-        [Route("{idConjunto}/Residentes")]
-        public ActionResult getResidentesConjunto([FromRoute] int idConjunto)
+        [Route("{idConjunto}/Perfiles")]
+        public ActionResult getPerfilesConjunto([FromRoute] int idConjunto)
         {
             var userProfile = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
 
             Perfil perfil = dbContext.Perfils.First(p => p.IdPerfil == userProfile);
 
-            if (perfil.IdTipoPerfil == 4 || (perfil.IdTipoPerfil == 1 && perfil.IdConjunto == idConjunto))
+            if (LogeadoComoAdministradorOAppmaster(idConjunto, perfil))
             {
                 List<PerfilesDTO> residentes = dbContext.Perfils
                             .Where(p => p.IdTipoPerfil == 2 && p.IdConjunto == idConjunto)
@@ -92,5 +101,14 @@ namespace APIConjuntos.Controllers
             else
                 return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
         }
+
+
+        bool LogeadoComoAdministradorOAppmaster(int idConjunto, Perfil perfil)
+        {
+            if (perfil.IdTipoPerfil == 4 || (perfil.IdTipoPerfil == 1 && perfil.IdConjunto == idConjunto))
+                return true;
+            return false;
+        }
     }
+         
 }

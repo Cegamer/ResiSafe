@@ -15,7 +15,7 @@ namespace APIConjuntos.Models
         public string Apellido { get; set; } = null!;
         public int Cedula { get; set; }
         public string Contraseña { get; set; } = null!;
-        public byte[] Foto { get; set; } = null!;
+        public byte[]? Foto { get; set; }
 
         public virtual ICollection<Perfil> Perfils { get; set; }
     }

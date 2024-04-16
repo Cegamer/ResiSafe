@@ -26,6 +26,8 @@ interface ApiService {
     fun loginUser(@Body usuarioLogin: UsuarioLoginModel): Call<LoginResponse>
     @GET("Users/{id}")
     fun getUserData(@Path("id") userId: Int,@Header("Authorization") token: String): Call<UserData>
+    @GET("Users/BuscarCedula/{cedula}")
+    fun getUserByCedula(@Path("cedula") cedula:Int, @Header("Authorization") token: String): Call<UserData>
     @POST("Perfiles/CrearPerfil")
     fun createProfile(@Header("Authorization") token: String) : Call<ProfileData>
     @GET("Perfiles/DatosPerfil/{id}")
@@ -33,10 +35,13 @@ interface ApiService {
     @POST("Conjuntos/CrearConjunto")
     fun crearConjunto(@Body conjunto: Conjunto, @Header("Authorization") token: String) : Call<ApiResponse>
     @GET("Conjuntos")
-    fun obtenerConjuntos(@Header("Authorization") token:String) : Call<List<Conjunto>>
-
+    fun obtenerConjuntos() : Call<List<Conjunto>>
+    @GET("Conjuntos/{id}")
+    fun obtenerInfoConjunto(@Path("id") idConjunto:Int,@Header("Authorization") token:String) : Call<Conjunto>
     @POST("Perfiles/IniciarPerfil/{id}")
     fun loginProfile(@Path("id") perfilId:Int,@Header("Authorization") token: String): Call<LoginResponse>
+    @GET("TipoPerfil")
+    fun getTiposPerfil() :Call<List<TipoPerfil>>
 }
 
 data class ApiResponse(val message: String)
@@ -46,11 +51,14 @@ data class UserData(  val idUsuario: Int,
                       val nombre: String,
                       val apellido: String,
                       val cedula: Int,
-                      val contraseña: String)
-data class ProfileData(val idPerfil: Int,val idUsuario: Int,val idConjunto: Int,val idTipoperfil: Int )
+                      val contraseña: String,
+                      var foto: String)
+data class ProfileData(val idPerfil: Int,val idUsuario: Int,val idConjunto: Int,val idTipoperfil: Int, val activo: Int)
 data class CardItem(val idPerfil:Int,val nombreConjunto:String,val nombreTipoPerfil:String)
 data class Conjunto(
     val idConjunto: Int,
     val nombre: String,
-    val direccion: String
+    val direccion: String,
+    val activo: Int
 )
+data class TipoPerfil(val IdTipo :Int, val nombreTipo: String)

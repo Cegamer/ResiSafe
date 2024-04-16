@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.gridlayout.widget.GridLayout
 import com.google.gson.Gson
+import com.resisafe.appconjuntos.ui.AppMaster.AppMasterActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

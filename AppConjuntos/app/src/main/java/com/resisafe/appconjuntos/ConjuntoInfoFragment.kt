@@ -1,11 +1,18 @@
 package com.resisafe.appconjuntos
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Switch
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,10 +48,63 @@ class ConjuntoInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val tokenResponse = ManejadorDeTokens.cargarTokenUsuario(view.context)
+        val apiService = RetrofitClient.apiService
+
+        val botonResidentes = view.findViewById<Button>(R.id.botonResidentes)
+        val botonVigilantes = view.findViewById<Button>(R.id.botonVigilantes)
+        val botonAdmins = view.findViewById<Button>(R.id.botonAdmins)
+
         val args = arguments
         if (args != null) {
-            val idConjunto = args.getInt("idConjunto")
-            view.findViewById<TextView>(R.id.idConjunto).text = idConjunto.toString()
+            val idConjuntoArg = args.getInt("idConjunto")
+            if (tokenResponse != null) {
+                apiService.obtenerInfoConjunto (idConjuntoArg, tokenResponse.token)
+                    .enqueue(object : Callback<Conjunto> {
+                        override fun onResponse(call: Call<Conjunto>, response: Response<Conjunto>) {
+                            if (response.isSuccessful) {
+                                val conjunto = response.body()
+
+                                val idConjunto = view.findViewById<TextView>(R.id.idConjunto)
+                                val nombreConjunto = view.findViewById<TextView>(R.id.nombreConjunto)
+                                val direccion = view.findViewById<TextView>(R.id.direccion)
+                                val activo = view.findViewById<Switch>(R.id.switch1)
+
+                                if (conjunto != null) {
+                                    idConjunto.text = conjunto.idConjunto.toString()
+                                    nombreConjunto.text = conjunto.nombre
+                                    direccion.text = conjunto.direccion
+                                    activo.isChecked = conjunto.activo == 1;
+                                }
+                                val bundle = Bundle()
+                                bundle.putInt("idConjunto", idConjuntoArg);
+
+                                botonResidentes.setOnClickListener(){
+                                    bundle.putInt("filtroInicial", 2);
+                                    view.findNavController().navigate(R.id.action_conjuntoInfoFragment_to_conjuntoPerfilesListaFragment,bundle)
+                                }
+                                botonVigilantes.setOnClickListener(){
+                                    bundle.putInt("filtroInicial", 3);
+                                    view.findNavController().navigate(R.id.action_conjuntoInfoFragment_to_conjuntoPerfilesListaFragment,bundle)
+                                }
+                                botonAdmins.setOnClickListener(){
+                                    bundle.putInt("filtroInicial", 1);
+                                    view.findNavController().navigate(R.id.action_conjuntoInfoFragment_to_conjuntoPerfilesListaFragment,bundle)
+                                }
+
+
+                            } else {
+                                Log.e("Tag", "Response body is null")
+
+                            }
+                        }
+
+                        override fun onFailure(call: Call<Conjunto>, t: Throwable) {
+                            Log.e("Tag", "FalloPeticion")
+
+                        }
+                    })
+            }
 
         }
     }

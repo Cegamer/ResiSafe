@@ -28,16 +28,8 @@ namespace APIConjuntos.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (perfil == null)
-            {
-                var problemDetails = new ProblemDetails
-                {
-                    Status = (int)HttpStatusCode.BadRequest,
-                    Title = "Los datos no pueden ser nulos",
-                    Detail = "No se ha ingresado ningún dato"
-                };
-
-                return BadRequest(problemDetails);
-            }
+                return BadRequest(ErrorsUtilities.datosNulos);
+            
 
             if (perfil.IdUsuario == Convert.ToInt32(userId))
             {
@@ -140,5 +132,7 @@ namespace APIConjuntos.Controllers
 
 
         }
+
+
     }
 }

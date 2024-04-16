@@ -29,7 +29,7 @@
                     android:icon="@drawable/ic_baseline_person_24"
                     android:title="Registrar Conjunto"/>
                 <item
-                    android:id="@+id/nav_userInfoFragment"
+                    android:id="@+id/action_nav_home_to_perfilCrearFragment"
                     android:icon="@drawable/ic_baseline_badge_24"
                     android:title="Agregar Administradores"/>
             </menu>

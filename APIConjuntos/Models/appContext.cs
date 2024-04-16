@@ -16,7 +16,6 @@ namespace APIConjuntos.Models
         {
         }
 
-
         public virtual DbSet<Conjunto> Conjuntos { get; set; } = null!;
         public virtual DbSet<Icono> Iconos { get; set; } = null!;
         public virtual DbSet<Paquete> Paquetes { get; set; } = null!;
@@ -35,7 +34,7 @@ namespace APIConjuntos.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySQL("Server=127.0.0.1;Port=3306;uid=root;pwd=root;Database=app");
+                optionsBuilder.UseMySQL("Server=localhost;Port=3306;uid=root;pwd=root;Database=app");
             }
         }
 
@@ -143,7 +142,6 @@ namespace APIConjuntos.Models
                 entity.HasOne(d => d.IdTipoPerfilNavigation)
                     .WithMany(p => p.Perfils)
                     .HasForeignKey(d => d.IdTipoPerfil)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("perfil_ibfk_3");
 
                 entity.HasOne(d => d.IdUsuarioNavigation)
@@ -288,7 +286,9 @@ namespace APIConjuntos.Models
 
                 entity.ToTable("residentes");
 
-                entity.Property(e => e.IdPerfil).HasColumnName("ID_Perfil");
+                entity.Property(e => e.IdPerfil)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("ID_Perfil");
 
                 entity.Property(e => e.Apartamento)
                     .HasMaxLength(255)
@@ -315,7 +315,7 @@ namespace APIConjuntos.Models
                 entity.Property(e => e.IdTipo).HasColumnName("ID_TIPO");
 
                 entity.Property(e => e.NombreTipo)
-                    .HasMaxLength(255)
+                    .HasMaxLength(45)
                     .HasColumnName("NOMBRE_TIPO");
             });
 
