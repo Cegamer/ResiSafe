@@ -69,5 +69,28 @@ namespace APIConjuntos.Controllers
             else
                 return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("{idConjunto}/Residentes")]
+        public ActionResult getResidentesConjunto([FromRoute] int idConjunto)
+        {
+            var userProfile = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
+
+            Perfil perfil = dbContext.Perfils.First(p => p.IdPerfil == userProfile);
+
+            if (perfil.IdTipoPerfil == 4 || (perfil.IdTipoPerfil == 1 && perfil.IdConjunto == idConjunto))
+            {
+                List<PerfilesDTO> residentes = dbContext.Perfils
+                            .Where(p => p.IdTipoPerfil == 2 && p.IdConjunto == idConjunto)
+                            .Select(p => mapper.Map<Perfil, PerfilesDTO>(p))
+                            .ToList();
+
+                return new JsonResult(residentes);
+            }
+
+            else
+                return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+        }
     }
 }
