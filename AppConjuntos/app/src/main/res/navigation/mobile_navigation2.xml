@@ -47,5 +47,17 @@
         <action
             android:id="@+id/action_nav_appmasterListaConjuntosFragment_to_nav_registrar_conjunto"
             app:destination="@id/nav_registrar_conjunto" />
+        <action
+            android:id="@+id/action_nav_appmasterListaConjuntosFragment_to_conjuntoInfoFragment"
+            app:destination="@id/conjuntoInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/conjuntoInfoFragment"
+        android:name="com.resisafe.appconjuntos.ConjuntoInfoFragment"
+        android:label="fragment_conjunto_info"
+        tools:layout="@layout/fragment_conjunto_info" >
+        <argument
+            android:name="idConjunto"
+            app:argType="integer" />
     </fragment>
 </navigation>

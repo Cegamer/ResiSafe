@@ -1,20 +1,17 @@
 package com.resisafe.appconjuntos
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -89,6 +86,9 @@ class AppmasterListaConjuntosFragment : Fragment() {
 
                             layout.addView(cardView)
                             boton.setOnClickListener(){
+                                val bundle = Bundle()
+                                bundle.putInt("idConjunto", conjunto.idConjunto);
+                                view.findNavController().navigate(R.id.action_nav_appmasterListaConjuntosFragment_to_conjuntoInfoFragment,bundle)
                             }
 
 
