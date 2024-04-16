@@ -16,6 +16,7 @@ namespace APIConjuntos.Models
         {
         }
 
+
         public virtual DbSet<Conjunto> Conjuntos { get; set; } = null!;
         public virtual DbSet<Icono> Iconos { get; set; } = null!;
         public virtual DbSet<Paquete> Paquetes { get; set; } = null!;

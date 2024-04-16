@@ -23,7 +23,6 @@ namespace APIConjuntos.Utilities
                     sb.Append(salt[i].ToString("x2"));
                 }
 
-
                 return sb.ToString();
             }
         

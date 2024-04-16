@@ -16,10 +16,12 @@ namespace APIConjuntos.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
+
     {
 
         appContext dbContext = new appContext();
         Mapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<Usuario, UsuariosDTO>().ReverseMap()));
+
 
         // GET: api/<UsersController>
         [HttpGet]
@@ -27,8 +29,6 @@ namespace APIConjuntos.Controllers
         {
             return mapper.Map<List<Usuario>, List<UsuariosDTO>>(dbContext.Usuarios.ToList()); ;
         }
-
-
 
         [HttpPost]
         [Route("Register")]

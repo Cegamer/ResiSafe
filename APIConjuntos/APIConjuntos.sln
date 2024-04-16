@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIConjuntos", "APIConjuntos.csproj", "{63FBDED5-C483-44B9-B14B-00FCC03B4579}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIConjuntosTests", "..\APIConjuntosTests\APIConjuntosTests.csproj", "{C6A959DA-880A-4A1F-AD32-FA3076C0507F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIConjuntosTests1", "..\APIConjuntosTests1\APIConjuntosTests1.csproj", "{70125BCF-888B-43DB-83D4-94CD590B29C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{63FBDED5-C483-44B9-B14B-00FCC03B4579}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63FBDED5-C483-44B9-B14B-00FCC03B4579}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63FBDED5-C483-44B9-B14B-00FCC03B4579}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C6A959DA-880A-4A1F-AD32-FA3076C0507F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C6A959DA-880A-4A1F-AD32-FA3076C0507F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C6A959DA-880A-4A1F-AD32-FA3076C0507F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C6A959DA-880A-4A1F-AD32-FA3076C0507F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70125BCF-888B-43DB-83D4-94CD590B29C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70125BCF-888B-43DB-83D4-94CD590B29C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70125BCF-888B-43DB-83D4-94CD590B29C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70125BCF-888B-43DB-83D4-94CD590B29C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
