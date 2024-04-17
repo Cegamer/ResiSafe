@@ -29,7 +29,7 @@ interface ApiService {
     @GET("Users/BuscarCedula/{cedula}")
     fun getUserByCedula(@Path("cedula") cedula:Int, @Header("Authorization") token: String): Call<UserData>
     @POST("Perfiles/CrearPerfil")
-    fun createProfile(@Header("Authorization") token: String) : Call<ProfileData>
+    fun createProfile(@Body ProfileData:ProfileData,@Header("Authorization") token: String) : Call<ApiResponse>
     @GET("Perfiles/DatosPerfil/{id}")
     fun obtenerDatosPerfiles(@Path("id") userId: Int,@Header("Authorization") token: String) : Call<List<CardItem>>
     @POST("Conjuntos/CrearConjunto")
@@ -53,7 +53,7 @@ data class UserData(  val idUsuario: Int,
                       val cedula: Int,
                       val contraseña: String,
                       var foto: String)
-data class ProfileData(val idPerfil: Int,val idUsuario: Int,val idConjunto: Int,val idTipoperfil: Int, val activo: Int)
+data class ProfileData(val IdPerfil: Int, val IdUsuario: Int, val IdConjunto: Int, val IdTipoPerfil: Int, val Activo: Int)
 data class CardItem(val idPerfil:Int,val nombreConjunto:String,val nombreTipoPerfil:String)
 data class Conjunto(
     val idConjunto: Int,
@@ -61,4 +61,4 @@ data class Conjunto(
     val direccion: String,
     val activo: Int
 )
-data class TipoPerfil(val IdTipo :Int, val nombreTipo: String)
+data class TipoPerfil(val idTipo :Int, val nombreTipo: String)

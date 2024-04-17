@@ -3,7 +3,6 @@ using APIConjuntos.Models;
 using APIConjuntos.Utilities;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Security.Claims;
@@ -12,6 +11,7 @@ namespace APIConjuntos.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
+    [ApiController]
     public class PerfilesController : ControllerBase
     {
 
@@ -26,12 +26,19 @@ namespace APIConjuntos.Controllers
         public IActionResult CrearPerfil(PerfilesDTO perfil)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var perfilId = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
+
+            Perfil perfilLogeado = dbContext.Perfils.First(p => p.IdPerfil == perfilId);
+
+
 
             if (perfil == null)
                 return BadRequest(ErrorsUtilities.datosNulos);
             
 
-            if (perfil.IdUsuario == Convert.ToInt32(userId))
+            if ((perfil.IdUsuario == Convert.ToInt32(userId) && perfil.IdTipoPerfil == 2) //Usuario crea su propio perfil de Residente
+                || perfilLogeado.IdTipoPerfil == 4 //Appmaster crea el perfil
+                || (perfilLogeado.IdConjunto == perfil.IdConjunto && perfilLogeado.IdTipoPerfil == 1)) //Administrador crea Perfil en su conjunto
             {
                 Perfil perfilARegistrar = mapper.Map<PerfilesDTO, Perfil>(perfil);
                 if (!PerfilExiste(perfilARegistrar))
@@ -43,16 +50,7 @@ namespace APIConjuntos.Controllers
                 return new JsonResult(new { message = "Perfil ya existe" });
             }
 
-            else
-            {
-                var problemDetails = new ProblemDetails
-                {
-                    Status = (int)HttpStatusCode.Unauthorized,
-                    Title = "No tiene acceso al recurso",
-                    Detail = "LOGIN-03",
-                };
-                return Unauthorized(problemDetails);
-            }
+            return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso); 
         }
 
         bool PerfilExiste(Perfil perfil)

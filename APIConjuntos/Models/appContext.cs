@@ -34,7 +34,7 @@ namespace APIConjuntos.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySQL("Server=localhost;Port=3306;uid=root;pwd=root;Database=app");
+                optionsBuilder.UseMySQL("Server=127.0.0.1;Port=3306;uid=root;pwd=root;Database=app");
             }
         }
 
@@ -119,11 +119,11 @@ namespace APIConjuntos.Models
 
                 entity.ToTable("perfil");
 
-                entity.HasIndex(e => e.IdUsuario, "perfil_ibfk_1");
+                entity.HasIndex(e => e.IdConjunto, "perfil_conjunto_idx");
 
-                entity.HasIndex(e => e.IdConjunto, "perfil_ibfk_2");
+                entity.HasIndex(e => e.IdTipoPerfil, "perfil_tipo_idx");
 
-                entity.HasIndex(e => e.IdTipoPerfil, "perfil_ibfk_3");
+                entity.HasIndex(e => e.IdUsuario, "perfil_usuario_idx");
 
                 entity.Property(e => e.IdPerfil).HasColumnName("ID_Perfil");
 
@@ -136,19 +136,17 @@ namespace APIConjuntos.Models
                 entity.HasOne(d => d.IdConjuntoNavigation)
                     .WithMany(p => p.Perfils)
                     .HasForeignKey(d => d.IdConjunto)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("perfil_ibfk_2");
+                    .HasConstraintName("perfil_conjunto");
 
                 entity.HasOne(d => d.IdTipoPerfilNavigation)
                     .WithMany(p => p.Perfils)
                     .HasForeignKey(d => d.IdTipoPerfil)
-                    .HasConstraintName("perfil_ibfk_3");
+                    .HasConstraintName("perfil_tipo");
 
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Perfils)
                     .HasForeignKey(d => d.IdUsuario)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("perfil_ibfk_1");
+                    .HasConstraintName("perfil_usuario");
             });
 
             modelBuilder.Entity<RegistroVigilante>(entity =>
@@ -391,6 +389,10 @@ namespace APIConjuntos.Models
                 entity.Property(e => e.IdConjunto).HasColumnName("ID_CONJUNTO");
 
                 entity.Property(e => e.IdIcono).HasColumnName("ID_ICONO");
+
+                entity.Property(e => e.IntervaloTurnos)
+                    .HasColumnName("INTERVALO_TURNOS")
+                    .HasComment("En minutos");
 
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(255)

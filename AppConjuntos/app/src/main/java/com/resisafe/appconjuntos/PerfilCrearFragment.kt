@@ -1,8 +1,6 @@
 package com.resisafe.appconjuntos
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +8,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.*
 import android.widget.TextView.OnEditorActionListener
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.resisafe.appconjuntos.RetrofitClient.apiService
 import retrofit2.Call
@@ -94,7 +91,7 @@ class PerfilCrearFragment : Fragment() {
         val cedulaBuscador = view.findViewById<EditText>(R.id.cedulaBuscador)
         val tokenResponse = ManejadorDeTokens.cargarTokenUsuario(this.requireContext())
 
-        val idText = view.findViewById<TextView>(R.id.textView14)
+        val idText = view.findViewById<TextView>(R.id.idUsuarioText)
         val nombreText = view.findViewById<TextView>(R.id.textView11)
 
         if (tokenResponse != null) {
@@ -142,7 +139,7 @@ class PerfilCrearFragment : Fragment() {
                     val datos = response.body()
                     if (datos != null) {
                         for (tipo in datos){
-                            mapTiposPerfil[tipo.nombreTipo] = tipo.IdTipo
+                            mapTiposPerfil[tipo.nombreTipo] = tipo.idTipo
                         }
 
                         val nombresTipos = mapTiposPerfil.keys.toList()
@@ -165,16 +162,48 @@ class PerfilCrearFragment : Fragment() {
         spinnerTipoPerfil.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val nombrePerfil = parent.getItemAtPosition(position).toString()
-                val idPerfil = mapConjuntos[nombrePerfil]
+                val idPerfil = mapTiposPerfil[nombrePerfil]
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
             }
         }
 
+
         val buttonCrearPerfil = view.findViewById<Button>(R.id.buttonCrearPerfil)
 
         buttonCrearPerfil.setOnClickListener{
+            for ((key, value) in mapTiposPerfil) {
+                Log.d("Mapa", "Clave: $key, Valor: $value")
+            }
+            val idUsuario: Int = idText.text.toString().toIntOrNull() ?: 0
+            val idConjunto: Int? = mapConjuntos[spinnerConjunto.selectedItem?.toString()]
+            val idTipoPerfil: Int? = mapTiposPerfil[spinnerTipoPerfil.selectedItem?.toString()]
 
+            val profileData: ProfileData = ProfileData(0, idUsuario, idConjunto ?: 0, idTipoPerfil ?: 0, 1)
+
+            if (tokenResponse != null) {
+                Log.d("WEAAAAAAAAA ", tokenResponse.token)
+                Log.d("Perfil", "${profileData.IdPerfil} -${profileData.IdUsuario} - ${profileData.IdConjunto} - ${profileData.IdTipoPerfil} - ${profileData.Activo}")
+
+                apiService.createProfile(profileData,tokenResponse.token).enqueue(object : Callback<ApiResponse> {
+                    override fun onResponse(
+                        call: Call<ApiResponse>,
+                        response: Response<ApiResponse>
+                    ) {
+
+                        if (response.isSuccessful) {
+                            val datos = response.body()
+
+                        } else {
+                            Log.e("Tag", "Response unsuccessful")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+                        Log.e("Tag", "Error en la solicitud: ${t.message}")
+                    }
+                })
+            }
 
         }
 

@@ -18,6 +18,10 @@ namespace APIConjuntos.Models
         public int AforoMaximo { get; set; }
         public int Precio { get; set; }
         public int IdIcono { get; set; }
+        /// <summary>
+        /// En minutos
+        /// </summary>
+        public int IntervaloTurnos { get; set; }
 
         public virtual Conjunto IdConjuntoNavigation { get; set; } = null!;
         public virtual Icono IdIconoNavigation { get; set; } = null!;
