@@ -1,10 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:background="@color/background_light"
+    android:padding="16dp"
     tools:context=".ConjuntoPerfilesListaFragment">
 
     <LinearLayout
@@ -23,7 +22,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/filtroCedula"
+            android:id="@+id/filtroCedulaUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"

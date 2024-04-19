@@ -6,7 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Spinner
+import android.widget.TextView
 import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import com.resisafe.appconjuntos.RetrofitClient.apiService
@@ -62,7 +67,11 @@ class PerfilCrearFragment : Fragment() {
                             mapConjuntos[conjunto.nombre] = conjunto.idConjunto
                         }
                         val nombresConjuntos = mapConjuntos.keys.toList()
-                        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, nombresConjuntos)
+                        val adapter = ArrayAdapter(
+                            requireContext(),
+                            android.R.layout.simple_spinner_item,
+                            nombresConjuntos
+                        )
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         spinnerConjunto.adapter = adapter
                     } else {
@@ -79,10 +88,16 @@ class PerfilCrearFragment : Fragment() {
         })
 
         spinnerConjunto.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val nombreConjunto = parent.getItemAtPosition(position).toString()
                 val idConjunto = mapConjuntos[nombreConjunto]
             }
+
             override fun onNothingSelected(parent: AdapterView<*>) {
             }
         }
@@ -99,7 +114,10 @@ class PerfilCrearFragment : Fragment() {
             cedulaBuscador.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
 
-                    apiService.getUserByCedula(cedulaBuscador.text.toString().toInt(), tokenResponse.token).enqueue(object : Callback<UserData> {
+                    apiService.getUserByCedula(
+                        cedulaBuscador.text.toString().toInt(),
+                        tokenResponse.token
+                    ).enqueue(object : Callback<UserData> {
                         override fun onResponse(
                             call: Call<UserData>,
                             response: Response<UserData>
@@ -109,12 +127,13 @@ class PerfilCrearFragment : Fragment() {
 
                                 if (datos != null) {
                                     idText.text = datos.idUsuario.toString()
-                                    nombreText.text = datos.nombre +" "+datos.apellido
+                                    nombreText.text = datos.nombre + " " + datos.apellido
                                 }
                             } else {
                                 Log.e("Tag", "Response unsuccessful")
                             }
                         }
+
                         override fun onFailure(call: Call<UserData>, t: Throwable) {
                             Log.e("Tag", "Error en la solicitud: ${t.message}")
                         }
@@ -138,12 +157,16 @@ class PerfilCrearFragment : Fragment() {
                 if (response.isSuccessful) {
                     val datos = response.body()
                     if (datos != null) {
-                        for (tipo in datos){
+                        for (tipo in datos) {
                             mapTiposPerfil[tipo.nombreTipo] = tipo.idTipo
                         }
 
                         val nombresTipos = mapTiposPerfil.keys.toList()
-                        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, nombresTipos)
+                        val adapter = ArrayAdapter(
+                            requireContext(),
+                            android.R.layout.simple_spinner_item,
+                            nombresTipos
+                        )
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         spinnerTipoPerfil.adapter = adapter
                     } else {
@@ -160,10 +183,16 @@ class PerfilCrearFragment : Fragment() {
         })
 
         spinnerTipoPerfil.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val nombrePerfil = parent.getItemAtPosition(position).toString()
                 val idPerfil = mapTiposPerfil[nombrePerfil]
             }
+
             override fun onNothingSelected(parent: AdapterView<*>) {
             }
         }
@@ -171,7 +200,7 @@ class PerfilCrearFragment : Fragment() {
 
         val buttonCrearPerfil = view.findViewById<Button>(R.id.buttonCrearPerfil)
 
-        buttonCrearPerfil.setOnClickListener{
+        buttonCrearPerfil.setOnClickListener {
             for ((key, value) in mapTiposPerfil) {
                 Log.d("Mapa", "Clave: $key, Valor: $value")
             }
@@ -179,30 +208,35 @@ class PerfilCrearFragment : Fragment() {
             val idConjunto: Int? = mapConjuntos[spinnerConjunto.selectedItem?.toString()]
             val idTipoPerfil: Int? = mapTiposPerfil[spinnerTipoPerfil.selectedItem?.toString()]
 
-            val profileData: ProfileData = ProfileData(0, idUsuario, idConjunto ?: 0, idTipoPerfil ?: 0, 1)
+            val profileData: ProfileData =
+                ProfileData(0, idUsuario, idConjunto ?: 0, idTipoPerfil ?: 0, 1)
 
             if (tokenResponse != null) {
                 Log.d("WEAAAAAAAAA ", tokenResponse.token)
-                Log.d("Perfil", "${profileData.IdPerfil} -${profileData.IdUsuario} - ${profileData.IdConjunto} - ${profileData.IdTipoPerfil} - ${profileData.Activo}")
+                Log.d(
+                    "Perfil",
+                    "${profileData.IdPerfil} -${profileData.IdUsuario} - ${profileData.IdConjunto} - ${profileData.IdTipoPerfil} - ${profileData.Activo}"
+                )
 
-                apiService.createProfile(profileData,tokenResponse.token).enqueue(object : Callback<ApiResponse> {
-                    override fun onResponse(
-                        call: Call<ApiResponse>,
-                        response: Response<ApiResponse>
-                    ) {
+                apiService.createProfile(profileData, tokenResponse.token)
+                    .enqueue(object : Callback<ApiResponse> {
+                        override fun onResponse(
+                            call: Call<ApiResponse>,
+                            response: Response<ApiResponse>
+                        ) {
 
-                        if (response.isSuccessful) {
-                            val datos = response.body()
+                            if (response.isSuccessful) {
+                                val datos = response.body()
 
-                        } else {
-                            Log.e("Tag", "Response unsuccessful")
+                            } else {
+                                Log.e("Tag", "Response unsuccessful")
+                            }
                         }
-                    }
 
-                    override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
-                        Log.e("Tag", "Error en la solicitud: ${t.message}")
-                    }
-                })
+                        override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+                            Log.e("Tag", "Error en la solicitud: ${t.message}")
+                        }
+                    })
             }
 
         }

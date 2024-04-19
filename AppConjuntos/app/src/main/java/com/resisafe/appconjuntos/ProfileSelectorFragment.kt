@@ -3,12 +3,12 @@ package com.resisafe.appconjuntos
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.gridlayout.widget.GridLayout
 import com.google.gson.Gson
 import com.resisafe.appconjuntos.ui.AppMaster.AppMasterActivity
@@ -47,11 +47,12 @@ class ProfileSelectorFragment : Fragment() {
         // Inflate the layout for this fragment
         return view
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val cardAddProfile: CardView = view.findViewById(R.id.cardAddProfile)
-        val gridLayout : GridLayout = view.findViewById(R.id.profilesGrid)
+        val gridLayout: GridLayout = view.findViewById(R.id.profilesGrid)
 
         val tokenResponse = ManejadorDeTokens.cargarTokenUsuario(this.requireContext())
         val apiService = RetrofitClient.apiService
@@ -60,89 +61,294 @@ class ProfileSelectorFragment : Fragment() {
         if (tokenResponse != null) {
             Log.d("Tag", "Token: ${tokenResponse.token}, UserID: ${tokenResponse.userID}")
 
-            apiService.obtenerDatosPerfiles(tokenResponse.userID,tokenResponse.token).enqueue(object :
-                Callback<List<CardItem>> {
-                override fun onResponse(
-                    call: Call<List<CardItem>>,
-                    response: Response<List<CardItem>>
-                ) {
-                    if (response.isSuccessful) {
-                        val datos = response.body()!!
+            apiService.obtenerDatosPerfiles(tokenResponse.userID, tokenResponse.token)
+                .enqueue(object :
+                    Callback<List<CardItem>> {
+                    override fun onResponse(
+                        call: Call<List<CardItem>>,
+                        response: Response<List<CardItem>>
+                    ) {
+                        if (response.isSuccessful) {
+                            val datos = response.body()!!
 
-                        for (perfil in datos) {
-                            val cardView = LayoutInflater.from(requireContext()).inflate(R.layout.profilesitem, null) as CardView
-                            val textViewConjunto = cardView.findViewById<TextView>(R.id.ConuntoText)
-                            val textViewTipoPerfil = cardView.findViewById<TextView>(R.id.conjuntoId)
-                            val idPerfil: TextView = cardView.findViewById(R.id.idPerfil)
+                            for (perfil in datos) {
+                                val cardView = LayoutInflater.from(requireContext())
+                                    .inflate(R.layout.itemperfiles, gridLayout, false) as CardView
+                                val textViewConjunto =
+                                    cardView.findViewById<TextView>(R.id.ConuntoText)
+                                val textViewTipoPerfil =
+                                    cardView.findViewById<TextView>(R.id.conjuntoId)
+                                val idPerfil: TextView = cardView.findViewById(R.id.idPerfil)
 
 
-                            textViewConjunto.text = perfil.nombreConjunto
-                            textViewTipoPerfil.text = perfil.nombreTipoPerfil
-                            idPerfil.text = perfil.idPerfil.toString()
-                            Log.d("Datos: ","id ${perfil.idPerfil} - conjunto ${perfil.nombreConjunto} - tipo ${perfil.nombreTipoPerfil}")
+                                textViewConjunto.text = perfil.nombreConjunto
+                                textViewTipoPerfil.text = perfil.nombreTipoPerfil
+                                idPerfil.text = perfil.idPerfil.toString()
 
-                            gridLayout.addView(cardView)
-                            when(perfil.nombreTipoPerfil){
-                                //AppMaster
-                                "AppMaster" -> {
-                                    cardView.setOnClickListener{
 
-                                        val apiService = RetrofitClient.apiService
-                                        val idText : TextView = cardView.findViewById(R.id.idPerfil)
-                                        val idPerfil = idText.text.toString().toInt()
-                                        val tokenResponse = ManejadorDeTokens.cargarTokenUsuario(context)
+                                gridLayout.addView(cardView)
+                                when (perfil.nombreTipoPerfil) {
 
-                                        if (tokenResponse != null) {
-                                            apiService.loginProfile(idPerfil, tokenResponse.token).enqueue(object : Callback<LoginResponse> {
-                                                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                                                    if (response.isSuccessful) {
-                                                        val responseBody = response.body()
-                                                        if (responseBody != null) {
-                                                            val token = responseBody.token
-                                                            val userId = responseBody.userID
-                                                            Log.d("Tag", "Token: $token, UserID: $userId")
-                                                            ManejadorDeTokens.guardarTokenUsuario(context,responseBody)
-                                                            Log.d("Tag", "Token Guardado")
-                                                            val intent = Intent(context, AppMasterActivity::class.java)
-                                                            startActivity(intent)
+                                    //Administrador
+                                    "Administrador" -> {
+                                        cardView.setOnClickListener {
+                                            val apiService = RetrofitClient.apiService
+                                            val idText: TextView =
+                                                cardView.findViewById(R.id.idPerfil)
+                                            val idPerfil = idText.text.toString().toInt()
+                                            val tokenResponse =
+                                                ManejadorDeTokens.cargarTokenUsuario(context)
 
+                                            if (tokenResponse != null) {
+                                                apiService.loginProfile(
+                                                    idPerfil,
+                                                    tokenResponse.token
+                                                ).enqueue(object : Callback<LoginResponse> {
+                                                    override fun onResponse(
+                                                        call: Call<LoginResponse>,
+                                                        response: Response<LoginResponse>
+                                                    ) {
+                                                        if (response.isSuccessful) {
+                                                            val responseBody = response.body()
+                                                            if (responseBody != null) {
+                                                                val token = responseBody.token
+                                                                val userId = responseBody.userID
+                                                                ManejadorDeTokens.guardarTokenUsuario(
+                                                                    context,
+                                                                    responseBody
+                                                                )
+                                                                val intent = Intent(
+                                                                    context,
+                                                                    AdministradorActivity::class.java
+                                                                )
+                                                                startActivity(intent)
+                                                                activity?.finish()
+
+                                                            } else {
+                                                                Log.e(
+                                                                    "Tag",
+                                                                    "Response body is null"
+                                                                )
+                                                            }
                                                         } else {
-                                                            Log.e("Tag", "Response body is null")
-                                                        }
-                                                    } else {
-                                                        try {
-                                                            val errorBody = response.errorBody()?.string()
-                                                            val errorJson = Gson().fromJson(errorBody, ErrorResponse::class.java)
-                                                            Log.e("Tag", "Unsuccessful response: ${response.code()}, Title: ${errorJson.title}, Detail: ${errorJson.detail}")
-                                                        } catch (e: Exception) {
-                                                            Log.e("Tag", "Failed to parse error response: ${e.message}", e)
                                                         }
                                                     }
-                                                }
 
-                                                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                                                    Log.e("Tag", "Failed to make request: ${t.message}", t)
-                                                }
+                                                    override fun onFailure(
+                                                        call: Call<LoginResponse>,
+                                                        t: Throwable
+                                                    ) {
+                                                    }
+                                                })
+                                            }
+                                        }
+                                    }
 
-                                            })
+                                    //Administrador
+                                    "Residente" -> {
+                                        cardView.setOnClickListener {
+                                            val apiService = RetrofitClient.apiService
+                                            val idText: TextView =
+                                                cardView.findViewById(R.id.idPerfil)
+                                            val idPerfil = idText.text.toString().toInt()
+                                            val tokenResponse =
+                                                ManejadorDeTokens.cargarTokenUsuario(context)
+
+                                            if (tokenResponse != null) {
+                                                apiService.loginProfile(
+                                                    idPerfil,
+                                                    tokenResponse.token
+                                                ).enqueue(object : Callback<LoginResponse> {
+                                                    override fun onResponse(
+                                                        call: Call<LoginResponse>,
+                                                        response: Response<LoginResponse>
+                                                    ) {
+                                                        if (response.isSuccessful) {
+                                                            val responseBody = response.body()
+                                                            if (responseBody != null) {
+                                                                val token = responseBody.token
+                                                                val userId = responseBody.userID
+                                                                ManejadorDeTokens.guardarTokenUsuario(
+                                                                    context,
+                                                                    responseBody
+                                                                )
+                                                                val intent = Intent(
+                                                                    context,
+                                                                    ResidenteActivity::class.java
+                                                                )
+                                                                startActivity(intent)
+
+                                                            } else {
+                                                                Log.e(
+                                                                    "Tag",
+                                                                    "Response body is null"
+                                                                )
+                                                            }
+                                                        } else {
+                                                        }
+                                                    }
+
+                                                    override fun onFailure(
+                                                        call: Call<LoginResponse>,
+                                                        t: Throwable
+                                                    ) {
+                                                    }
+                                                })
+                                            }
+                                        }
+                                    }
+
+                                    //Vigilante
+                                    "Vigilante" -> {
+                                        cardView.setOnClickListener {
+                                            val apiService = RetrofitClient.apiService
+                                            val idText: TextView =
+                                                cardView.findViewById(R.id.idPerfil)
+                                            val idPerfil = idText.text.toString().toInt()
+                                            val tokenResponse =
+                                                ManejadorDeTokens.cargarTokenUsuario(context)
+
+                                            if (tokenResponse != null) {
+                                                apiService.loginProfile(
+                                                    idPerfil,
+                                                    tokenResponse.token
+                                                ).enqueue(object : Callback<LoginResponse> {
+                                                    override fun onResponse(
+                                                        call: Call<LoginResponse>,
+                                                        response: Response<LoginResponse>
+                                                    ) {
+                                                        if (response.isSuccessful) {
+                                                            val responseBody = response.body()
+                                                            if (responseBody != null) {
+                                                                val token = responseBody.token
+                                                                val userId = responseBody.userID
+                                                                ManejadorDeTokens.guardarTokenUsuario(
+                                                                    context,
+                                                                    responseBody
+                                                                )
+                                                                val intent = Intent(
+                                                                    context,
+                                                                    VigilanteActivity::class.java
+                                                                )
+                                                                startActivity(intent)
+
+                                                            } else {
+                                                                Log.e(
+                                                                    "Tag",
+                                                                    "Response body is null"
+                                                                )
+                                                            }
+                                                        } else {
+                                                        }
+                                                    }
+
+                                                    override fun onFailure(
+                                                        call: Call<LoginResponse>,
+                                                        t: Throwable
+                                                    ) {
+                                                    }
+                                                })
+                                            }
+                                        }
+                                    }
+
+                                    //AppMaster
+                                    "AppMaster" -> {
+                                        cardView.setOnClickListener {
+
+                                            val apiService = RetrofitClient.apiService
+                                            val idText: TextView =
+                                                cardView.findViewById(R.id.idPerfil)
+                                            val idPerfil = idText.text.toString().toInt()
+                                            val tokenResponse =
+                                                ManejadorDeTokens.cargarTokenUsuario(context)
+
+                                            if (tokenResponse != null) {
+                                                apiService.loginProfile(
+                                                    idPerfil,
+                                                    tokenResponse.token
+                                                ).enqueue(object : Callback<LoginResponse> {
+                                                    override fun onResponse(
+                                                        call: Call<LoginResponse>,
+                                                        response: Response<LoginResponse>
+                                                    ) {
+                                                        if (response.isSuccessful) {
+                                                            val responseBody = response.body()
+                                                            if (responseBody != null) {
+                                                                val token = responseBody.token
+                                                                val userId = responseBody.userID
+                                                                Log.d(
+                                                                    "Tag",
+                                                                    "Token: $token, UserID: $userId"
+                                                                )
+                                                                ManejadorDeTokens.guardarTokenUsuario(
+                                                                    context,
+                                                                    responseBody
+                                                                )
+                                                                Log.d("Tag", "Token Guardado")
+                                                                val intent = Intent(
+                                                                    context,
+                                                                    AppMasterActivity::class.java
+                                                                )
+                                                                startActivity(intent)
+
+                                                            } else {
+                                                                Log.e(
+                                                                    "Tag",
+                                                                    "Response body is null"
+                                                                )
+                                                            }
+                                                        } else {
+                                                            try {
+                                                                val errorBody =
+                                                                    response.errorBody()?.string()
+                                                                val errorJson = Gson().fromJson(
+                                                                    errorBody,
+                                                                    ErrorResponse::class.java
+                                                                )
+                                                                Log.e(
+                                                                    "Tag",
+                                                                    "Unsuccessful response: ${response.code()}, Title: ${errorJson.title}, Detail: ${errorJson.detail}"
+                                                                )
+                                                            } catch (e: Exception) {
+                                                                Log.e(
+                                                                    "Tag",
+                                                                    "Failed to parse error response: ${e.message}",
+                                                                    e
+                                                                )
+                                                            }
+                                                        }
+                                                    }
+
+                                                    override fun onFailure(
+                                                        call: Call<LoginResponse>,
+                                                        t: Throwable
+                                                    ) {
+                                                        Log.e(
+                                                            "Tag",
+                                                            "Failed to make request: ${t.message}",
+                                                            t
+                                                        )
+                                                    }
+
+                                                })
+                                            }
                                         }
                                     }
                                 }
                             }
+                        } else {
+                            Log.e("Tag", "Response body is null")
                         }
-                    } else {
-                        Log.e("Tag", "Response body is null")
                     }
-                }
 
-                override fun onFailure(call: Call<List<CardItem>>, t: Throwable) {
-                    Log.e("Tag", "Response body is dsafadfafdasf")
-                }
-            })
+                    override fun onFailure(call: Call<List<CardItem>>, t: Throwable) {
+                        Log.e("Tag", "Response body is dsafadfafdasf")
+                    }
+                })
         }
 
     }
-
 
 
     companion object {

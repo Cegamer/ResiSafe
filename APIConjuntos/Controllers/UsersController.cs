@@ -179,10 +179,27 @@ namespace APIConjuntos.Controllers
 
         // DELETE api/<UsersController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [Authorize]
+        public IActionResult Delete(int id)
         {
-            dbContext.Usuarios.Remove(dbContext.Usuarios.First(u => u.IdUsuario == id));
-            dbContext.SaveChanges();
+
+            var perfilId = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
+            var usuarioLogeadoId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            Perfil perfilLogeado = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == perfilId);
+
+
+            if (perfilLogeado.IdTipoPerfil == 4 || id == usuarioLogeadoId)
+            {
+                try
+                {
+                    dbContext.Usuarios.Remove(dbContext.Usuarios.First(u => u.IdUsuario == id));
+                    dbContext.SaveChanges();
+                    return new JsonResult(new { message = "Usuario Eliminado" });
+                }
+                catch (Exception e) { return BadRequest(); }
+            }
+            return Unauthorized();
         }
     }
 }

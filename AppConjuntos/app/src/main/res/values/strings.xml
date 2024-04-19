@@ -14,4 +14,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_app_master">AppMasterActivity</string>
+    <string name="title_activity_residente">ResidenteActivity</string>
+    <string name="title_activity_administrador">AdministradorActivity</string>
+    <string name="title_activity_vigilante">VigilanteActivity</string>
 </resources>

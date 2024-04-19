@@ -7,9 +7,8 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.resisafe.appconjuntos.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_appmaster_home" >
+        android:name="com.resisafe.appconjuntos.ui.AppMaster.AppmasterHomeFragment"
+        android:label="@string/menu_home">
         <action
             android:id="@+id/action_nav_home_to_nav_registrar_conjunto"
             app:destination="@id/nav_registrar_conjunto" />
@@ -18,20 +17,22 @@
             app:destination="@id/nav_appmasterListaConjuntosFragment" />
         <action
             android:id="@+id/action_nav_home_to_perfilCrearFragment"
-            app:destination="@id/perfilCrearFragment" />
+            app:destination="@id/perfilCrearFragment">
+            <argument
+                android:name="idConjunto"
+                android:defaultValue="1" />
+            <argument
+                android:name="tipoUsuarioSolicitante"
+                android:defaultValue="4" />
+        </action>
+        <action
+            android:id="@+id/action_nav_home_to_appmasterListaUsuariosFragment"
+            app:destination="@id/appmasterListaUsuariosFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_appmasterCrearUsuarioFragment"
+            app:destination="@id/appmasterCrearUsuarioFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.resisafe.appconjuntos.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.resisafe.appconjuntos.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
     <activity
         android:id="@+id/nav_usuarioActivity"
         android:name="com.resisafe.appconjuntos.UsuarioActivity"
@@ -46,7 +47,7 @@
         android:id="@+id/nav_appmasterListaConjuntosFragment"
         android:name="com.resisafe.appconjuntos.ui.AppMaster.AppmasterListaConjuntosFragment"
         android:label="fragment_appmaster_lista_conjuntos"
-        tools:layout="@layout/fragment_appmaster_lista_conjuntos" >
+        tools:layout="@layout/fragment_appmaster_lista_conjuntos">
         <action
             android:id="@+id/action_nav_appmasterListaConjuntosFragment_to_nav_registrar_conjunto"
             app:destination="@id/nav_registrar_conjunto" />
@@ -58,19 +59,22 @@
         android:id="@+id/conjuntoInfoFragment"
         android:name="com.resisafe.appconjuntos.ConjuntoInfoFragment"
         android:label="fragment_conjunto_info"
-        tools:layout="@layout/fragment_conjunto_info" >
+        tools:layout="@layout/fragment_conjunto_info">
         <argument
             android:name="idConjunto"
             app:argType="integer" />
         <action
             android:id="@+id/action_conjuntoInfoFragment_to_conjuntoPerfilesListaFragment"
             app:destination="@id/conjuntoPerfilesListaFragment" />
+        <action
+            android:id="@+id/action_conjuntoInfoFragment_to_conjuntoAgregarZonacomunFragment2"
+            app:destination="@id/conjuntoAgregarZonacomunFragment" />
     </fragment>
     <fragment
         android:id="@+id/conjuntoPerfilesListaFragment"
         android:name="com.resisafe.appconjuntos.ConjuntoPerfilesListaFragment"
         android:label="fragment_conjunto_perfiles_lista"
-        tools:layout="@layout/fragment_conjunto_perfiles_lista" >
+        tools:layout="@layout/fragment_conjunto_perfiles_lista">
         <argument
             android:name="idConjunto"
             app:argType="integer" />
@@ -79,13 +83,43 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_conjuntoPerfilesListaFragment_to_perfilCrearFragment"
-            app:destination="@id/perfilCrearFragment" />
+            app:destination="@id/perfilCrearFragment">
+            <argument
+                android:name="tipoUsuarioSolicitante"
+                android:defaultValue="4" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/perfilCrearFragment"
         android:name="com.resisafe.appconjuntos.PerfilCrearFragment"
         android:label="fragment_perfil_crear"
-        tools:layout="@layout/fragment_perfil_crear" >
+        tools:layout="@layout/fragment_perfil_crear">
+        <argument
+            android:name="idConjunto"
+            app:argType="integer" />
+        <argument
+            android:name="tipoUsuarioSolicitante"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/appmasterListaUsuariosFragment"
+        android:name="com.resisafe.appconjuntos.AppmasterListaUsuariosFragment"
+        android:label="fragment_appmaster_lista_usuarios"
+        tools:layout="@layout/fragment_appmaster_lista_usuarios">
+        <action
+            android:id="@+id/action_appmasterListaUsuariosFragment_to_appmasterCrearUsuarioFragment"
+            app:destination="@id/appmasterCrearUsuarioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/appmasterCrearUsuarioFragment"
+        android:name="com.resisafe.appconjuntos.AppmasterCrearUsuarioFragment"
+        android:label="fragment_appmaster_crear_usuario"
+        tools:layout="@layout/fragment_appmaster_crear_usuario" />
+    <fragment
+        android:id="@+id/conjuntoAgregarZonacomunFragment"
+        android:name="com.resisafe.appconjuntos.conjuntoAgregarZonacomunFragment"
+        android:label="fragment_conjunto_agregar_zonacomun"
+        tools:layout="@layout/fragment_conjunto_agregar_zonacomun">
         <argument
             android:name="idConjunto"
             app:argType="integer" />

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment" >
+    tools:context=".ui.home.HomeFragment">
 
 
     <ScrollView
@@ -24,157 +23,182 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:id="@+id/registrarConjuntosCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="25dp"
+                android:backgroundTint="@android:color/holo_blue_light"
+                app:cardCornerRadius="20dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_baseline_villa_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="261dp"
+                        android:layout_height="24dp"
+                        android:gravity="center"
+                        android:text="Registrar Conjuntos"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView9"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/listaConjuntosCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="25dp"
+                android:backgroundTint="@android:color/holo_blue_light"
+                app:cardCornerRadius="20dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/imageView14"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_baseline_villa_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="261dp"
+                        android:layout_height="24dp"
+                        android:gravity="center"
+                        android:text="Lista de Conjuntos"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView14"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/vincularUsuariosCard"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="25dp"
                 android:backgroundTint="@android:color/holo_blue_light"
                 app:cardCornerRadius="20dp">
 
-                <LinearLayout
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="25dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_baseline_villa_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="261dp"
+                        android:layout_height="24dp"
+                        android:gravity="center"
+                        android:text="Vincular usuarios a conjunto"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView12"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/listaUsuariosCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="25dp"
+                android:backgroundTint="@android:color/holo_blue_light"
+                app:cardCornerRadius="20dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/imageView10"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_baseline_villa_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="261dp"
+                        android:layout_height="24dp"
+                        android:gravity="center"
+                        android:text="Lista de Usuarios"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView10"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/crearUsuariosCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="25dp"
+                android:backgroundTint="@android:color/holo_blue_light"
+                app:cardCornerRadius="20dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
 
                     <ImageView
                         android:id="@+id/imageView5"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/ic_baseline_villa_24" />
+                        android:src="@drawable/ic_baseline_villa_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="261dp"
+                        android:layout_height="24dp"
                         android:gravity="center"
-                        android:text="Registrar Conjuntos"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="25dp"
-                android:backgroundTint="@android:color/holo_blue_light"
-                app:cardCornerRadius="20dp">
-
-                <LinearLayout
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="25dp">
-
-                    <ImageView
-                        android:id="@+id/imageConjuntoList"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/ic_baseline_villa_24" />
-
-                    <TextView
-                        android:id="@+id/textConjuntoList"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Registrar Conjuntos"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="25dp"
-                android:backgroundTint="@android:color/holo_blue_light"
-                app:cardCornerRadius="20dp">
-
-                <LinearLayout
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="25dp">
-
-                    <ImageView
-                        android:id="@+id/imageAgregarAdmins"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/ic_baseline_villa_24" />
-
-                    <TextView
-                        android:id="@+id/textAgregarAdmins"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Registrar Conjuntos"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="25dp"
-                android:backgroundTint="@android:color/holo_blue_light"
-                app:cardCornerRadius="20dp">
-
-                <LinearLayout
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="25dp">
-
-                    <ImageView
-                        android:id="@+id/imageListaUsuarios"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/ic_baseline_villa_24" />
-
-                    <TextView
-                        android:id="@+id/textListaUsuarios"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Registrar Conjuntos"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="25dp"
-                android:backgroundTint="@android:color/holo_blue_light"
-                app:cardCornerRadius="20dp">
-
-                <LinearLayout
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="25dp">
-
-                    <ImageView
-                        android:id="@+id/imageListaPerfiles"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/ic_baseline_villa_24" />
-
-                    <TextView
-                        android:id="@+id/textListaPerfiles"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Registrar Conjuntos"
-                        android:textSize="20sp" />
-                </LinearLayout>
+                        android:text="Crear Usuario"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView5"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 

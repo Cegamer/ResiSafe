@@ -13,7 +13,6 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.resisafe.appconjuntos.Conjunto
-import com.resisafe.appconjuntos.ManejadorDeTokens
 import com.resisafe.appconjuntos.R
 import com.resisafe.appconjuntos.RetrofitClient
 import retrofit2.Call
@@ -57,53 +56,59 @@ class AppmasterListaConjuntosFragment : Fragment() {
         val context = this.requireContext()
 
         val boton = view.findViewById<Button>(R.id.buttonNuevoConjunto)
-        boton.setOnClickListener(){
-            view.findNavController().navigate(R.id.action_nav_appmasterListaConjuntosFragment_to_nav_registrar_conjunto)
+        boton.setOnClickListener() {
+            view.findNavController()
+                .navigate(R.id.action_nav_appmasterListaConjuntosFragment_to_nav_registrar_conjunto)
         }
 
         val layout = view.findViewById<LinearLayout>(R.id.layoutListaConjuntos)
 
 
 
-            apiService.obtenerConjuntos().enqueue(object :
-                Callback<List<Conjunto>> {
-                override fun onResponse(
-                    call: Call<List<Conjunto>>,
-                    response: Response<List<Conjunto>>
-                ) {
-                    if (response.isSuccessful) {
-                        val datos = response.body()!!
+        apiService.obtenerConjuntos().enqueue(object :
+            Callback<List<Conjunto>> {
+            override fun onResponse(
+                call: Call<List<Conjunto>>,
+                response: Response<List<Conjunto>>
+            ) {
+                if (response.isSuccessful) {
+                    val datos = response.body()!!
 
-                        for (conjunto in datos) {
-                            val cardView = LayoutInflater.from(requireContext()).inflate(R.layout.conjuntositem, null) as CardView
-                            val textViewId = cardView.findViewById<TextView>(R.id.conjuntoId)
-                            val textViewNombre = cardView.findViewById<TextView>(R.id.conjuntoNombre)
-                            val textViewDireccion: TextView = cardView.findViewById(R.id.conjuntoDireccion)
-                            val boton = cardView.findViewById<ImageButton>(R.id.imageButton)
-
-
-                            textViewId.text = conjunto.idConjunto.toString()
-                            textViewNombre.text = conjunto.nombre
-                            textViewDireccion.text = conjunto.direccion
-
-                            layout.addView(cardView)
-                            boton.setOnClickListener(){
-                                val bundle = Bundle()
-                                bundle.putInt("idConjunto", conjunto.idConjunto);
-                                view.findNavController().navigate(R.id.action_nav_appmasterListaConjuntosFragment_to_conjuntoInfoFragment,bundle)
-                            }
+                    for (conjunto in datos) {
+                        val cardView = LayoutInflater.from(requireContext())
+                            .inflate(R.layout.itemconjuntos, null) as CardView
+                        val textViewId = cardView.findViewById<TextView>(R.id.conjuntoId)
+                        val textViewNombre = cardView.findViewById<TextView>(R.id.conjuntoNombre)
+                        val textViewDireccion: TextView =
+                            cardView.findViewById(R.id.conjuntoDireccion)
+                        val boton = cardView.findViewById<ImageButton>(R.id.imageButton)
 
 
+                        textViewId.text = conjunto.idConjunto.toString()
+                        textViewNombre.text = conjunto.nombre
+                        textViewDireccion.text = conjunto.direccion
+
+                        layout.addView(cardView)
+                        boton.setOnClickListener() {
+                            val bundle = Bundle()
+                            bundle.putInt("idConjunto", conjunto.idConjunto);
+                            view.findNavController().navigate(
+                                R.id.action_nav_appmasterListaConjuntosFragment_to_conjuntoInfoFragment,
+                                bundle
+                            )
                         }
-                    } else {
-                        Log.e("Tag", "Response body is null")
-                    }
-                }
 
-                override fun onFailure(call: Call<List<Conjunto>>, t: Throwable) {
-                    Log.e("Tag", "Response body is dsafadfafdasf")
+
+                    }
+                } else {
+                    Log.e("Tag", "Response body is null")
                 }
-            })
+            }
+
+            override fun onFailure(call: Call<List<Conjunto>>, t: Throwable) {
+                Log.e("Tag", "Response body is dsafadfafdasf")
+            }
+        })
 
 
     }

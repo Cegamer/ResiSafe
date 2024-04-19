@@ -17,5 +17,12 @@ namespace APIConjuntos.Utilities
             Title = "No tiene acceso al recurso",
             Detail = "LOGIN-03",
         };
+
+        public static ProblemDetails errorAlCrear = new ProblemDetails
+        {
+            Status = (int)HttpStatusCode.BadRequest,
+            Title = "Error al crear",
+            Detail = "Error al crear",
+        };
     }
 }

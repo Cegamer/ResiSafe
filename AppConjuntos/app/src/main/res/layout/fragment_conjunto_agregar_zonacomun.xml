@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".conjuntoAgregarZonacomunFragment">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textViewNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:textColor="@color/text_primary" />
+
+        <EditText
+            android:id="@+id/editTextNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre"
+            android:textColor="@color/text_primary" />
+
+        <TextView
+            android:id="@+id/textViewApertura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Horario de Apertura"
+            android:textColor="@color/text_primary" />
+
+        <LinearLayout
+            android:id="@+id/layoutApertura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextApertura"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Apertura"
+                android:textColor="@color/text_primary"
+                android:inputType="none"
+                android:focusable="false" />
+
+            <Button
+                android:id="@+id/buttonApertura"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seleccionar"
+                android:textColor="@color/text_primary"
+                android:background="@null" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewCierre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Horario de Cierre"
+            android:textColor="@color/text_primary" />
+
+        <LinearLayout
+            android:id="@+id/layoutCierre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextCierre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Cierre"
+                android:textColor="@color/text_primary"
+                android:inputType="none"
+                android:focusable="false" />
+
+            <Button
+                android:id="@+id/buttonCierre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seleccionar"
+                android:textColor="@color/text_primary"
+                android:background="@null" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewAforoMaximo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aforo Máximo"
+            android:textColor="@color/text_primary" />
+
+        <EditText
+            android:id="@+id/editTextAforoMaximo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Aforo Máximo"
+            android:inputType="number"
+            android:textColor="@color/text_primary" />
+
+        <TextView
+            android:id="@+id/textViewPrecio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Precio"
+            android:textColor="@color/text_primary" />
+
+        <EditText
+            android:id="@+id/editTextPrecio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Precio"
+            android:inputType="number"
+            android:textColor="@color/text_primary" />
+
+        <TextView
+            android:id="@+id/textViewIntervaloTurnos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Intervalo de Turnos (minutos)"
+            android:textColor="@color/text_primary" />
+
+        <EditText
+            android:id="@+id/editTextIntervaloTurnos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Intervalo de Turnos"
+            android:inputType="number"
+            android:textColor="@color/text_primary" />
+
+        <Button
+            android:id="@+id/buttonGuardar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:textColor="@android:color/white"
+            android:background="@color/button_primary"
+            android:padding="12dp"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+
+
+</FrameLayout>

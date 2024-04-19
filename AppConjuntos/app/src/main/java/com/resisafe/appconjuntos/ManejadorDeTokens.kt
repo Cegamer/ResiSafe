@@ -5,12 +5,14 @@ import android.util.Log
 import com.google.gson.Gson
 import java.io.File
 
-object  ManejadorDeTokens {
+object ManejadorDeTokens {
     fun guardarTokenUsuario(context: Context, loginResponse: LoginResponse) {
         val jsonObject = mapOf(
             "token" to loginResponse.token,
             "userID" to loginResponse.userID
         )
+
+        Log.d("Token:", "${loginResponse.token} - ${loginResponse.userID}")
 
         val jsonString = Gson().toJson(jsonObject)
 
@@ -28,7 +30,8 @@ object  ManejadorDeTokens {
             Log.e("Error", "Error al escribir en el almacenamiento interno: ${e.message}", e)
         }
     }
-    fun cargarTokenUsuario(context: Context):LoginResponse?{
+
+    fun cargarTokenUsuario(context: Context): LoginResponse? {
         val archivoDatos = File(context.filesDir, "datos.json")
         if (!archivoDatos.exists()) {
             return null // El archivo no existe
@@ -43,6 +46,7 @@ object  ManejadorDeTokens {
         val bearer = "Bearer $token"
         return LoginResponse(bearer, userID)
     }
+
     fun eliminarTokenUsuario(context: Context) {
         val archivoDatos = File(context.filesDir, "datos.json")
         if (archivoDatos.exists()) {

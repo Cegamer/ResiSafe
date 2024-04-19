@@ -1,10 +1,13 @@
 package com.resisafe.appconjuntos.ui.AppMaster
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import com.resisafe.appconjuntos.CardItem
 import com.resisafe.appconjuntos.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,6 +39,44 @@ class AppmasterHomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_appmaster_home, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val registrarConjuntosCard = view.findViewById<CardView>(R.id.registrarConjuntosCard)
+        val listaConjuntosCard = view.findViewById<CardView>(R.id.listaConjuntosCard)
+        val vincularUsuariosCard = view.findViewById<CardView>(R.id.vincularUsuariosCard)
+        val crearUsuariosCard = view.findViewById<CardView>(R.id.crearUsuariosCard)
+        val listaUsuariosCard = view.findViewById<CardView>(R.id.listaUsuariosCard)
+
+        registrarConjuntosCard.setOnClickListener {
+            view.findNavController().navigate(
+                R.id.action_nav_home_to_nav_registrar_conjunto
+            )
+        }
+        listaConjuntosCard.setOnClickListener {
+            view.findNavController().navigate(
+                R.id.action_nav_home_to_nav_appmasterListaConjuntosFragment
+            )
+        }
+        vincularUsuariosCard.setOnClickListener {
+            view.findNavController().navigate(
+                R.id.action_nav_home_to_perfilCrearFragment
+            )
+        }
+        listaUsuariosCard.setOnClickListener {
+            view.findNavController()
+                .navigate(R.id.action_nav_home_to_appmasterListaUsuariosFragment)
+        }
+        crearUsuariosCard.setOnClickListener {
+            view.findNavController().navigate(
+                R.id.action_nav_home_to_appmasterCrearUsuarioFragment
+            )
+        }
+
+
+
+        super.onViewCreated(view, savedInstanceState)
     }
 
     companion object {

@@ -42,7 +42,7 @@ class ConjuntoInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return  inflater.inflate(R.layout.fragment_conjunto_info, container, false)
+        return inflater.inflate(R.layout.fragment_conjunto_info, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,18 +55,25 @@ class ConjuntoInfoFragment : Fragment() {
         val botonVigilantes = view.findViewById<Button>(R.id.botonVigilantes)
         val botonAdmins = view.findViewById<Button>(R.id.botonAdmins)
 
+        val buttonAgregarZonaComun = view.findViewById<Button>(R.id.buttonAgregarZonaComun)
+
+
         val args = arguments
         if (args != null) {
             val idConjuntoArg = args.getInt("idConjunto")
             if (tokenResponse != null) {
-                apiService.obtenerInfoConjunto (idConjuntoArg, tokenResponse.token)
+                apiService.obtenerInfoConjunto(idConjuntoArg, tokenResponse.token)
                     .enqueue(object : Callback<Conjunto> {
-                        override fun onResponse(call: Call<Conjunto>, response: Response<Conjunto>) {
+                        override fun onResponse(
+                            call: Call<Conjunto>,
+                            response: Response<Conjunto>
+                        ) {
                             if (response.isSuccessful) {
                                 val conjunto = response.body()
 
                                 val idConjunto = view.findViewById<TextView>(R.id.idConjunto)
-                                val nombreConjunto = view.findViewById<TextView>(R.id.nombreConjunto)
+                                val nombreConjunto =
+                                    view.findViewById<TextView>(R.id.nombreConjunto)
                                 val direccion = view.findViewById<TextView>(R.id.direccion)
                                 val activo = view.findViewById<Switch>(R.id.switch1)
 
@@ -79,17 +86,34 @@ class ConjuntoInfoFragment : Fragment() {
                                 val bundle = Bundle()
                                 bundle.putInt("idConjunto", idConjuntoArg);
 
-                                botonResidentes.setOnClickListener(){
+                                botonResidentes.setOnClickListener() {
                                     bundle.putInt("filtroInicial", 2);
-                                    view.findNavController().navigate(R.id.action_conjuntoInfoFragment_to_conjuntoPerfilesListaFragment,bundle)
+                                    view.findNavController().navigate(
+                                        R.id.action_conjuntoInfoFragment_to_conjuntoPerfilesListaFragment,
+                                        bundle
+                                    )
                                 }
-                                botonVigilantes.setOnClickListener(){
+                                botonVigilantes.setOnClickListener() {
                                     bundle.putInt("filtroInicial", 3);
-                                    view.findNavController().navigate(R.id.action_conjuntoInfoFragment_to_conjuntoPerfilesListaFragment,bundle)
+                                    view.findNavController().navigate(
+                                        R.id.action_conjuntoInfoFragment_to_conjuntoPerfilesListaFragment,
+                                        bundle
+                                    )
                                 }
-                                botonAdmins.setOnClickListener(){
+                                botonAdmins.setOnClickListener() {
                                     bundle.putInt("filtroInicial", 1);
-                                    view.findNavController().navigate(R.id.action_conjuntoInfoFragment_to_conjuntoPerfilesListaFragment,bundle)
+                                    view.findNavController().navigate(
+                                        R.id.action_conjuntoInfoFragment_to_conjuntoPerfilesListaFragment,
+                                        bundle
+                                    )
+                                }
+
+                                buttonAgregarZonaComun.setOnClickListener {
+                                    bundle.putInt("idConjunto", idConjuntoArg)
+                                    view.findNavController().navigate(
+                                        R.id.action_conjuntoInfoFragment_to_conjuntoAgregarZonacomunFragment2,
+                                        bundle
+                                    )
                                 }
 
 

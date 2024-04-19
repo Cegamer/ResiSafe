@@ -16,21 +16,21 @@
             android:id="@+id/Titulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Crear Perfil de Usuario"
-            android:textSize="24sp"
-            android:textColor="@color/text_primary"
-            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
             android:gravity="center"
-            android:layout_marginBottom="16dp"/>
+            android:text="Crear Perfil de Usuario"
+            android:textColor="@color/text_primary"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/conjuntoLabel3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="Conjunto"
-            android:textSize="16sp"
             android:textColor="@color/text_secondary"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="16sp" />
 
         <Spinner
             android:id="@+id/spinnerConjunto"
@@ -41,49 +41,49 @@
             android:id="@+id/cedulaLabel2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="Cedula"
-            android:textSize="16sp"
             android:textColor="@color/text_secondary"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/cedulaBuscador"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@color/background_light"
             android:ems="10"
             android:hint="cedula"
             android:inputType="number"
-            android:textColor="@color/text_primary"
-            android:background="@color/background_light"
             android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
+            android:textColor="@color/text_primary" />
 
         <TextView
             android:id="@+id/idUsuarioText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="idUsuario"
-            android:textSize="16sp"
             android:textColor="@color/text_secondary"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="Nombre"
-            android:textSize="16sp"
             android:textColor="@color/text_secondary"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tipoLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="Tipo Usuario"
-            android:textSize="16sp"
             android:textColor="@color/text_secondary"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="16sp" />
 
         <Spinner
             android:id="@+id/spinnerTipoPerfil"

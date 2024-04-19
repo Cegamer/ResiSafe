@@ -1,7 +1,7 @@
 package com.resisafe.appconjuntos
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +9,15 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.resisafe.appconjuntos.ui.AppMaster.Adapters.PerfilUsuario
 import com.resisafe.appconjuntos.ui.AppMaster.Adapters.perfilUsuarioAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,32 +51,9 @@ class ConjuntoPerfilesListaFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val adapter = perfilUsuarioAdapter(mutableListOf())
 
-        val datosDePrueba = listOf(
-            PerfilUsuario(1, 123456789, "Juan Pérez", "Administrador", "Torre A", 101, 1),
-            PerfilUsuario(2, 987654321, "María Rodríguez", "Residente", "Torre B", 202, 1),
-            PerfilUsuario(3, 246813579, "Pedro González", "Residente", "Torre C", 303, 0),
-            PerfilUsuario(4, 135792468, "Ana López", "Vigilante", "Torre D", 404, 0),
-            PerfilUsuario(5, 864209731, "Carlos Martínez", "Residente", "Torre E", 505, 0),
-            PerfilUsuario(6, 102938475, "Laura Sánchez", "Administrador", "Torre F", 606, 1),
-            PerfilUsuario(7, 576829104, "Luis Hernández", "Vigilante", "Torre G", 707, 0),
-            PerfilUsuario(8, 789012345, "Andrea Gómez", "Residente", "Torre H", 808, 0),
-            PerfilUsuario(9, 219087654, "Sofía Ramírez", "Residente", "Torre I", 909, 0),
-            PerfilUsuario(10, 345678901, "Diego Castillo", "Vigilante", "Torre J", 1010, 1),
-            PerfilUsuario(11, 876543210, "Elena Torres", "Administrador", "Torre K", 1111, 1),
-            PerfilUsuario(12, 987654123, "Javier Díaz", "Residente", "Torre L", 1212, 0),
-            PerfilUsuario(13, 234567890, "Marta Ruiz", "Vigilante", "Torre M", 1313, 1),
-            PerfilUsuario(14, 543210987, "Roberto Castro", "Administrador", "Torre N", 1414, 1),
-            PerfilUsuario(15, 109876543, "Lucía Gutiérrez", "Residente", "Torre O", 1515, 1)
-        )
-
-        val datos = datosDePrueba
-
-        val botonNuevoPerfilConjunto = view. findViewById<Button>(R.id.botonNuevoPerfilConjunto)
-
-        val adapter = perfilUsuarioAdapter(datos)
-
-        val textFiltro = view.findViewById<EditText>(R.id.filtroCedula)
+        val textFiltro = view.findViewById<EditText>(R.id.filtroCedulaUsuario)
         val checkbox1 = view.findViewById<CheckBox>(R.id.checkBox)
         val checkbox2 = view.findViewById<CheckBox>(R.id.checkBox2)
         val checkbox3 = view.findViewById<CheckBox>(R.id.checkBox3)
@@ -87,7 +68,7 @@ class ConjuntoPerfilesListaFragment : Fragment() {
         if (args != null) {
             val idTipoPerfil = args.getInt("filtroInicial")
 
-            when(idTipoPerfil){
+            when (idTipoPerfil) {
                 1 -> checkbox3.isChecked = true;
                 2 -> checkbox1.isChecked = true;
                 3 -> checkbox2.isChecked = true;
@@ -95,6 +76,17 @@ class ConjuntoPerfilesListaFragment : Fragment() {
         }
 
 
+        val botonNuevoPerfilConjunto = view.findViewById<Button>(R.id.botonNuevoPerfilConjunto)
+        botonNuevoPerfilConjunto.setOnClickListener {
+            val bundle = Bundle()
+            if (idConjuntoArg != null) {
+                bundle.putInt("idConjunto", idConjuntoArg)
+            };
+            view.findNavController().navigate(
+                R.id.action_conjuntoPerfilesListaFragment_to_perfilCrearFragment,
+                bundle
+            )
+        }
 
         fun aplicarFiltrado() {
             val tiposPerfilSeleccionados = mutableListOf<String>()
@@ -108,7 +100,7 @@ class ConjuntoPerfilesListaFragment : Fragment() {
                 else -> null
             }
 
-            val datosFiltrados = datosDePrueba.filter { usuario ->
+            val datosFiltrados = adapter.getData().filter { usuario ->
                 tiposPerfilSeleccionados.isEmpty() || usuario.tipoPerfil in tiposPerfilSeleccionados
             }.filter { usuario ->
                 filtroActivo == null || usuario.activo == filtroActivo
@@ -116,7 +108,7 @@ class ConjuntoPerfilesListaFragment : Fragment() {
                 usuario.cedula.toString().contains(textFiltro.text)
             }
 
-            adapter.actualizar(datosFiltrados)
+            adapter.actualizar(datosFiltrados.toMutableList())
         }
 
         // Agregar listeners para los checkboxes y el campo de filtro
@@ -124,32 +116,54 @@ class ConjuntoPerfilesListaFragment : Fragment() {
         checkbox2.setOnCheckedChangeListener { _, _ -> aplicarFiltrado() }
         checkbox3.setOnCheckedChangeListener { _, _ -> aplicarFiltrado() }
         checkbox4.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked)
+            if (isChecked)
                 checkbox5.isChecked = false
-            aplicarFiltrado()  }
+            aplicarFiltrado()
+        }
         checkbox5.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked)
+            if (isChecked)
                 checkbox4.isChecked = false
 
-            aplicarFiltrado() }
+            aplicarFiltrado()
+        }
         textFiltro.addTextChangedListener { aplicarFiltrado() }
 
-        aplicarFiltrado();
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerVIew)
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
         recyclerView.adapter = adapter
 
-        botonNuevoPerfilConjunto.setOnClickListener{
-            val bundle = Bundle()
-            if (idConjuntoArg != null) {
-                bundle.putInt("idConjunto", idConjuntoArg)
-            };
-            view.findNavController().navigate(R.id.action_nav_appmasterListaConjuntosFragment_to_conjuntoInfoFragment,bundle)
+
+        val apiService = RetrofitClient.apiService
+        val context = this.requireContext()
+        val token = ManejadorDeTokens.cargarTokenUsuario(context)?.token;
+
+        if (token != null) {
+            apiService.obtenerPerfilesConjunto(idConjuntoArg, token)
+                .enqueue(object : Callback<List<PerfilUsuario>> {
+                    override fun onResponse(
+                        call: Call<List<PerfilUsuario>>,
+                        response: Response<List<PerfilUsuario>>
+                    ) {
+                        if (response.isSuccessful) {
+                            val datos = response.body()
+                            if (datos != null) {
+                                adapter.actualizar(datos.toMutableList())
+                            }
+                        } else {
+                            Log.e("Tag", "Response body is null")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<List<PerfilUsuario>>, t: Throwable) {
+                        Log.e("Tag", "Response body is dsafadfafdasf")
+                    }
+                })
         }
+
+        aplicarFiltrado();
 
         super.onViewCreated(view, savedInstanceState)
     }
-
 
 
     companion object {

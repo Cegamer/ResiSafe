@@ -1,28 +1,24 @@
 package com.resisafe.appconjuntos
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
-import androidx.annotation.NonNull
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
+import com.google.android.material.navigation.NavigationView
 import com.resisafe.appconjuntos.databinding.ActivityUsuarioBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 
 class UsuarioActivity : AppCompatActivity() {
 
@@ -51,16 +47,8 @@ class UsuarioActivity : AppCompatActivity() {
             ), drawerLayout
         )
 
-
-
-
         setupActionBarWithNavController(navController, appBarConfiguration)
-
-
         navView.setupWithNavController(navController)
-
-
-
 
 
         Log.d("Tag", "Ventana Cambiada")
@@ -99,19 +87,14 @@ class UsuarioActivity : AppCompatActivity() {
                     }
                 })
         }
-
-
-/*
         navView.menu.findItem(R.id.nav_userLoginActivity).setOnMenuItemClickListener {
-            ManejadorDeTokens.eliminarTokenUsuario(this.baseContext )
+            ManejadorDeTokens.eliminarTokenUsuario(this.baseContext)
             Log.d("Tag", "Sesion Cerrada")
             val intent = Intent(this, UserLoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             true
         }
-*/
-
-
     }
 
 
@@ -125,6 +108,7 @@ class UsuarioActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()

@@ -4,14 +4,15 @@
     tools:showIn="navigation_view">
 
 
-    <group android:id="@+id/homeGrupo"
+    <group
+        android:id="@+id/homeGrupo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checkableBehavior="single">
-                <item
-                android:id="@+id/appmasterHomeFragment"
-                android:icon="@drawable/ic_baseline_home_24"
-                android:title="Home"/>
+        <item
+            android:id="@+id/appmasterHomeFragment"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="Home" />
     </group>
     <group
         android:id="@+id/opciones_conjuntos"
@@ -22,16 +23,16 @@
             <menu>
                 <item
                     android:id="@+id/nav_appmasterListaConjuntosFragment"
-                    android:icon="@drawable/ic_baseline_person_24"
-                    android:title="Lista de Conjuntos"/>
+                    android:icon="@drawable/ic_baseline_villa_24"
+                    android:title="Lista de Conjuntos" />
                 <item
                     android:id="@+id/nav_registrar_conjunto"
-                    android:icon="@drawable/ic_baseline_person_24"
-                    android:title="Registrar Conjunto"/>
+                    android:icon="@drawable/ic_baseline_villa_24"
+                    android:title="Registrar Conjunto" />
                 <item
                     android:id="@+id/action_nav_home_to_perfilCrearFragment"
                     android:icon="@drawable/ic_baseline_badge_24"
-                    android:title="Agregar Administradores"/>
+                    android:title="Agregar Administradores" />
             </menu>
         </item>
     </group>
@@ -41,13 +42,13 @@
         <item android:title="Usuarios">
             <menu>
                 <item
-                    android:id="@+id/nav_lista_usuarios"
-                    android:icon="@drawable/ic_baseline_logout_24"
+                    android:id="@+id/action_nav_home_to_appmasterListaUsuariosFragment"
+                    android:icon="@drawable/ic_baseline_person_24"
                     android:title="Lista Usuarios" />
                 <item
-                    android:id="@+id/nav_lista_perfiles"
-                    android:icon="@drawable/ic_baseline_logout_24"
-                    android:title="Lista Perfiles" />
+                    android:id="@+id/action_nav_home_to_appmasterCrearUsuarioFragment"
+                    android:icon="@drawable/ic_baseline_person_24"
+                    android:title="Agregar Usuario" />
             </menu>
         </item>
     </group>

@@ -34,7 +34,7 @@ namespace APIConjuntos.Controllers
 
             if (perfil == null)
                 return BadRequest(ErrorsUtilities.datosNulos);
-            
+
 
             if ((perfil.IdUsuario == Convert.ToInt32(userId) && perfil.IdTipoPerfil == 2) //Usuario crea su propio perfil de Residente
                 || perfilLogeado.IdTipoPerfil == 4 //Appmaster crea el perfil
@@ -50,7 +50,7 @@ namespace APIConjuntos.Controllers
                 return new JsonResult(new { message = "Perfil ya existe" });
             }
 
-            return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso); 
+            return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
         }
 
         bool PerfilExiste(Perfil perfil)
@@ -91,7 +91,7 @@ namespace APIConjuntos.Controllers
 
             else
                 return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
-            
+
         }
 
         [HttpGet]
@@ -99,7 +99,7 @@ namespace APIConjuntos.Controllers
         [Route("DatosPerfil/{idUsuario}")]
         public IActionResult ObtenerPerfiles([FromRoute] int idUsuario)
         {
- 
+
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (idUsuario == Convert.ToInt32(userId))
             {
@@ -117,19 +117,104 @@ namespace APIConjuntos.Controllers
 
 
             }
-            else
-            {
-                var problemDetails = new ProblemDetails
-                {
-                    Status = (int)HttpStatusCode.Unauthorized,
-                    Title = "No tiene acceso al recurso",
-                    Detail = "LOGIN-03",
-                };
-                return Unauthorized(problemDetails);
-            }
 
+            return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
 
         }
+
+
+        [HttpGet]
+        [Route("Conjunto/{idConjunto}")]
+        [Authorize]
+        public IActionResult getPerfilesConjunto([FromRoute] int idConjunto) {
+
+            var perfilId = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
+            Perfil perfilLogeado = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == perfilId);
+
+            if (perfilLogeado == null)
+                return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+
+            if ((perfilLogeado.IdTipoPerfil == 4) || (perfilLogeado.IdConjunto == idConjunto && perfilLogeado.IdPerfil == 1)) {
+
+
+                var perfiles = dbContext.Perfils
+                                        .Where(p => p.IdConjunto == idConjunto)
+                                        .Select(p => new
+                                        {
+                                            id = p.IdPerfil,
+                                            cedula = dbContext.Usuarios.FirstOrDefault(u => u.IdUsuario == p.IdUsuario).Cedula,
+                                            nombre = dbContext.Usuarios.FirstOrDefault(u => u.IdUsuario == p.IdUsuario).Nombre + " " + dbContext.Usuarios.FirstOrDefault(u => u.IdUsuario == p.IdUsuario).Apellido,
+                                            tipoPerfil = dbContext.TiposDePerfils.FirstOrDefault(tp => tp.IdTipo == p.IdTipoPerfil).NombreTipo,
+                                            Torre = "NIMP",
+                                            Apto = 000,
+                                            activo = p.Activo
+                                        })
+                                        .ToList();
+                return new JsonResult(perfiles);
+            }
+
+            return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+        }
+
+
+        [HttpDelete]
+        [Authorize]
+        [Route("{idPerfiLEliminar}")]
+        public IActionResult eliminarPerfil([FromRoute]int idPerfiLEliminar) {
+
+            var perfilId = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
+            Perfil perfilLogeado = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == perfilId);
+            Perfil perfilAEliminar = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == idPerfiLEliminar);
+
+
+            if (perfilLogeado == null) return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+            if (perfilAEliminar == null) return BadRequest(ErrorsUtilities.datosNulos);
+
+            if(perfilLogeado.IdTipoPerfil == 4 || perfilLogeado.IdPerfil == idPerfiLEliminar || (perfilLogeado.IdTipoPerfil == 1 && perfilLogeado.IdConjunto == perfilAEliminar.IdConjunto))
+            {
+                dbContext.Perfils.Remove(perfilAEliminar);
+                dbContext.SaveChanges();
+                return new JsonResult(new { message = "Perfil eliminado" });
+            }
+            return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+        }
+
+        [HttpPut]
+        [Authorize]
+        [Route("{idPerfiLEliminar}")]
+
+        public IActionResult cambiarEstadoPerfil([FromRoute]int idPerfiLEliminar,int estado) {
+            var perfilId = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
+            Perfil perfilLogeado = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == perfilId);
+            Perfil perfilAModificar = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == idPerfiLEliminar);
+
+
+            if (perfilLogeado == null) return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+            if (perfilAModificar == null) return BadRequest(ErrorsUtilities.datosNulos);
+
+            if (perfilLogeado.IdTipoPerfil == 4 || (perfilLogeado.IdTipoPerfil == 1 && perfilLogeado.IdConjunto == perfilAModificar.IdConjunto))
+            {
+
+                if (estado == 1)
+                {
+                    perfilAModificar.Activo = 1;
+                    dbContext.Perfils.Update(perfilAModificar);
+                    dbContext.SaveChanges();
+                    return new JsonResult(new { message = "Perfil Activado" });
+                }
+                else if (estado == 0)
+                {
+                    perfilAModificar.Activo = 0;
+                    dbContext.Perfils.Update(perfilAModificar);
+                    dbContext.SaveChanges();
+                    return new JsonResult(new { message = "Perfil Desactivado" });
+                }
+                else return BadRequest();
+            }
+            return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+
+        }
+
 
 
     }
