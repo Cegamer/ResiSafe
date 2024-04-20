@@ -92,6 +92,14 @@ namespace APIConjuntos.Controllers
             else
                 return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
 
+
+
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult getPerfil([FromRoute] int id) {
+            return new JsonResult(mapper.Map<Perfil, PerfilesDTO>( dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == id)));
         }
 
         [HttpGet]
@@ -134,7 +142,7 @@ namespace APIConjuntos.Controllers
             if (perfilLogeado == null)
                 return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
 
-            if ((perfilLogeado.IdTipoPerfil == 4) || (perfilLogeado.IdConjunto == idConjunto && perfilLogeado.IdPerfil == 1)) {
+            if ((perfilLogeado.IdTipoPerfil == 4) || (perfilLogeado.IdConjunto == idConjunto && perfilLogeado.IdTipoPerfil == 1)) {
 
 
                 var perfiles = dbContext.Perfils

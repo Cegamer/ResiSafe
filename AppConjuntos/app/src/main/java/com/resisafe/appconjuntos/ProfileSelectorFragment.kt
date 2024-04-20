@@ -121,6 +121,10 @@ class ProfileSelectorFragment : Fragment() {
                                                                     context,
                                                                     AdministradorActivity::class.java
                                                                 )
+                                                                val b = Bundle()
+                                                                b.putInt("idPerfil",idPerfil) //Your id
+
+                                                                intent.putExtras(b)
                                                                 startActivity(intent)
                                                                 activity?.finish()
 

@@ -3,12 +3,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/Principal"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_baseline_home_24"
             android:title="@string/menu_home" />
     </group>
+
+    <group android:id="@+id/ZonasComunes">
+        <item
+            android:id="@+id/action_administradorHomeFragment_to_conjuntoAgregarZonacomunFragment3"
+            android:icon="@drawable/ic_baseline_villa_24"
+            android:title="Agregar Zona Común"/>
+        <item
+            android:icon="@drawable/ic_baseline_villa_24"
+            android:title="Lista Zonas Comunes"/>
+    </group>
+
+    <group android:id="@+id/Usuarios">
+        <item
+            android:id="@+id/action_administradorHomeFragment_to_perfilCrearFragment3"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="Vincular Usuarios"/>
+
+        <item
+            android:id="@+id/action_administradorHomeFragment_to_conjuntoPerfilesListaFragment2"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Lista Usuarios Vinculados"/>
+
+    </group>
+    <group android:id="@+id/Otros">
+        <item
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="Historial Paquetería"/>
+        <item
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="Historial Visitantes"/>
+        <item
+            android:icon="@drawable/ic_baseline_badge_24"
+            android:title="Historial Reservas"/>
+    </group>
+
+
     <group android:id="@+id/OpcionesSesion">
         <item
             android:id="@+id/nav_usuarioActivity"

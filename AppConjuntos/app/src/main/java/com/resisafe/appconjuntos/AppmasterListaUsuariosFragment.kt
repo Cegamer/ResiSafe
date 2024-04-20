@@ -58,7 +58,7 @@ class AppmasterListaUsuariosFragment : Fragment() {
         val textFiltro = view.findViewById<EditText>(R.id.filtroCedulaUsuario)
 
         val Usuarios: MutableList<UserData> = mutableListOf();
-        val adapter = UsuarioAdapter(Usuarios)
+        val adapter = UsuarioAdapter(Usuarios,Usuarios)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerUsuarios)
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
         recyclerView.adapter = adapter
@@ -85,7 +85,7 @@ class AppmasterListaUsuariosFragment : Fragment() {
                     if (response.isSuccessful) {
                         val datos = response.body()
                         if (datos != null) {
-                            adapter.actualizar(datos.toMutableList())
+                            adapter.generarListaOriginal(datos.toMutableList())
                         }
                     } else {
                         Log.e("Tag", "Response body is null")

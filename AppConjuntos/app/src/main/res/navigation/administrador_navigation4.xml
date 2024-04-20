@@ -14,6 +14,59 @@
         android:id="@+id/administradorHomeFragment"
         android:name="com.resisafe.appconjuntos.AdministradorHomeFragment"
         android:label="fragment_administrador_home"
-        tools:layout="@layout/fragment_administrador_home" />
+        tools:layout="@layout/fragment_administrador_home" >
+        <action
+            android:id="@+id/action_administradorHomeFragment_to_perfilCrearFragment3"
+            app:destination="@id/perfilCrearFragment3" />
+        <action
+            android:id="@+id/action_administradorHomeFragment_to_conjuntoAgregarZonacomunFragment3"
+            app:destination="@id/conjuntoAgregarZonacomunFragment3" />
+        <action
+            android:id="@+id/action_administradorHomeFragment_to_conjuntoPerfilesListaFragment2"
+            app:destination="@id/conjuntoPerfilesListaFragment2" />
+        <action
+            android:id="@+id/action_administradorHomeFragment_to_conjuntoInfoFragment2"
+            app:destination="@id/conjuntoInfoFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/perfilCrearFragment3"
+        android:name="com.resisafe.appconjuntos.PerfilCrearFragment"
+        android:label="fragment_perfil_crear"
+        tools:layout="@layout/fragment_perfil_crear" />
+    <fragment
+        android:id="@+id/conjuntoAgregarZonacomunFragment3"
+        android:name="com.resisafe.appconjuntos.conjuntoAgregarZonacomunFragment"
+        android:label="fragment_conjunto_agregar_zonacomun"
+        tools:layout="@layout/fragment_conjunto_agregar_zonacomun" >
+        <argument
+            android:name="idConjunto"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/conjuntoPerfilesListaFragment2"
+        android:name="com.resisafe.appconjuntos.ConjuntoPerfilesListaFragment"
+        android:label="fragment_conjunto_perfiles_lista"
+        tools:layout="@layout/fragment_conjunto_perfiles_lista" >
+        <argument
+            android:name="idConjunto"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_conjuntoPerfilesListaFragment_to_perfilCrearFragment"
+            app:destination="@id/perfilCrearFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/conjuntoInfoFragment2"
+        android:name="com.resisafe.appconjuntos.ConjuntoInfoFragment"
+        android:label="fragment_conjunto_info"
+        tools:layout="@layout/fragment_conjunto_info" >
+        <argument android:name="idConjunto"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_conjuntoInfoFragment_to_conjuntoAgregarZonacomunFragment"
+            app:destination="@id/conjuntoAgregarZonacomunFragment3" />
+        <action
+            android:id="@+id/action_conjuntoInfoFragment2_to_conjuntoPerfilesListaFragment2"
+            app:destination="@id/conjuntoPerfilesListaFragment2" />
+    </fragment>
 
 </navigation>

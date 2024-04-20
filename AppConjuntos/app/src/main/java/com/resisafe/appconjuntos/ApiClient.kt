@@ -90,6 +90,13 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Call<LoginResponse>
 
+
+    @GET("Perfiles/{id}")
+    fun getPerfil(
+        @Path("id") perfilId: Int,
+        @Header("Authorization") token: String
+    ): Call<PerfilesDTO>
+
     @DELETE("Perfiles/{id}")
     fun eliminarPerfil(
         @Path("id") perfilId: Int,
@@ -98,11 +105,15 @@ interface ApiService {
 
     @PUT("Perfiles/{id}")
     fun cambiarEstadoPerfil(
-        @Body estado: Int,
+        @Body body: CambiarEstadoRequestBody,
         @Path("id") perfilId: Int,
         @Header("Authorization") token: String
     ): Call<ApiResponse>
 
+    data class CambiarEstadoRequestBody(
+        val estado: Int
+        // Puedes agregar más campos si los necesitas
+    )
 
     @GET("TipoPerfil")
     fun getTiposPerfil(): Call<List<TipoPerfil>>
@@ -116,6 +127,13 @@ interface ApiService {
 
 }
 
+data class PerfilesDTO(
+    var idPerfil: Int,
+    var idUsuario: Int,
+    var idConjunto: Int,
+    var idTipoPerfil: Int,
+    var activo: Byte = 0
+)
 data class ApiResponse(val message: String)
 data class LoginResponse(val token: String, val userID: Int)
 data class ErrorResponse(val title: String, val status: Int, val detail: String)

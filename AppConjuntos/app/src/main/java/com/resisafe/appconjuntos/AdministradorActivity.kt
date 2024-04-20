@@ -1,17 +1,20 @@
 package com.resisafe.appconjuntos
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.navigation.NavigationView
 import com.resisafe.appconjuntos.databinding.ActivityAdministradorBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class AdministradorActivity : AppCompatActivity() {
 
@@ -38,6 +41,47 @@ class AdministradorActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val b = intent.extras
+        var idPerfil = -1 // or other values
+
+        if (b != null) idPerfil = b.getInt("idPerfil")
+
+        val apiService = RetrofitClient.apiService
+        val context = this
+        val token = ManejadorDeTokens.cargarTokenUsuario(context)?.token;
+
+        if (token != null) {
+            apiService.getPerfil(idPerfil,token).enqueue(object : Callback<PerfilesDTO> {
+                override fun onResponse(
+                    call: Call<PerfilesDTO>,
+                    response: Response<PerfilesDTO>
+                ) {
+                    if (response.isSuccessful) {
+                        val datos = response.body()
+                        if (datos != null) {
+                            Log.d("AAAAAAAAAA", datos.idConjunto.toString())
+                            navView.menu.findItem(R.id.action_administradorHomeFragment_to_conjuntoPerfilesListaFragment2).setOnMenuItemClickListener {
+                                val bundle = Bundle()
+                                bundle.putInt("idConjunto", datos.idConjunto);
+                                navController.navigate(R.id.action_administradorHomeFragment_to_conjuntoPerfilesListaFragment2, bundle)
+                                true
+                            }
+                        }
+                    } else {
+                        Log.e("Tag", "Response body is null")
+                    }
+                }
+
+                override fun onFailure(call: Call<PerfilesDTO>, t: Throwable) {
+                    Log.e("Tag", "Response body is dsafadfafdasf")
+                }
+            })
+        }
+
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

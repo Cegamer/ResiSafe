@@ -11,15 +11,10 @@ object ManejadorDeTokens {
             "token" to loginResponse.token,
             "userID" to loginResponse.userID
         )
-
         Log.d("Token:", "${loginResponse.token} - ${loginResponse.userID}")
 
         val jsonString = Gson().toJson(jsonObject)
-
-        // Obtener el directorio de almacenamiento interno
         val directorioAlmacenamientoInterno = context.filesDir
-
-        // Crear un archivo en el directorio de almacenamiento interno
         val archivoDatos = File(directorioAlmacenamientoInterno, "datos.json")
 
         try {
@@ -30,6 +25,8 @@ object ManejadorDeTokens {
             Log.e("Error", "Error al escribir en el almacenamiento interno: ${e.message}", e)
         }
     }
+
+
 
     fun cargarTokenUsuario(context: Context): LoginResponse? {
         val archivoDatos = File(context.filesDir, "datos.json")

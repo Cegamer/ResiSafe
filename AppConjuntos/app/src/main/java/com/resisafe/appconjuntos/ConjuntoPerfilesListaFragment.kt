@@ -51,7 +51,7 @@ class ConjuntoPerfilesListaFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = perfilUsuarioAdapter(mutableListOf())
+        val adapter = perfilUsuarioAdapter(mutableListOf(), mutableListOf())
 
         val textFiltro = view.findViewById<EditText>(R.id.filtroCedulaUsuario)
         val checkbox1 = view.findViewById<CheckBox>(R.id.checkBox)
@@ -147,7 +147,7 @@ class ConjuntoPerfilesListaFragment : Fragment() {
                         if (response.isSuccessful) {
                             val datos = response.body()
                             if (datos != null) {
-                                adapter.actualizar(datos.toMutableList())
+                                adapter.generarListaOriginal(datos.toMutableList())
                             }
                         } else {
                             Log.e("Tag", "Response body is null")

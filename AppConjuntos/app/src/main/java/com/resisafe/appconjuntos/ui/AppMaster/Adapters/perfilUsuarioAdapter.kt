@@ -11,12 +11,14 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.resisafe.appconjuntos.ApiResponse
+import com.resisafe.appconjuntos.ApiService
 import com.resisafe.appconjuntos.ManejadorDeTokens
 import com.resisafe.appconjuntos.R
 import com.resisafe.appconjuntos.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.log
 
 
 data class PerfilUsuario(
@@ -26,10 +28,10 @@ data class PerfilUsuario(
     val tipoPerfil: String,
     val Torre: String,
     val Apto: Int,
-    val activo: Int
+    var activo: Int
 )
 
-class perfilUsuarioAdapter(var perfiles: MutableList<PerfilUsuario>) :
+class perfilUsuarioAdapter(var perfiles: MutableList<PerfilUsuario>, var listaOriginal : MutableList<PerfilUsuario>) :
     RecyclerView.Adapter<perfilUsuarioViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): perfilUsuarioViewHolder {
 
@@ -53,20 +55,16 @@ class perfilUsuarioAdapter(var perfiles: MutableList<PerfilUsuario>) :
         holder.switchActivo.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (holder.token != null) {
                 val estado = if (isChecked) 1 else 0
-                apiService.cambiarEstadoPerfil(estado, perfiles[position].id.toInt(), holder.token)
+                val body = ApiService.CambiarEstadoRequestBody(estado)
+                apiService.cambiarEstadoPerfil(body, perfiles[position].id.toInt(), holder.token)
                     .enqueue(object : Callback<ApiResponse> {
                         override fun onResponse(
                             call: Call<ApiResponse>,
                             response: Response<ApiResponse>
                         ) {
                             if (response.isSuccessful) {
-                                val builder = AlertDialog.Builder(holder.context)
-                                builder.setMessage("Se Modificó el estado del Perfil")
-                                builder.setPositiveButton("Aceptar") { dialog, _ ->
-                                    dialog.dismiss()
-                                }
-                                val dialog = builder.create()
-                                dialog.show()
+                                Log.d("AAAAAAAAAAAA",estado.toString())
+                                perfiles[position].activo = estado;
                             } else {
                                 Log.e("Tag", "Response body is null")
                             }
@@ -121,7 +119,14 @@ class perfilUsuarioAdapter(var perfiles: MutableList<PerfilUsuario>) :
     }
 
     fun getData(): MutableList<PerfilUsuario> {
-        return perfiles
+        return listaOriginal
+
+    }
+
+    fun generarListaOriginal(toMutableList: MutableList<PerfilUsuario>) {
+        listaOriginal = toMutableList;
+        perfiles = toMutableList
+        notifyDataSetChanged();
     }
 }
 

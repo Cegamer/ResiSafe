@@ -18,10 +18,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class UsuarioAdapter(var usuarios: MutableList<UserData>) :
+class UsuarioAdapter(var usuarios: MutableList<UserData>, var listaOriginal : MutableList<UserData>) :
     RecyclerView.Adapter<UsuarioViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsuarioViewHolder {
-
         val layoutInflater = LayoutInflater.from(parent.context)
         return UsuarioViewHolder(
             layoutInflater.inflate(
@@ -80,7 +79,13 @@ class UsuarioAdapter(var usuarios: MutableList<UserData>) :
     }
 
     fun getData(): MutableList<UserData> {
-        return usuarios
+        return listaOriginal
+    }
+
+    fun generarListaOriginal(lista : MutableList<UserData>){
+        listaOriginal = lista;
+        usuarios = lista;
+        notifyDataSetChanged()
     }
 }
 
