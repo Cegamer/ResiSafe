@@ -59,6 +59,17 @@ namespace APIConjuntos
                 });
                 
             });
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder
+                            .AllowAnyOrigin() // Permitir cualquier origen
+                            .AllowAnyMethod() // Permitir cualquier método (GET, POST, etc.)
+                            .AllowAnyHeader(); // Permitir cualquier encabezado
+                    });
+            });
 
             var app = builder.Build();
 
@@ -70,6 +81,7 @@ namespace APIConjuntos
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("AllowAll");
 
             app.UseAuthentication();
             app.UseAuthorization();

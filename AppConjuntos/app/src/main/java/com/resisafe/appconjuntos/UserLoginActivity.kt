@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,8 +30,8 @@ class UserLoginActivity : AppCompatActivity() {
 
         botonIniciarSesion.setOnClickListener() {
 
-            val cedulaCampo: EditText = findViewById(R.id.cedulaFieldLogin)
-            val contrasenaCampo: EditText = findViewById(R.id.contrasenaFieldLogin)
+            val cedulaCampo: TextInputEditText = findViewById(R.id.cedulaFieldLogin)
+            val contrasenaCampo: TextInputEditText = findViewById(R.id.contrasenaFieldLogin)
             val errorText: TextView = findViewById(R.id.errorText)
 
             val loginData = UsuarioLoginModel(
@@ -69,6 +70,8 @@ class UserLoginActivity : AppCompatActivity() {
                             )
                         } catch (e: Exception) {
                             Log.e("Tag", "Failed to parse error response: ${e.message}", e)
+                            errorText.text = "No se ha podido comunicar con el servidor";
+
                         }
                     }
                 }
