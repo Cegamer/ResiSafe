@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import com.google.android.material.textfield.TextInputEditText
 import com.resisafe.appconjuntos.ApiResponse
 import com.resisafe.appconjuntos.Conjunto
 import com.resisafe.appconjuntos.ManejadorDeTokens
@@ -51,14 +53,21 @@ class AppmasterRegistrarConjuntoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val boton: Button = view.findViewById(R.id.buttonCrearConjunto)
+        val buttonCancelar : Button = view.findViewById(R.id.buttonCancelar)
+        buttonCancelar.setOnClickListener {
+            view.findNavController().popBackStack()
+
+        }
+
         boton.setOnClickListener() {
 
             val tokenResponse = ManejadorDeTokens.cargarTokenUsuario(this.requireContext())
             val apiService = RetrofitClient.apiService
             val context = this.requireContext()
 
-            val nombreCampo: EditText = view!!.findViewById(R.id.nombreConjuntoInput)
-            val direccionCampo: EditText = view!!.findViewById(R.id.direccionConjuntoInput)
+            val nombreCampo: TextInputEditText = view!!.findViewById(R.id.nombreConjuntoInput)
+            val direccionCampo: TextInputEditText = view!!.findViewById(R.id.direccionConjuntoInput)
+
 
 
             val conjuntoData = Conjunto(

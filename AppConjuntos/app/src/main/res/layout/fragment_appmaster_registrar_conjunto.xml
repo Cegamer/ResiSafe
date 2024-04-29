@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.AppMaster.AppmasterRegistrarConjuntoFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="1000dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="-500dp"
+            android:background="@drawable/wave_foreground"
+            android:backgroundTint="@color/colorPrimary"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"></LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="1000dp"
+            android:layout_height="864dp"
+            android:layout_marginTop="-370dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/wave"
+            app:tint="@color/colorPrimary" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,42 +43,114 @@
         android:padding="25dp">
 
         <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/profile_selector_background"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Registrar Nuevo Conjunto"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp" />
+
+        <TextView
             android:id="@+id/nombreConjuntoLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Nombre del conjunto"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/nombreConjuntoInput"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/login_inputs"
-            android:ems="10"
-            android:hint="Nombre"
-            android:inputType="text" />
+            android:backgroundTint="@color/colorSecondary"
+            android:hint="Nombre Conjunto"
+            android:inputType="number"
+            android:textColorHint="@color/colorPrimary"
+            app:boxBackgroundColor="@color/colorSecondary"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary"
+            app:startIconDrawable="@drawable/ic_baseline_villa_24"
+            app:startIconTint="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nombreConjuntoInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:inputType="text"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <TextView
             android:id="@+id/direccionConjuntoLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Dirección del Conjunto"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/direccionConjuntoInput"
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/login_inputs"
-            android:ems="10"
-            android:hint="Direccion"
-            android:inputType="text" />
+            android:backgroundTint="@color/colorSecondary"
+            android:hint="Dirección Conjunto"
+            android:inputType="number"
+            android:textColorHint="@color/colorPrimary"
+            app:boxBackgroundColor="@color/colorSecondary"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary"
+            app:startIconDrawable="@drawable/share_location"
+            app:startIconTint="@color/colorPrimary">
 
-        <Button
-            android:id="@+id/buttonCrearConjunto"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/direccionConjuntoInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:inputType="text"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/colorPrimaryDanger"
+                android:padding="10dp"
+                android:text="Cancelar"
+                app:cornerRadius="10dp" />
+
+            <Button
+                android:id="@+id/buttonCrearConjunto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:padding="10dp"
+                android:text="Registrar"
+                app:cornerRadius="10dp" />
+        </LinearLayout>
 
     </LinearLayout>
 </FrameLayout>
