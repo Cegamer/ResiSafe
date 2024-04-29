@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,10 +17,16 @@ class activityUserRegister : AppCompatActivity() {
         setContentView(R.layout.activity_user_register)
 
         val registerButton: Button = findViewById(R.id.registerButton)
-        var cedulaCampo: TextView = findViewById(R.id.cedulaField);
-        var nombreCampo: TextView = findViewById(R.id.nombreField);
-        var apellidoCampo: TextView = findViewById(R.id.apellidoField);
-        var contrasenaCamo: TextView = findViewById(R.id.contrasenaField);
+        val cancelButton : Button = findViewById(R.id.cancelButton)
+        var cedulaCampo: TextInputEditText = findViewById(R.id.cedulaField);
+        var nombreCampo: TextInputEditText = findViewById(R.id.nombreField);
+        var apellidoCampo: TextInputEditText = findViewById(R.id.apellidoField);
+        var contrasenaCamo: TextInputEditText = findViewById(R.id.contrasenaField);
+        cancelButton.setOnClickListener () {
+            val intent = Intent(this, UserLoginActivity::class.java)
+            startActivity(intent)
+        }
+
         registerButton.setOnClickListener() {
             val userData = UsuarioRegisterModel(
                 nombreCampo.text.toString(),

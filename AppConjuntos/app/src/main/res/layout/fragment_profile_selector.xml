@@ -7,27 +7,70 @@
     android:background="@color/BackgroundColor"
     tools:context=".ProfileSelectorFragment">
 
-    <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/profilesGrid"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="30dp"
-        app:columnCount="2">
+        android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardAddProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            app:cardBackgroundColor="#DF0A0A"
-            app:cardCornerRadius="25dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="25dp">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@drawable/ic_baseline_add_24" />
-        </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/profile_selector_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Selecciona tu Perfil"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="24sp" />
 
-    </androidx.gridlayout.widget.GridLayout>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/profile_selector_background"
+                android:contentDescription="Perfiles">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.gridlayout.widget.GridLayout
+                        android:id="@+id/profilesGrid"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="30dp"
+                        app:columnCount="2">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardAddProfile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:backgroundTint="@color/BackgroundColor"
+                            app:cardBackgroundColor="#DF0A0A"
+                            app:cardCornerRadius="25dp">
+
+                            <ImageView
+                                android:id="@+id/imageView3"
+                                android:layout_width="125dp"
+                                android:layout_height="125dp"
+                                android:src="@drawable/ic_baseline_add_24"
+                                app:tint="@color/colorPrimary" />
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.gridlayout.widget.GridLayout>
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

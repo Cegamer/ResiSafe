@@ -2,10 +2,12 @@ package com.resisafe.appconjuntos
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract.Profile
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
@@ -80,6 +82,8 @@ class ProfileSelectorFragment : Fragment() {
                                     cardView.findViewById<TextView>(R.id.conjuntoId)
                                 val idPerfil: TextView = cardView.findViewById(R.id.idPerfil)
 
+                                val ProfileIcon: ImageView = cardView.findViewById(R.id.ProfileIcon)
+
 
                                 textViewConjunto.text = perfil.nombreConjunto
                                 textViewTipoPerfil.text = perfil.nombreTipoPerfil
@@ -91,6 +95,8 @@ class ProfileSelectorFragment : Fragment() {
 
                                     //Administrador
                                     "Administrador" -> {
+
+                                        ProfileIcon.setImageResource(R.drawable.manage_accounts)
                                         cardView.setOnClickListener {
                                             val apiService = RetrofitClient.apiService
                                             val idText: TextView =
@@ -204,6 +210,7 @@ class ProfileSelectorFragment : Fragment() {
 
                                     //Vigilante
                                     "Vigilante" -> {
+                                        ProfileIcon.setImageResource(R.drawable.shield_person)
                                         cardView.setOnClickListener {
                                             val apiService = RetrofitClient.apiService
                                             val idText: TextView =
@@ -258,8 +265,8 @@ class ProfileSelectorFragment : Fragment() {
 
                                     //AppMaster
                                     "AppMaster" -> {
+                                        ProfileIcon.setImageResource(R.drawable.egineering)
                                         cardView.setOnClickListener {
-
                                             val apiService = RetrofitClient.apiService
                                             val idText: TextView =
                                                 cardView.findViewById(R.id.idPerfil)

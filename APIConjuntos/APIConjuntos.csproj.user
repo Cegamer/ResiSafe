@@ -3,6 +3,10 @@
   <PropertyGroup>
     <Controller_SelectedScaffolderID>ApiControllerWithActionsScaffolder</Controller_SelectedScaffolderID>
     <Controller_SelectedScaffolderCategoryPath>root/Common/Api</Controller_SelectedScaffolderCategoryPath>
-    <NameOfLastUsedPublishProfile>E:\Proyectos Programacion\ResiSafe\APIConjuntos\Properties\PublishProfiles\APIConjuntos20240426195103 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>E:\Proyectos Programacion\ResiSafe\APIConjuntos\Properties\PublishProfiles\FTPProfile.pubxml</NameOfLastUsedPublishProfile>
+    <ActiveDebugProfile>APIConjuntos</ActiveDebugProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

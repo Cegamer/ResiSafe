@@ -5,12 +5,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
+    app:cardBackgroundColor="@color/BackgroundColor"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
     <LinearLayout
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -25,14 +26,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <ImageView
                 android:id="@+id/ProfileIcon"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_baseline_person_24" />
+                android:src="@drawable/ic_baseline_person_24"
+                app:tint="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/conjuntoId"
@@ -40,21 +43,23 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView"
-                android:textSize="14sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/ConuntoIcon"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_baseline_villa_24" />
+                android:src="@drawable/ic_baseline_villa_24"
+                app:tint="@color/colorPrimaryLight" />
 
             <TextView
                 android:id="@+id/ConuntoText"
@@ -62,7 +67,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView"
-                android:textSize="14sp" />
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
