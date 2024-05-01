@@ -202,16 +202,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_marginTop="10dp"
+            android:background="@drawable/profile_selector_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/textView13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="16dp"
+                android:gravity="center"
                 android:text="Opciones del Conjunto"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -250,10 +253,9 @@
             <Switch
                 android:id="@+id/switch1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="48dp"
+                android:layout_height="48dp"
                 android:text="Activo"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/colorPrimary"
                 android:thumbTint="@color/colorPrimary"
                 android:trackTint="@color/text_secondary" />
         </LinearLayout>
