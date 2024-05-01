@@ -4,78 +4,113 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardBackgroundColor="@color/background_light"
+    app:cardBackgroundColor="@color/BackgroundColor"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
-    app:cardUseCompatPadding="true"> <!-- Agregamos cardUseCompatPadding para que la sombra se muestre correctamente -->
+    app:cardElevation="0dp"
+    app:cardUseCompatPadding="false"> <!-- Agregamos cardUseCompatPadding para que la sombra se muestre correctamente -->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/idPerfil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            tools:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/ProfileIcon"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_baseline_villa_24"
-            app:tint="@color/background_light" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/conjuntoId"
-                android:layout_width="match_parent"
+                android:id="@+id/idPerfil"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:text="TextView"
-                android:textColor="@color/background_light"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:visibility="gone"
+                tools:visibility="gone" />
 
-            <TextView
-                android:id="@+id/conjuntoNombre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:text="TextView"
-                android:textColor="@color/background_light"
-                android:textSize="18sp" />
+            <ImageView
+                android:id="@+id/ProfileIcon"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:padding="20dp"
+                android:src="@drawable/apartment"
+                app:tint="@color/colorPrimary" />
 
-            <TextView
-                android:id="@+id/conjuntoDireccion"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="2dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/colorSecondaryLight"
+                android:gravity="center"
+                android:orientation="vertical"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:text="TextView"
-                android:textColor="@color/background_light"
-                android:textSize="14sp" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/conjuntoId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:text="TextView"
+                    android:textColor="@color/colorSecondary"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/conjuntoNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:tint="@color/colorPrimary"
+                        app:srcCompat="@drawable/location_on" />
+
+                    <TextView
+                        android:id="@+id/conjuntoDireccion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TextView"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                android:contentDescription="info"
+                android:minHeight="48dp"
+                app:srcCompat="@drawable/ic_baseline_chevron_right_24"
+                app:tint="@color/colorPrimary" />
 
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
-            android:contentDescription="info"
-            android:minHeight="48dp"
-            app:srcCompat="@drawable/ic_baseline_chevron_right_24"
-            app:tint="@color/background_light" />
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorSecondary"
+            android:orientation="horizontal"></LinearLayout>
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

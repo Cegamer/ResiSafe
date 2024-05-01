@@ -46,7 +46,7 @@
     <fragment
         android:id="@+id/nav_appmasterListaConjuntosFragment"
         android:name="com.resisafe.appconjuntos.ui.AppMaster.AppmasterListaConjuntosFragment"
-        android:label="fragment_appmaster_lista_conjuntos"
+        android:label="Conjuntos Registrados"
         tools:layout="@layout/fragment_appmaster_lista_conjuntos">
         <action
             android:id="@+id/action_nav_appmasterListaConjuntosFragment_to_nav_registrar_conjunto"
