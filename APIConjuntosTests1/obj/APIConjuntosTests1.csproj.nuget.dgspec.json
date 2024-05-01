@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SERGIO\\Documents\\GitHub\\ResiSafe\\APIConjuntosTests1\\APIConjuntosTests1.csproj": {}
+    "E:\\Proyectos Programacion\\ResiSafe\\APIConjuntosTests1\\APIConjuntosTests1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SERGIO\\Documents\\GitHub\\ResiSafe\\APIConjuntosTests1\\APIConjuntosTests1.csproj": {
+    "E:\\Proyectos Programacion\\ResiSafe\\APIConjuntosTests1\\APIConjuntosTests1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SERGIO\\Documents\\GitHub\\ResiSafe\\APIConjuntosTests1\\APIConjuntosTests1.csproj",
+        "projectUniqueName": "E:\\Proyectos Programacion\\ResiSafe\\APIConjuntosTests1\\APIConjuntosTests1.csproj",
         "projectName": "APIConjuntosTests1",
-        "projectPath": "C:\\Users\\SERGIO\\Documents\\GitHub\\ResiSafe\\APIConjuntosTests1\\APIConjuntosTests1.csproj",
-        "packagesPath": "C:\\Users\\SERGIO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SERGIO\\Documents\\GitHub\\ResiSafe\\APIConjuntosTests1\\obj\\",
+        "projectPath": "E:\\Proyectos Programacion\\ResiSafe\\APIConjuntosTests1\\APIConjuntosTests1.csproj",
+        "packagesPath": "C:\\Users\\Cegamer\\.nuget\\packages\\",
+        "outputPath": "E:\\Proyectos Programacion\\ResiSafe\\APIConjuntosTests1\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\SERGIO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Cegamer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\SERGIO\\Documents\\GitHub\\ResiSafe\\APIConjuntos\\APIConjuntos.csproj": {
-                "projectPath": "C:\\Users\\SERGIO\\Documents\\GitHub\\ResiSafe\\APIConjuntos\\APIConjuntos.csproj"
+              "E:\\Proyectos Programacion\\ResiSafe\\APIConjuntos\\APIConjuntos.csproj": {
+                "projectPath": "E:\\Proyectos Programacion\\ResiSafe\\APIConjuntos\\APIConjuntos.csproj"
               }
             }
           }
@@ -38,11 +43,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -86,21 +86,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\SERGIO\\Documents\\GitHub\\ResiSafe\\APIConjuntos\\APIConjuntos.csproj": {
+    "E:\\Proyectos Programacion\\ResiSafe\\APIConjuntos\\APIConjuntos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SERGIO\\Documents\\GitHub\\ResiSafe\\APIConjuntos\\APIConjuntos.csproj",
+        "projectUniqueName": "E:\\Proyectos Programacion\\ResiSafe\\APIConjuntos\\APIConjuntos.csproj",
         "projectName": "APIConjuntos",
-        "projectPath": "C:\\Users\\SERGIO\\Documents\\GitHub\\ResiSafe\\APIConjuntos\\APIConjuntos.csproj",
-        "packagesPath": "C:\\Users\\SERGIO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SERGIO\\Documents\\GitHub\\ResiSafe\\APIConjuntos\\obj\\",
+        "projectPath": "E:\\Proyectos Programacion\\ResiSafe\\APIConjuntos\\APIConjuntos.csproj",
+        "packagesPath": "C:\\Users\\Cegamer\\.nuget\\packages\\",
+        "outputPath": "E:\\Proyectos Programacion\\ResiSafe\\APIConjuntos\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\SERGIO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Cegamer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -108,6 +112,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -120,11 +126,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -189,7 +190,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
