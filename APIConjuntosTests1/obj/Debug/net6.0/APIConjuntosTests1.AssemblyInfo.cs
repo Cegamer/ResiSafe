@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("APIConjuntosTests1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f43c192b971595de08070eb7148d602eab023ba")]
 [assembly: System.Reflection.AssemblyProductAttribute("APIConjuntosTests1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("APIConjuntosTests1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
