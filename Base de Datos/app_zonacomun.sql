@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
 -- Host: localhost    Database: app
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `zonacomun`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `zonacomun` (
-  `ID_ZONA_COMUN` int NOT NULL,
+  `ID_ZONA_COMUN` int NOT NULL AUTO_INCREMENT,
   `ID_CONJUNTO` int NOT NULL,
   `NOMBRE` varchar(255) NOT NULL,
   `HORARIO_APERTURA` time NOT NULL,
@@ -31,12 +31,13 @@ CREATE TABLE `zonacomun` (
   `AFORO_MAXIMO` int NOT NULL,
   `PRECIO` int NOT NULL,
   `ID_ICONO` int NOT NULL,
+  `INTERVALO_TURNOS` int NOT NULL COMMENT 'En minutos',
   PRIMARY KEY (`ID_ZONA_COMUN`),
   KEY `zonacomun_ibfk_1` (`ID_CONJUNTO`),
   KEY `zonacomun_ibfk_2` (`ID_ICONO`),
   CONSTRAINT `zonacomun_ibfk_1` FOREIGN KEY (`ID_CONJUNTO`) REFERENCES `conjunto` (`ID_CONJUNTO`),
   CONSTRAINT `zonacomun_ibfk_2` FOREIGN KEY (`ID_ICONO`) REFERENCES `iconos` (`ID_ICONO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +46,7 @@ CREATE TABLE `zonacomun` (
 
 LOCK TABLES `zonacomun` WRITE;
 /*!40000 ALTER TABLE `zonacomun` DISABLE KEYS */;
+INSERT INTO `zonacomun` VALUES (5,2,'asdfafs','08:56:00','23:57:00',10,0,1,60),(6,3,'safsfdsaf','00:09:00','08:09:00',1,0,1,10),(7,6,'Piscina','21:25:00','06:31:00',12,0,1,60);
 /*!40000 ALTER TABLE `zonacomun` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-25 22:10:18
+-- Dump completed on 2024-05-01 14:29:37

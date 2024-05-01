@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
 -- Host: localhost    Database: app
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,14 +23,14 @@ DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuario` (
-  `ID_Usuario` int NOT NULL,
+  `ID_Usuario` int NOT NULL AUTO_INCREMENT,
   `NOMBRE` varchar(255) NOT NULL,
   `APELLIDO` varchar(255) NOT NULL,
   `CEDULA` int NOT NULL,
   `Contraseña` varchar(255) NOT NULL,
-  `FOTO` longblob NOT NULL,
+  `FOTO` longblob,
   PRIMARY KEY (`ID_Usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +39,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (49,'Nicolle','Villamil',12345678,'de2faac42bb2fea2ccc046541917eff31b0c091b4e2993dbe78f065d19516a79b97b46d21cf41cad60d0986bcce002ce4905f82a99597116d4f126495d8efac3',''),(50,'Sergio','Meza',1234567,'362f03c43bb2aba2fbc04854ec1764f3e10c971bc9297fdbb48f0d5d6551e679c77b9fd281f4e0ad4cd0616baee0ccceef05302a0959e01616f14549ab8e8dc3',''),(57,'Cesar Mauricio','Martinez Navarro',1097910221,'912fc5c46bb2a3a214c09d54721793f3000cc01b2729dbdbac8f0a5d69513d79757bfdd2b7f4d6ad80d0176ba6e0c0ce3005162a91591e16fff1d749c78ef6c3',''),(58,'12345','12345',12345,'592f94c447b21aa2bbc0015411172af3fc0cc11b812959dbf68fcc5d7451b479f57b11d2b9f498ad06d0da6b59e0b3ceca05f52aa959c11673f1ca49cf8ec5c3',''),(59,'hzpbxa','',98485,'e32fb0c4c4b242a298c0fc541c1714f39a0cfb1bf429c8db998f6f5db9512479277baed241f4e4ad64d09b6b93e04ccea405952a99591b1678f15249b88e55c3',''),(60,'shyeysys','htsgwg',54552,'032facc467b242a216c0f354e1175cf3760c1e1be129a5dbe28f555df0516779957b36d223f4c8adb3d0886bb4e045ce9e05132af9597816d7f1c849468ef4c3',''),(61,'elver','galarga',12345213,'962f9ec46ab23ca21ac0c854c217d0f3b00c551b222902dbf28f195d5951f1799f7b98d237f454ad49d0536b8fe0a6cedc054c2a0c599216f8f1bc49218e72c3',''),(62,'string','string',0,'472f32c487b2f8a229c08d54ba1771f3630ca81b972990db898f585df751c079ea7be7d233f4e2ad5dd02e6b02e079ce9205ea2a2e59dc169bf1ed492f8ea8c3',''),(63,'laura','godoy',123456,'8b2fb0c4cfb26ea2b9c0b1547d170ff37d0c221bb42956dbf18f215d25517d79c17b25d24ef41fad01d0666b53e070ce4705632a8359ea1677f16d49f48e14c3','');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-25 22:10:18
+-- Dump completed on 2024-05-01 14:29:37

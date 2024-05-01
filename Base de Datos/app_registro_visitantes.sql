@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
 -- Host: localhost    Database: app
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `registro_visitantes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `registro_visitantes` (
-  `ID_REGISTRO` int NOT NULL,
+  `ID_REGISTRO` int NOT NULL AUTO_INCREMENT,
   `ID_VISITANTE` int NOT NULL,
   `ID_RESIDENTE_VINCULADO` int NOT NULL,
   `ID_VIGILANTE_QUE_REGISTRA` int NOT NULL,
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-25 22:10:17
+-- Dump completed on 2024-05-01 14:29:37

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
 -- Host: localhost    Database: app
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,18 +23,19 @@ DROP TABLE IF EXISTS `perfil`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `perfil` (
-  `ID_Perfil` int NOT NULL,
+  `ID_Perfil` int NOT NULL AUTO_INCREMENT,
   `ID_Usuario` int NOT NULL,
   `ID_CONJUNTO` int NOT NULL,
   `ID_TIPO_PERFIL` int NOT NULL,
+  `Activo` tinyint NOT NULL,
   PRIMARY KEY (`ID_Perfil`),
-  KEY `perfil_ibfk_1` (`ID_Usuario`),
-  KEY `perfil_ibfk_2` (`ID_CONJUNTO`),
-  KEY `perfil_ibfk_3` (`ID_TIPO_PERFIL`),
-  CONSTRAINT `perfil_ibfk_1` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuario` (`ID_Usuario`),
-  CONSTRAINT `perfil_ibfk_2` FOREIGN KEY (`ID_CONJUNTO`) REFERENCES `conjunto` (`ID_CONJUNTO`),
-  CONSTRAINT `perfil_ibfk_3` FOREIGN KEY (`ID_TIPO_PERFIL`) REFERENCES `tipos_de_perfil` (`ID_TIPO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `perfil_conjunto_idx` (`ID_CONJUNTO`),
+  KEY `perfil_tipo_idx` (`ID_TIPO_PERFIL`),
+  KEY `perfil_usuario_idx` (`ID_Usuario`),
+  CONSTRAINT `perfil_conjunto` FOREIGN KEY (`ID_CONJUNTO`) REFERENCES `conjunto` (`ID_CONJUNTO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `perfil_tipo` FOREIGN KEY (`ID_TIPO_PERFIL`) REFERENCES `tipos_de_perfil` (`ID_TIPO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `perfil_usuario` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuario` (`ID_Usuario`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +44,7 @@ CREATE TABLE `perfil` (
 
 LOCK TABLES `perfil` WRITE;
 /*!40000 ALTER TABLE `perfil` DISABLE KEYS */;
+INSERT INTO `perfil` VALUES (3,49,1,4,0),(4,50,1,4,0),(33,58,4,1,0),(34,58,4,2,0),(35,58,4,3,0),(36,58,1,4,0),(37,49,4,2,0),(38,57,6,2,1);
 /*!40000 ALTER TABLE `perfil` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-25 22:10:18
+-- Dump completed on 2024-05-01 14:29:37

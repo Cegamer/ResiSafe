@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
 -- Host: localhost    Database: app
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,11 +23,12 @@ DROP TABLE IF EXISTS `conjunto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `conjunto` (
-  `ID_CONJUNTO` int NOT NULL,
+  `ID_CONJUNTO` int NOT NULL AUTO_INCREMENT,
   `NOMBRE` varchar(255) NOT NULL,
   `Direccion` varchar(255) NOT NULL,
+  `Activo` tinyint NOT NULL,
   PRIMARY KEY (`ID_CONJUNTO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,6 +37,7 @@ CREATE TABLE `conjunto` (
 
 LOCK TABLES `conjunto` WRITE;
 /*!40000 ALTER TABLE `conjunto` DISABLE KEYS */;
+INSERT INTO `conjunto` VALUES (1,'AppMaster','AppMaster',0),(2,'12345','12345',0),(3,'rer','rer',0),(4,'Villa Grande','cra 85',0),(5,'asdfasdfsaf','safsafsaf',1),(6,'villa pene','cra pene',1),(7,'prueba1','test',1);
 /*!40000 ALTER TABLE `conjunto` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-25 22:10:18
+-- Dump completed on 2024-05-01 14:29:37
