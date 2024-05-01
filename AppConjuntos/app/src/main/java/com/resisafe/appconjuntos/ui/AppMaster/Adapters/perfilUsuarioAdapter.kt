@@ -142,6 +142,7 @@ class perfilUsuarioViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val botonBorrar = view.findViewById<ImageView>(R.id.botonBorrar)
     val token = ManejadorDeTokens.cargarTokenUsuario(view.context)?.token;
     val context = view.context
+    val icono = view.findViewById<ImageView>(R.id.imageView8)
 
 
     fun render(PerfilUsuario: PerfilUsuario) {
@@ -154,7 +155,20 @@ class perfilUsuarioViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         textoApto.text = PerfilUsuario.Apto.toString()
         switchActivo.isChecked = PerfilUsuario.activo == 1;
 
+        when (PerfilUsuario.tipoPerfil) {
+            "Administrador" -> {
+                icono.setImageResource(R.drawable.manage_accounts)
+            }
 
+            "Residente" -> {
+                icono.setImageResource(R.drawable.ic_baseline_person_24)
+            }
+            "Vigilante" -> {
+                icono.setImageResource(R.drawable.shield_person)
+            }
+            "AppMaster" -> {
+                icono.setImageResource(R.drawable.egineering)
+            }
+        }
     }
-
 }

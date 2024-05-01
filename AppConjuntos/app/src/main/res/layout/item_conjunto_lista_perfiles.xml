@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardBackgroundColor="@color/primary_light"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
@@ -12,14 +12,17 @@
         android:id="@+id/tarjetaPerfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/profile_selector_background"
         android:orientation="horizontal"
         android:padding="16dp">
 
         <ImageView
             android:id="@+id/imageView8"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_baseline_badge_24" />
+            android:padding="10dp"
+            android:src="@drawable/ic_baseline_badge_24"
+            app:tint="@color/colorPrimary" />
 
         <LinearLayout
             android:layout_width="256dp"
@@ -27,7 +30,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="124dp"
+                android:layout_width="153dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
@@ -36,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ID:"
-                    android:textColor="@color/text_secondary"
+                    android:textColor="@color/colorPrimaryLight"
                     android:textSize="12sp"
                     android:textStyle="normal" />
 
@@ -44,8 +47,8 @@
                     android:id="@+id/textoCedulaUsuario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="ID:"
-                    android:textColor="@color/text_secondary"
+                    android:text="cc"
+                    android:textColor="@color/colorPrimaryLight"
                     android:textSize="12sp"
                     android:textStyle="normal" />
 
@@ -54,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
                 <TextView
@@ -62,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tipo de Perfil"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -81,14 +84,15 @@
                         android:id="@+id/imageView11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_villa_24" />
+                        android:src="@drawable/ic_baseline_villa_24"
+                        app:tint="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/textoTorre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Torre"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -102,14 +106,15 @@
                         android:id="@+id/imageView13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_home_24" />
+                        android:src="@drawable/ic_baseline_home_24"
+                        app:tint="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/textoApto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Apto"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -117,8 +122,12 @@
                     android:id="@+id/switchActivo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/colorPrimary"
+                    android:foregroundTint="@color/colorPrimary"
                     android:minHeight="48dp"
-                    android:text="Activo" />
+                    android:text="Activo"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorLink="@color/colorPrimary" />
 
             </LinearLayout>
 
@@ -126,13 +135,16 @@
 
         <ImageButton
             android:id="@+id/botonBorrar"
-            android:layout_width="48dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="info"
             android:minWidth="48dp"
+            android:padding="10dp"
             android:src="@android:drawable/ic_menu_delete"
-            app:tint="@color/black" />
+            app:tint="@color/colorPrimaryDark"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>
 
