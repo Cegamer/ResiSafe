@@ -109,6 +109,53 @@ namespace APIConjuntos.Controllers
                 return true;
             return false;
         }
+
+        [HttpPut]
+        [Authorize]
+        [Route("{idConjunto}")]
+        public IActionResult modificarConjunto([FromRoute] int idConjunto, ConjuntoDTO conjunto) {
+            var userProfile = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
+            
+            Perfil perfilLogeado = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == userProfile);
+
+            Conjunto conjuntoAModificar = dbContext.Conjuntos.FirstOrDefault(c => c.IdConjunto == idConjunto);
+
+
+            if (perfilLogeado == null) return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+            if (conjuntoAModificar == null) return NotFound();
+
+            if(perfilLogeado.IdTipoPerfil == 4 )
+            {
+                dbContext.Conjuntos.Update(conjuntoAModificar);
+                dbContext.SaveChanges();
+                return new JsonResult(new { message = "conjunto modificado" });
+            }
+            return BadRequest();
+        }
+
+        [HttpDelete]
+        [Authorize]
+        [Route("{idConjunto}")]
+        public IActionResult eliminarConjunto([FromRoute] int idConjunto)
+        {
+            var userProfile = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
+
+            Perfil perfilLogeado = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == userProfile);
+
+            Conjunto conjuntoAEliminar = dbContext.Conjuntos.FirstOrDefault(c => c.IdConjunto == idConjunto);
+
+
+            if (perfilLogeado == null) return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+            if (conjuntoAEliminar == null) return NotFound();
+
+            if (perfilLogeado.IdTipoPerfil == 4)
+            {
+                dbContext.Conjuntos.Remove(conjuntoAEliminar);
+                dbContext.SaveChanges();
+                return new JsonResult(new { message = "conjunto eliminado" });
+            }
+            return BadRequest();
+        }
     }
          
 }

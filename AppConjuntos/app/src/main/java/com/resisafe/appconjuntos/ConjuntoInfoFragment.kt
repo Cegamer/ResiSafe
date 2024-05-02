@@ -56,7 +56,7 @@ class ConjuntoInfoFragment : Fragment() {
         val botonAdmins = view.findViewById<Button>(R.id.botonAdmins)
 
         val buttonAgregarZonaComun = view.findViewById<Button>(R.id.buttonAgregarZonaComun)
-
+        val botonListaZonaComun = view.findViewById<Button>(R.id.botonListaZonaComun)
 
         val args = arguments
         if (args != null) {
@@ -114,6 +114,12 @@ class ConjuntoInfoFragment : Fragment() {
                                         R.id.action_conjuntoInfoFragment_to_conjuntoAgregarZonacomunFragment2,
                                         bundle
                                     )
+                                }
+
+                                botonListaZonaComun.setOnClickListener{
+                                    bundle.putInt("idConjunto", idConjuntoArg)
+                                    view.findNavController().navigate(R.id.action_conjuntoInfoFragment_to_fragmentConjuntoListaZonascomunes,bundle)
+
                                 }
 
 

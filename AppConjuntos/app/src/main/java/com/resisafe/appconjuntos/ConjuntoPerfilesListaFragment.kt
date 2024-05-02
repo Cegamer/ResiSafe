@@ -76,7 +76,7 @@ class ConjuntoPerfilesListaFragment : Fragment() {
         }
 
 
-        val botonNuevoPerfilConjunto = view.findViewById<Button>(R.id.botonNuevoPerfilConjunto)
+        val botonNuevoPerfilConjunto = view.findViewById<Button>(R.id.botonNuevoUsuario)
         botonNuevoPerfilConjunto.setOnClickListener {
             val bundle = Bundle()
             if (idConjuntoArg != null) {

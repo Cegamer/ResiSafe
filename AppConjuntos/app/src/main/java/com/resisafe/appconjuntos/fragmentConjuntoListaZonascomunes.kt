@@ -1,0 +1,129 @@
+package com.resisafe.appconjuntos
+
+import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import androidx.core.widget.addTextChangedListener
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.resisafe.appconjuntos.ui.AppMaster.Adapters.UsuarioAdapter
+import com.resisafe.appconjuntos.ui.AppMaster.Adapters.ZonaComunAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
+
+/**
+ * A simple [Fragment] subclass.
+ * Use the [fragmentConjuntoListaZonascomunes.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class fragmentConjuntoListaZonascomunes : Fragment() {
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+
+
+
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_conjunto_lista_zonascomunes, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val buttonNuevaZonaComun = view.findViewById<Button>(R.id.buttonNuevaZonaComun)
+
+
+
+        val zonasComunes: MutableList<ZonaComun> = mutableListOf();
+        val adapter = ZonaComunAdapter(zonasComunes)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerVIew)
+        recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
+        recyclerView.adapter = adapter
+
+
+        val apiService = RetrofitClient.apiService
+        val context = this.requireContext()
+        val token = ManejadorDeTokens.cargarTokenUsuario(context)?.token;
+        val args = arguments
+
+        if(args != null){
+            val idConjuntoArg = args.getInt("idConjunto")
+
+            buttonNuevaZonaComun.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putInt("idConjunto", idConjuntoArg)
+                view.findNavController().navigate(
+                    R.id.action_conjuntoInfoFragment_to_conjuntoAgregarZonacomunFragment2,
+                    bundle
+                )
+            }
+            if (token != null) {
+                apiService.getZonasComunesConjunto(idConjuntoArg,token).enqueue(object : Callback<List<ZonaComun>> {
+                    override fun onResponse(
+                        call: Call<List<ZonaComun>>,
+                        response: Response<List<ZonaComun>>
+                    ) {
+                        if (response.isSuccessful) {
+                            val datos = response.body()
+                            if (datos != null) {
+                                adapter.actualizar(datos.toMutableList())
+                            }
+                        } else {
+                            Log.e("Tag", "Response body is null")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<List<ZonaComun>>, t: Throwable) {
+                        Log.e("Tag", "ERROOOOOOOR")
+                    }
+                })
+            }
+        }
+
+        super.onViewCreated(view, savedInstanceState)
+    }
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment fragmentConjuntoListaZonascomunes.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            fragmentConjuntoListaZonascomunes().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
+    }
+}

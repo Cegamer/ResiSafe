@@ -69,6 +69,9 @@
         <action
             android:id="@+id/action_conjuntoInfoFragment_to_conjuntoAgregarZonacomunFragment2"
             app:destination="@id/conjuntoAgregarZonacomunFragment" />
+        <action
+            android:id="@+id/action_conjuntoInfoFragment_to_fragmentConjuntoListaZonascomunes"
+            app:destination="@id/fragmentConjuntoListaZonascomunes" />
     </fragment>
     <fragment
         android:id="@+id/conjuntoPerfilesListaFragment"
@@ -123,5 +126,17 @@
         <argument
             android:name="idConjunto"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentConjuntoListaZonascomunes"
+        android:name="com.resisafe.appconjuntos.fragmentConjuntoListaZonascomunes"
+        android:label="fragment_conjunto_lista_zonascomunes"
+        tools:layout="@layout/fragment_conjunto_lista_zonascomunes" >
+        <argument
+            android:name="idConjunto"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_fragmentConjuntoListaZonascomunes_to_conjuntoAgregarZonacomunFragment"
+            app:destination="@id/conjuntoAgregarZonacomunFragment" />
     </fragment>
 </navigation>

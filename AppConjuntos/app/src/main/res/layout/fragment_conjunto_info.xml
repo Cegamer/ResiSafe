@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light"
+    android:background="@color/BackgroundColor"
     android:padding="16dp"
     tools:context=".ConjuntoInfoFragment">
 
@@ -186,7 +186,7 @@
                     app:cornerRadius="20dp" />
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/botonListaZonaComun"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -224,7 +224,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button9"
+                    android:id="@+id/buttonEliminar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -237,7 +237,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <Button
-                    android:id="@+id/button10"
+                    android:id="@+id/buttonModificar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -19,16 +19,54 @@ namespace APIConjuntos.Controllers
         appContext dbContext = new appContext();
         // GET: api/<ZonacomunController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return new JsonResult(mapper.Map<List<Zonacomun>, List<ZonacomunDTO>>(dbContext.Zonacomuns.ToList()));
+
         }
+
+
+        [HttpGet]
+        [Route("Conjunto/{idConjunto}")]
+        [Authorize]
+        public IActionResult getZonaComunConjunto([FromRoute] int idConjunto)
+        {
+
+            var perfilId = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
+            Perfil perfilLogeado = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == perfilId);
+
+            if (perfilLogeado == null)
+                return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+
+            if ((perfilLogeado.IdTipoPerfil == 4) || (perfilLogeado.IdConjunto == idConjunto))
+            {
+                var zonasComunes = dbContext.Zonacomuns.Where(c => c.IdConjunto == idConjunto).ToList();
+                return new JsonResult(mapper.Map<List<Zonacomun>, List<ZonacomunDTO>>(zonasComunes));
+            }
+
+            return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+        }
+
 
         // GET api/<ZonacomunController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            var perfilId = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
+            Perfil perfilLogeado = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == perfilId);
+
+            if (perfilLogeado == null)
+                return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+
+            var zonaComun = dbContext.Zonacomuns.FirstOrDefault(zc => zc.IdZonaComun == id);
+
+            if ((perfilLogeado.IdTipoPerfil == 4) || (perfilLogeado.IdConjunto == zonaComun.IdConjunto))
+            {
+                return new JsonResult(zonaComun);
+            
+            }
+            return BadRequest();
+            
         }
 
         // POST api/<ZonacomunController>
@@ -73,16 +111,25 @@ namespace APIConjuntos.Controllers
             catch (Exception ex) { return false; }
         }
 
-        // PUT api/<ZonacomunController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
         // DELETE api/<ZonacomunController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            var perfilId = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
+            Perfil perfilLogeado = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == perfilId);
+
+            if (perfilLogeado == null)
+                return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+
+            var zonaComun = dbContext.Zonacomuns.FirstOrDefault(zc => zc.IdZonaComun == id);
+            if(zonaComun == null) return NotFound();
+
+            if ((perfilLogeado.IdTipoPerfil == 4) || (perfilLogeado.IdConjunto == zonaComun.IdConjunto))
+            {
+                dbContext.Zonacomuns.Remove(zonaComun);
+                dbContext.SaveChanges();
+            }
+            return BadRequest();
         }
     }
 }

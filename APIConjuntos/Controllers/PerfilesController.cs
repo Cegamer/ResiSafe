@@ -189,12 +189,12 @@ namespace APIConjuntos.Controllers
 
         [HttpPut]
         [Authorize]
-        [Route("{idPerfiLEliminar}")]
+        [Route("{idPerfilModificar}")]
 
-        public IActionResult cambiarEstadoPerfil([FromRoute]int idPerfiLEliminar,int estado) {
+        public IActionResult cambiarEstadoPerfil([FromRoute]int idPerfilModificar, int estado) {
             var perfilId = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
             Perfil perfilLogeado = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == perfilId);
-            Perfil perfilAModificar = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == idPerfiLEliminar);
+            Perfil perfilAModificar = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == idPerfilModificar);
 
 
             if (perfilLogeado == null) return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);

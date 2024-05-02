@@ -16,6 +16,7 @@ import retrofit2.http.Path
 object RetrofitClient {
     private const val BASE_URL = "https://more-molly-honest.ngrok-free.app/api/"
 
+
     val apiService: ApiService by lazy {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -68,6 +69,14 @@ interface ApiService {
         @Body conjunto: Conjunto,
         @Header("Authorization") token: String
     ): Call<ApiResponse>
+
+    @DELETE("Conjuntos/{id}")
+    fun eliminarConjunto(@Path("id") conjuntoId:Int, @Header("Authorization") token: String) : Call<ApiResponse>
+
+    @PUT("Conjuntos/{id}")
+    fun eliminarConjunto(@Path("id") conjuntoId:Int,
+                         @Body conjunto: Conjunto,
+                         @Header("Authorization") token: String) : Call<ApiResponse>
 
     @GET("Conjuntos")
     fun obtenerConjuntos(): Call<List<Conjunto>>
@@ -123,6 +132,10 @@ interface ApiService {
         @Body zonacomun: ZonaComun,
         @Header("Authorization") token: String
     ): Call<ApiResponse>
+
+    @GET("Zonacomun/Conjunto/{idConjunto}")
+    fun getZonasComunesConjunto(@Path("idConjunto") idConjunto: Int,
+                                @Header("Authorization") token: String) : Call<List<ZonaComun>>
 
 
 }
