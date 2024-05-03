@@ -60,8 +60,12 @@ class AppmasterHomeFragment : Fragment() {
             )
         }
         vincularUsuariosCard.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("idConjunto", 1);
+            bundle.putInt("tipoUsuarioSolicitante", 4);
+
             view.findNavController().navigate(
-                R.id.action_nav_home_to_perfilCrearFragment
+                R.id.action_nav_home_to_perfilCrearFragment,bundle
             )
         }
         listaUsuariosCard.setOnClickListener {

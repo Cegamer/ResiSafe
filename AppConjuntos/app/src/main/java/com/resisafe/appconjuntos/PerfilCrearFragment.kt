@@ -52,9 +52,13 @@ class PerfilCrearFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         val spinnerConjunto: Spinner = view.findViewById(R.id.spinnerConjunto)
 
         val mapConjuntos: MutableMap<String, Int> = mutableMapOf()
+
+
+        //Definir datos spinner conjuntos
         apiService.obtenerConjuntos().enqueue(object : Callback<List<Conjunto>> {
             override fun onResponse(
                 call: Call<List<Conjunto>>,
@@ -69,11 +73,23 @@ class PerfilCrearFragment : Fragment() {
                         val nombresConjuntos = mapConjuntos.keys.toList()
                         val adapter = ArrayAdapter(
                             requireContext(),
-                            android.R.layout.simple_spinner_item,
+                            R.layout.spinner_box,
                             nombresConjuntos
                         )
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        adapter.setDropDownViewResource(R.layout.spinner_item)
                         spinnerConjunto.adapter = adapter
+                        val args = arguments
+                        if(args != null) {
+                            val idConjunto = args.getInt("idConjunto")
+                            val tipoUsuarioSolicitante = args.getInt("tipoUsuarioSolicitante")
+
+                            if(tipoUsuarioSolicitante == 1){
+                                val conjuntoActual = datos.find { it.idConjunto == idConjunto }
+                                spinnerConjunto.setSelection(nombresConjuntos.indexOf(conjuntoActual?.nombre))
+                                spinnerConjunto.isEnabled = false
+                            }
+                        }
+
                     } else {
                         Log.e("Tag", "Response body is null")
                     }
@@ -103,51 +119,56 @@ class PerfilCrearFragment : Fragment() {
         }
 
 
+
+        //Buscador por cedula
         val cedulaBuscador = view.findViewById<EditText>(R.id.cedulaBuscador)
         val tokenResponse = ManejadorDeTokens.cargarTokenUsuario(this.requireContext())
-
         val idText = view.findViewById<TextView>(R.id.idUsuarioText)
         val nombreText = view.findViewById<TextView>(R.id.textView11)
+        fun cargarUsuarioPorCedula(){
+            if (tokenResponse != null) {
+                apiService.getUserByCedula(
+                    cedulaBuscador.text.toString().toInt(),
+                    tokenResponse.token
+                ).enqueue(object : Callback<UserData> {
+                    override fun onResponse(
+                        call: Call<UserData>,
+                        response: Response<UserData>
+                    ) {
+                        if (response.isSuccessful) {
+                            val datos = response.body()
 
+                            if (datos != null) {
+                                idText.text = datos.idUsuario.toString()
+                                nombreText.text = datos.nombre + " " + datos.apellido
+                            }
+                        } else {
+                            Log.e("Tag", "Response unsuccessful")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<UserData>, t: Throwable) {
+                        Log.e("Tag", "Error en la solicitud: ${t.message}")
+                    }
+                })
+            }
+
+        }
         if (tokenResponse != null) {
             Log.d("Tag", "Token: ${tokenResponse.token}, UserID: ${tokenResponse.userID}")
             cedulaBuscador.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    cargarUsuarioPorCedula()
 
-                    apiService.getUserByCedula(
-                        cedulaBuscador.text.toString().toInt(),
-                        tokenResponse.token
-                    ).enqueue(object : Callback<UserData> {
-                        override fun onResponse(
-                            call: Call<UserData>,
-                            response: Response<UserData>
-                        ) {
-                            if (response.isSuccessful) {
-                                val datos = response.body()
 
-                                if (datos != null) {
-                                    idText.text = datos.idUsuario.toString()
-                                    nombreText.text = datos.nombre + " " + datos.apellido
-                                }
-                            } else {
-                                Log.e("Tag", "Response unsuccessful")
-                            }
-                        }
-
-                        override fun onFailure(call: Call<UserData>, t: Throwable) {
-                            Log.e("Tag", "Error en la solicitud: ${t.message}")
-                        }
-                    })
                     return@OnEditorActionListener true
                 }
                 false
             })
         }
 
-        /*===============================================================================*/
-
+        /*Spinner tipo perfil*/
         val spinnerTipoPerfil: Spinner = view.findViewById(R.id.spinnerTipoPerfil)
-
         val mapTiposPerfil: MutableMap<String, Int> = mutableMapOf()
         apiService.getTiposPerfil().enqueue(object : Callback<List<TipoPerfil>> {
             override fun onResponse(
@@ -164,11 +185,50 @@ class PerfilCrearFragment : Fragment() {
                         val nombresTipos = mapTiposPerfil.keys.toList()
                         val adapter = ArrayAdapter(
                             requireContext(),
-                            android.R.layout.simple_spinner_item,
+                            R.layout.spinner_box,
                             nombresTipos
                         )
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        adapter.setDropDownViewResource(R.layout.spinner_item)
                         spinnerTipoPerfil.adapter = adapter
+
+                        val args = arguments
+                        if(args != null) {
+                           val idConjunto = args.getInt("idConjunto")
+                            val tipoUsuarioSolicitante = args.getInt("tipoUsuarioSolicitante")
+
+                            if(tipoUsuarioSolicitante == 0){
+                                spinnerTipoPerfil.setSelection(nombresTipos.indexOf("Residente"))
+                                spinnerTipoPerfil.isEnabled = false
+
+                                val dataToken = ManejadorDeTokens.cargarTokenUsuario(view.context)
+                                val token = dataToken?.token;
+                                val idUsuario = dataToken?.userID
+
+                                if (token != null && idUsuario != null) {
+                                    apiService.getUserData(idUsuario,token).enqueue(object : Callback<UserData> {
+                                        override fun onResponse(
+                                            call: Call<UserData>,
+                                            response: Response<UserData>
+                                        ) {
+                                            if (response.isSuccessful) {
+                                                val data = response.body()
+                                                if (data != null) {
+                                                    cedulaBuscador.setText( data.cedula.toString())
+                                                    cargarUsuarioPorCedula()
+                                                    cedulaBuscador.isEnabled = false;
+                                                };
+                                            } else {
+                                                Log.e("Tag", "Response body is null")
+                                            }
+                                        }
+                                        override fun onFailure(call: Call<UserData>, t: Throwable) {
+                                            Log.e("Tag", "Response body is dsafadfafdasf")
+                                        }
+                                    })
+                                }
+                            }
+
+                        }
                     } else {
                         Log.e("Tag", "Response body is null")
                     }
@@ -181,7 +241,6 @@ class PerfilCrearFragment : Fragment() {
                 Log.e("Tag", "Error en la solicitud: ${t.message}")
             }
         })
-
         spinnerTipoPerfil.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -197,9 +256,8 @@ class PerfilCrearFragment : Fragment() {
             }
         }
 
-
+        //Botón crear perfil
         val buttonCrearPerfil = view.findViewById<Button>(R.id.buttonCrearPerfil)
-
         buttonCrearPerfil.setOnClickListener {
             for ((key, value) in mapTiposPerfil) {
                 Log.d("Mapa", "Clave: $key, Valor: $value")
@@ -240,7 +298,6 @@ class PerfilCrearFragment : Fragment() {
             }
 
         }
-
 
         super.onViewCreated(view, savedInstanceState)
     }
