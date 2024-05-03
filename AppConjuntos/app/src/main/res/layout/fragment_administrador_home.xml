@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
     >
 
 
@@ -45,195 +46,309 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Administrador"
+                android:text="ADMINISTRADOR"
                 android:textColor="@color/colorSecondaryLight"
                 android:textSize="24sp" />
 
         </LinearLayout>
     </LinearLayout>
 
-    <androidx.gridlayout.widget.GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-        <LinearLayout
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="480dp"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/registrarConjuntosCard"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:backgroundTint="@color/colorSecondaryDark"
-                app:cardCornerRadius="20dp">
-
-                <ImageView
-                    android:id="@+id/imageView9"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/domain_add"
-                    app:tint="@color/colorPrimary" />
-
-            </androidx.cardview.widget.CardView>
-
-            <TextView
+            <androidx.gridlayout.widget.GridLayout
                 android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:gravity="center"
-                android:text="Registrar Conjuntos"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-        <LinearLayout
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_column="1"
-            app:layout_row="0">
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/listaConjuntosCard"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:backgroundTint="@color/colorSecondaryDark"
-                app:cardCornerRadius="20dp">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/registrarConjuntosCard"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:backgroundTint="@color/colorSecondaryDark"
+                        app:cardCornerRadius="20dp">
 
-                <ImageView
-                    android:id="@+id/imageView14"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_baseline_villa_24"
-                    app:tint="@color/colorPrimary" />
+                        <ImageView
+                            android:id="@+id/imageView9"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/conjunto"
+                            app:tint="@color/colorPrimary" />
 
-            </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:gravity="center"
-                android:text="Lista de Conjuntos"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Información del conjunto"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+                </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_column="0"
-            app:layout_row="1">
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_column="1"
+                    app:layout_row="0">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/vincularUsuariosCard"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:backgroundTint="@color/colorSecondaryDark"
-                app:cardCornerRadius="20dp">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/listaConjuntosCard"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:backgroundTint="@color/colorSecondaryDark"
+                        app:cardCornerRadius="20dp">
 
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/location_away"
-                    app:tint="@color/colorPrimary" />
+                        <ImageView
+                            android:id="@+id/imageView14"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/agregar_persona"
+                            app:tint="@color/colorPrimary" />
 
-            </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:gravity="center"
-                android:text="Vincular Usuarios"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:gravity="center"
+                        android:text="Agregar perfiles"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+                </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_column="1"
-            app:layout_row="1">
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_column="0"
+                    app:layout_row="1">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/crearUsuariosCard"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:backgroundTint="@color/colorSecondaryDark"
-                app:cardCornerRadius="20dp">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/vincularUsuariosCard"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:backgroundTint="@color/colorSecondaryDark"
+                        app:cardCornerRadius="20dp">
 
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/group_add"
-                    app:tint="@color/colorPrimary" />
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/agregar_persona"
+                            app:tint="@color/colorPrimary" />
 
-            </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:gravity="center"
-                android:text="Crear Usuarios"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:gravity="center"
+                        android:text="Lista perfiles"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_column="1"
+                    app:layout_row="1">
 
-        <LinearLayout
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_column="0"
-            app:layout_row="2">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/crearUsuariosCard"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:backgroundTint="@color/colorSecondaryDark"
+                        app:cardCornerRadius="20dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/listaUsuariosCard"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:backgroundTint="@color/colorSecondaryDark"
-                app:cardCornerRadius="20dp">
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/habilitar_residentes"
+                            app:tint="@color/colorPrimary" />
 
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/groups"
-                    app:tint="@color/colorPrimary" />
+                    </androidx.cardview.widget.CardView>
 
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:gravity="center"
-                android:text="Lista Usuarios"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:gravity="center"
+                        android:text="Habilitar Residentes"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+                </LinearLayout>
 
 
-    </androidx.gridlayout.widget.GridLayout>
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_column="0"
+                    app:layout_row="2">
 
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/listadeperfiles1"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:backgroundTint="@color/colorSecondaryDark"
+                        app:cardCornerRadius="20dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/historialpaquetes"
+                            app:tint="@color/colorPrimary" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Historial paquetes"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_column="1"
+                    app:layout_row="2">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/listadeperfiles2"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:backgroundTint="@color/colorSecondaryDark"
+                        app:cardCornerRadius="20dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/historialpaquetes"
+                            app:tint="@color/colorPrimary" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:gravity="center"
+                        android:text="Historial visitantes"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_column="0"
+                    app:layout_row="3">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/reservaspendientes"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:backgroundTint="@color/colorSecondaryDark"
+                        app:cardCornerRadius="20dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/zonacomun"
+                            app:tint="@color/colorPrimary" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:gravity="center"
+                        android:text="Reservas pendientes"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_column="1"
+                    app:layout_row="3">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/agregarzonacomun"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:backgroundTint="@color/colorSecondaryDark"
+                        app:cardCornerRadius="20dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/anadir"
+                            app:tint="@color/colorPrimary" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:gravity="center"
+                        android:text="Agregar zona comun"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+
+            </androidx.gridlayout.widget.GridLayout>
+        </ScrollView>
+    </LinearLayout>
     <!--
     <LinearLayout
         android:layout_width="match_parent"

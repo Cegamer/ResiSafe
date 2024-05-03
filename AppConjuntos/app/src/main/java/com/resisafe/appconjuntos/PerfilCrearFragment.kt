@@ -167,7 +167,7 @@ class PerfilCrearFragment : Fragment() {
             })
         }
 
-        /*Spinner tipo perfil*/
+        ///Spinner tipo perfil/
         val spinnerTipoPerfil: Spinner = view.findViewById(R.id.spinnerTipoPerfil)
         val mapTiposPerfil: MutableMap<String, Int> = mutableMapOf()
         apiService.getTiposPerfil().enqueue(object : Callback<List<TipoPerfil>> {
@@ -193,7 +193,7 @@ class PerfilCrearFragment : Fragment() {
 
                         val args = arguments
                         if(args != null) {
-                           val idConjunto = args.getInt("idConjunto")
+                            val idConjunto = args.getInt("idConjunto")
                             val tipoUsuarioSolicitante = args.getInt("tipoUsuarioSolicitante")
 
                             if(tipoUsuarioSolicitante == 0){

@@ -111,7 +111,7 @@ class ZonacomunInfoFragment : Fragment() {
                         Log.e("Tag", "Response body is dsafadfafdasf")
                     }
                 })*/
-            }
+        }
 
         super.onViewCreated(view, savedInstanceState)
     }
