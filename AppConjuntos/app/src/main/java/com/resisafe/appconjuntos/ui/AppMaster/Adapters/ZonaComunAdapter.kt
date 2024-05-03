@@ -1,12 +1,14 @@
 package com.resisafe.appconjuntos.ui.AppMaster.Adapters
 
 import android.app.AlertDialog
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.resisafe.appconjuntos.ApiResponse
 import com.resisafe.appconjuntos.ManejadorDeTokens
@@ -34,8 +36,14 @@ class ZonaComunAdapter(var zonasComunes: MutableList<ZonaComun>) :
 
     override fun onBindViewHolder(holder: ZonaComunViewHolder, position: Int) {
         val item = zonasComunes[position]
-        holder.render(item)
 
+        holder.botonZonaComunInfo.setOnClickListener(){
+            val bundle = Bundle()
+            bundle.putInt("idZonaComun", holder.idZonaComun)
+            val navController = Navigation.findNavController(holder.itemView)
+            navController!!.navigate(R.id.action_fragmentConjuntoListaZonascomunes_to_zonacomunInfoFragment,bundle)
+        }
+        holder.render(item)
     }
 
     override fun getItemCount(): Int {
@@ -72,9 +80,8 @@ class ZonaComunViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         horarioCierre.text = ZonaComun.horarioCierre
         idZonaComun = ZonaComun.idZonaComun
 
-        botonZonaComunInfo.setOnClickListener(){
-            //Implementar
 
-        }
+
+
     }
 }

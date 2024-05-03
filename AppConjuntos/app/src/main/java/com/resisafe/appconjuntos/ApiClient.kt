@@ -189,3 +189,23 @@ data class Conjunto(
 )
 
 data class TipoPerfil(val idTipo: Int, val nombreTipo: String)
+data class Reserva(
+    val idReserva: Int,
+    val idReservante: Int,
+    val idZonaComun: Int,
+    val fecha: String,
+    val horaInicio: String,
+    val horaFin: String,
+    val cantidadPersonas: Int
+)
+
+data class ReservaLista(
+    val idReserva: Int,
+    val nombreReservante: String,
+    val nombreZonaComun: String,
+    val fecha: String,
+    val horaInicio: String,
+    val horaFin: String,
+    val cantidadPersonas: Int,
+    val estado: Int
+)

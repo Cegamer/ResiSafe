@@ -9,7 +9,6 @@ namespace APIConjuntos.Models
         {
             PaqueteIdResidenteRecibeNavigations = new HashSet<Paquete>();
             PaqueteIdVigilanteRecibeNavigations = new HashSet<Paquete>();
-            RegistroVigilantes = new HashSet<RegistroVigilante>();
             RegistroVisitanteIdResidenteVinculadoNavigations = new HashSet<RegistroVisitante>();
             RegistroVisitanteIdVigilanteQueRegistraNavigations = new HashSet<RegistroVisitante>();
             Reservas = new HashSet<Reserva>();
@@ -27,7 +26,6 @@ namespace APIConjuntos.Models
         public virtual Residente? Residente { get; set; }
         public virtual ICollection<Paquete> PaqueteIdResidenteRecibeNavigations { get; set; }
         public virtual ICollection<Paquete> PaqueteIdVigilanteRecibeNavigations { get; set; }
-        public virtual ICollection<RegistroVigilante> RegistroVigilantes { get; set; }
         public virtual ICollection<RegistroVisitante> RegistroVisitanteIdResidenteVinculadoNavigations { get; set; }
         public virtual ICollection<RegistroVisitante> RegistroVisitanteIdVigilanteQueRegistraNavigations { get; set; }
         public virtual ICollection<Reserva> Reservas { get; set; }

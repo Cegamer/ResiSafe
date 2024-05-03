@@ -138,5 +138,25 @@
         <action
             android:id="@+id/action_fragmentConjuntoListaZonascomunes_to_conjuntoAgregarZonacomunFragment"
             app:destination="@id/conjuntoAgregarZonacomunFragment" />
+        <action
+            android:id="@+id/action_fragmentConjuntoListaZonascomunes_to_zonacomunInfoFragment"
+            app:destination="@id/zonacomunInfoFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/zonacomunInfoFragment"
+        android:name="com.resisafe.appconjuntos.ZonacomunInfoFragment"
+        android:label="fragment_zonacomun_info"
+        tools:layout="@layout/fragment_zonacomun_info" >
+        <argument
+            android:name="idZonaComun"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_zonacomunInfoFragment_to_listaReservasFragment"
+            app:destination="@id/listaReservasFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listaReservasFragment"
+        android:name="com.resisafe.appconjuntos.ListaReservasFragment"
+        android:label="fragment_lista_reservas"
+        tools:layout="@layout/fragment_lista_reservas" />
 </navigation>

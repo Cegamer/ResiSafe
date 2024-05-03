@@ -1,10 +1,19 @@
 package com.resisafe.appconjuntos
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.navigation.findNavController
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +44,76 @@ class ZonacomunInfoFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_zonacomun_info, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val apiService = RetrofitClient.apiService
+        val context = this.requireContext()
+        val token = ManejadorDeTokens.cargarTokenUsuario(context)?.token;
+        val args = arguments
+        val botonListaReservas = view.findViewById<Button>(R.id.botonListaReservas)
+
+        if(args != null){
+            val idZonaComunArg = args.getInt("idZonaComun")
+
+            botonListaReservas.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putInt("idZonaComun", idZonaComunArg)
+                view.findNavController().navigate(
+                    R.id.action_zonacomunInfoFragment_to_listaReservasFragment,
+                    bundle
+                )
+            }
+
+            /*
+            if (token != null) {
+                apiService.obtenerConjuntos().enqueue(object :
+                    Callback<List<Conjunto>> {
+                    override fun onResponse(
+                        call: Call<List<Conjunto>>,
+                        response: Response<List<Conjunto>>
+                    ) {
+                        if (response.isSuccessful) {
+                            val datos = response.body()!!
+
+                            for (conjunto in datos) {
+                                val cardView = LayoutInflater.from(requireContext())
+                                    .inflate(R.layout.itemconjuntos, null) as CardView
+                                val textViewId = cardView.findViewById<TextView>(R.id.conjuntoId)
+                                val textViewNombre = cardView.findViewById<TextView>(R.id.conjuntoNombre)
+                                val textViewDireccion: TextView =
+                                    cardView.findViewById(R.id.conjuntoDireccion)
+                                val boton = cardView.findViewById<ImageButton>(R.id.imageButton)
+
+
+                                textViewId.text = conjunto.idConjunto.toString()
+                                textViewNombre.text = conjunto.nombre
+                                textViewDireccion.text = conjunto.direccion
+
+                                layout.addView(cardView)
+                                boton.setOnClickListener() {
+                                    val bundle = Bundle()
+                                    bundle.putInt("idConjunto", conjunto.idConjunto);
+                                    view.findNavController().navigate(
+                                        R.id.action_nav_appmasterListaConjuntosFragment_to_conjuntoInfoFragment,
+                                        bundle
+                                    )
+                                }
+
+
+                            }
+                        } else {
+                            Log.e("Tag", "Response body is null")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<List<Conjunto>>, t: Throwable) {
+                        Log.e("Tag", "Response body is dsafadfafdasf")
+                    }
+                })*/
+            }
+
+        super.onViewCreated(view, savedInstanceState)
     }
 
     companion object {

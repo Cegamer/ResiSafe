@@ -12,6 +12,7 @@ namespace APIConjuntos.Models
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraFin { get; set; }
         public int CantidadPersonas { get; set; }
+        public int Estado { get; set; }
 
         public virtual Perfil IdReservanteNavigation { get; set; } = null!;
         public virtual Zonacomun IdZonaComunNavigation { get; set; } = null!;

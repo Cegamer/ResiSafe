@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using MySqlX.XDevAPI;
 
 namespace APIConjuntos.Models
 {
@@ -21,11 +20,12 @@ namespace APIConjuntos.Models
         public virtual DbSet<Icono> Iconos { get; set; } = null!;
         public virtual DbSet<Paquete> Paquetes { get; set; } = null!;
         public virtual DbSet<Perfil> Perfils { get; set; } = null!;
-        public virtual DbSet<RegistroVigilante> RegistroVigilantes { get; set; } = null!;
+        public virtual DbSet<QuejasReclamo> QuejasReclamos { get; set; } = null!;
         public virtual DbSet<RegistroVisitante> RegistroVisitantes { get; set; } = null!;
         public virtual DbSet<Reserva> Reservas { get; set; } = null!;
         public virtual DbSet<Residente> Residentes { get; set; } = null!;
         public virtual DbSet<TiposDePerfil> TiposDePerfils { get; set; } = null!;
+        public virtual DbSet<TiposQuejasReclamo> TiposQuejasReclamos { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
         public virtual DbSet<Visitante> Visitantes { get; set; } = null!;
         public virtual DbSet<Zonacomun> Zonacomuns { get; set; } = null!;
@@ -80,6 +80,8 @@ namespace APIConjuntos.Models
 
                 entity.ToTable("paquete");
 
+                entity.HasIndex(e => e.IdConjunto, "idConjunto_idx");
+
                 entity.HasIndex(e => e.IdVigilanteRecibe, "paquete_ibfk_1");
 
                 entity.HasIndex(e => e.IdResidenteRecibe, "paquete_ibfk_2");
@@ -92,6 +94,24 @@ namespace APIConjuntos.Models
 
                 entity.Property(e => e.Estado).HasColumnName("ESTADO");
 
+                entity.Property(e => e.FechaEntrega)
+                    .HasColumnType("date")
+                    .HasColumnName("Fecha_Entrega");
+
+                entity.Property(e => e.FechaRecibido)
+                    .HasColumnType("date")
+                    .HasColumnName("Fecha_Recibido");
+
+                entity.Property(e => e.HoraEntrega)
+                    .HasColumnType("time")
+                    .HasColumnName("Hora_Entrega");
+
+                entity.Property(e => e.HoraRecibido)
+                    .HasColumnType("time")
+                    .HasColumnName("Hora_Recibido");
+
+                entity.Property(e => e.IdConjunto).HasColumnName("idConjunto");
+
                 entity.Property(e => e.IdResidenteRecibe).HasColumnName("ID_RESIDENTE_RECIBE");
 
                 entity.Property(e => e.IdVigilanteRecibe).HasColumnName("ID_VIGILANTE_RECIBE");
@@ -99,6 +119,12 @@ namespace APIConjuntos.Models
                 entity.Property(e => e.Torre)
                     .HasMaxLength(255)
                     .HasColumnName("TORRE");
+
+                entity.HasOne(d => d.IdConjuntoNavigation)
+                    .WithMany(p => p.Paquetes)
+                    .HasForeignKey(d => d.IdConjunto)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("idConjunto");
 
                 entity.HasOne(d => d.IdResidenteRecibeNavigation)
                     .WithMany(p => p.PaqueteIdResidenteRecibeNavigations)
@@ -150,36 +176,28 @@ namespace APIConjuntos.Models
                     .HasConstraintName("perfil_usuario");
             });
 
-            modelBuilder.Entity<RegistroVigilante>(entity =>
+            modelBuilder.Entity<QuejasReclamo>(entity =>
             {
-                entity.HasKey(e => e.IdRegistro)
+                entity.HasKey(e => e.IdquejasReclamos)
                     .HasName("PRIMARY");
 
-                entity.ToTable("registro_vigilantes");
+                entity.ToTable("quejas_reclamos");
 
-                entity.HasIndex(e => e.IdVigilante, "registro_vigilantes_ibfk_1");
+                entity.HasIndex(e => e.IdTipo, "tipo_idx");
 
-                entity.Property(e => e.IdRegistro).HasColumnName("ID_REGISTRO");
+                entity.Property(e => e.IdquejasReclamos).HasColumnName("idquejas_reclamos");
 
-                entity.Property(e => e.Fecha)
-                    .HasColumnType("date")
-                    .HasColumnName("FECHA");
+                entity.Property(e => e.IdTipo).HasColumnName("idTipo");
 
-                entity.Property(e => e.HoraEntrada)
-                    .HasColumnType("time")
-                    .HasColumnName("HORA_ENTRADA");
+                entity.Property(e => e.QuejaReclamo)
+                    .HasMaxLength(4500)
+                    .HasColumnName("quejaReclamo");
 
-                entity.Property(e => e.HoraSalida)
-                    .HasColumnType("time")
-                    .HasColumnName("HORA_SALIDA");
-
-                entity.Property(e => e.IdVigilante).HasColumnName("ID_VIGILANTE");
-
-                entity.HasOne(d => d.IdVigilanteNavigation)
-                    .WithMany(p => p.RegistroVigilantes)
-                    .HasForeignKey(d => d.IdVigilante)
+                entity.HasOne(d => d.IdTipoNavigation)
+                    .WithMany(p => p.QuejasReclamos)
+                    .HasForeignKey(d => d.IdTipo)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("registro_vigilantes_ibfk_1");
+                    .HasConstraintName("tipo");
             });
 
             modelBuilder.Entity<RegistroVisitante>(entity =>
@@ -316,6 +334,20 @@ namespace APIConjuntos.Models
                 entity.Property(e => e.NombreTipo)
                     .HasMaxLength(45)
                     .HasColumnName("NOMBRE_TIPO");
+            });
+
+            modelBuilder.Entity<TiposQuejasReclamo>(entity =>
+            {
+                entity.HasKey(e => e.IdtiposQuejasReclamos)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("tipos_quejas_reclamos");
+
+                entity.Property(e => e.IdtiposQuejasReclamos).HasColumnName("idtipos_quejas_reclamos");
+
+                entity.Property(e => e.NombreTipo)
+                    .HasMaxLength(45)
+                    .HasColumnName("nombreTipo");
             });
 
             modelBuilder.Entity<Usuario>(entity =>

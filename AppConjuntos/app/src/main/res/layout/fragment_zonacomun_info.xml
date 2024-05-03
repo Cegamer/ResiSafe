@@ -210,24 +210,44 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/buttonAgregarZonaComun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Modificar"
-                android:textColor="@color/colorSecondaryLight"
-                android:textSize="14sp"
-                app:cornerRadius="20dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonEliminar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorPrimaryDanger"
+                    android:text="Eliminar"
+                    android:textColor="@color/colorSecondaryLight"
+                    android:textSize="14sp"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/buttonAgregarZonaComun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Modificar"
+                    android:textColor="@color/colorSecondaryLight"
+                    android:textSize="14sp"
+                    app:cornerRadius="20dp" />
+            </LinearLayout>
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/botonListaZonaComun"
+            android:id="@+id/botonListaReservas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
