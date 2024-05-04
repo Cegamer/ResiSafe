@@ -14,7 +14,7 @@ import retrofit2.http.Path
 
 
 object RetrofitClient {
-    private const val BASE_URL = "https://more-molly-honest.ngrok-free.app/api/"
+    private const val BASE_URL = "https://resisafe.somee.com/api/"
 
 
     val apiService: ApiService by lazy {

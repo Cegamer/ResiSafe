@@ -16,4 +16,5 @@
         android:label="fragment_user_info"
         tools:layout="@layout/fragment_user_info" />
 
+
 </navigation>
