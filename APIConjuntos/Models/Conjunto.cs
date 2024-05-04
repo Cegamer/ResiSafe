@@ -9,6 +9,7 @@ namespace APIConjuntos.Models
         {
             Paquetes = new HashSet<Paquete>();
             Perfils = new HashSet<Perfil>();
+            QuejasReclamos = new HashSet<QuejasReclamo>();
             Zonacomuns = new HashSet<Zonacomun>();
         }
 
@@ -19,6 +20,7 @@ namespace APIConjuntos.Models
 
         public virtual ICollection<Paquete> Paquetes { get; set; }
         public virtual ICollection<Perfil> Perfils { get; set; }
+        public virtual ICollection<QuejasReclamo> QuejasReclamos { get; set; }
         public virtual ICollection<Zonacomun> Zonacomuns { get; set; }
     }
 }

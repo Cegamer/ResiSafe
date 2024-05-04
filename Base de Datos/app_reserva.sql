@@ -30,6 +30,7 @@ CREATE TABLE `reserva` (
   `HORA_INICIO` time NOT NULL,
   `HORA_FIN` time NOT NULL,
   `CANTIDAD_PERSONAS` int NOT NULL,
+  `Estado` int NOT NULL,
   PRIMARY KEY (`ID_RESERVA`),
   KEY `reserva_ibfk_1` (`ID_RESERVANTE`),
   KEY `reserva_ibfk_2` (`ID_ZONA_COMUN`),
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-01 14:29:36
+-- Dump completed on 2024-05-03 17:12:27

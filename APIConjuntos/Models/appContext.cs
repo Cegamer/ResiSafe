@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using MySqlX.XDevAPI;
 
 namespace APIConjuntos.Models
 {
@@ -183,15 +184,25 @@ namespace APIConjuntos.Models
 
                 entity.ToTable("quejas_reclamos");
 
+                entity.HasIndex(e => e.IdConjunto, "conjunto_idx");
+
                 entity.HasIndex(e => e.IdTipo, "tipo_idx");
 
                 entity.Property(e => e.IdquejasReclamos).HasColumnName("idquejas_reclamos");
+
+                entity.Property(e => e.IdConjunto).HasColumnName("idConjunto");
 
                 entity.Property(e => e.IdTipo).HasColumnName("idTipo");
 
                 entity.Property(e => e.QuejaReclamo)
                     .HasMaxLength(4500)
                     .HasColumnName("quejaReclamo");
+
+                entity.HasOne(d => d.IdConjuntoNavigation)
+                    .WithMany(p => p.QuejasReclamos)
+                    .HasForeignKey(d => d.IdConjunto)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("conjunto");
 
                 entity.HasOne(d => d.IdTipoNavigation)
                     .WithMany(p => p.QuejasReclamos)

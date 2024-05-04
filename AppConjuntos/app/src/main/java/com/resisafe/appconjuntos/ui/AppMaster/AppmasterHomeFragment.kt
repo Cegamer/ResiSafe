@@ -54,6 +54,7 @@ class AppmasterHomeFragment : Fragment() {
                 R.id.action_nav_home_to_nav_registrar_conjunto
             )
         }
+        
         listaConjuntosCard.setOnClickListener {
             view.findNavController().navigate(
                 R.id.action_nav_home_to_nav_appmasterListaConjuntosFragment

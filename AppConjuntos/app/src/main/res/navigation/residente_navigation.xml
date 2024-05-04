@@ -18,12 +18,23 @@
         android:label="fragment_residente_home"
         tools:layout="@layout/fragment_residente_home" >
         <action
+            android:id="@+id/action_residenteHomeFragment_to_residenteReservarZonacomunFragment"
+            app:destination="@id/residenteReservarZonacomunFragment" />
+        <action
             android:id="@+id/action_residenteHomeFragment_to_residenteQuejasYReclamosFragment2"
             app:destination="@id/residenteQuejasYReclamosFragment" />
     </fragment>
     <fragment
+        android:id="@+id/residenteReservarZonacomunFragment"
+        android:name="com.resisafe.appconjuntos.ResidenteReservarZonacomunFragment"
+        android:label="fragment_residente_reservar_zonacomun"
+        tools:layout="@layout/fragment_residente_reservar_zonacomun" />
+
+    <fragment
         android:id="@+id/residenteQuejasYReclamosFragment"
         android:name="com.resisafe.appconjuntos.ResidenteQuejasYReclamosFragment"
         android:label="fragment_residente_quejas_y_reclamos"
-        tools:layout="@layout/fragment_residente_quejas_y_reclamos" />
+    tools:layout="@layout/fragment_residente_quejas_y_reclamos" >
+
+    </fragment>
 </navigation>
