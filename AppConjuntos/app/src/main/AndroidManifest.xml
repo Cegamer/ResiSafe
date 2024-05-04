@@ -16,6 +16,8 @@
         android:theme="@style/Theme.AppConjuntos"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+
         <activity
             android:name=".VigilanteActivity"
             android:exported="false"

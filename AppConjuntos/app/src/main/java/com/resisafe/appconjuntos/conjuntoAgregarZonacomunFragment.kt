@@ -10,8 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.TimePicker
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,13 +54,13 @@ class conjuntoAgregarZonacomunFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val editTextNombre = view.findViewById<EditText>(R.id.editTextNombre)
-        val editTextAforoMaximo = view.findViewById<EditText>(R.id.editTextAforoMaximo)
-        val editTextPrecio = view.findViewById<EditText>(R.id.editTextPrecio)
-        val editTextIntervaloTurnos = view.findViewById<EditText>(R.id.editTextIntervaloTurnos)
+        val editTextNombre = view.findViewById<TextInputEditText>(R.id.editTextNombre)
+        val editTextAforoMaximo = view.findViewById<TextInputEditText>(R.id.editTextAforoMaximo)
+        val editTextPrecio = view.findViewById<TextInputEditText>(R.id.editTextPrecio)
+        val editTextIntervaloTurnos = view.findViewById<TextInputEditText>(R.id.editTextIntervaloTurnos)
 
-        val editTextApertura = view.findViewById<EditText>(R.id.editTextApertura)
-        val editTextCierre = view.findViewById<EditText>(R.id.editTextCierre)
+        val editTextApertura = view.findViewById<TextView>(R.id.editTextApertura)
+        val editTextCierre = view.findViewById<TextView>(R.id.editTextCierre)
 
 
         val buttonApertura = view.findViewById<Button>(R.id.buttonApertura)
@@ -156,7 +158,7 @@ class conjuntoAgregarZonacomunFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun mostrarTimePickerDialog(editText: EditText) {
+    private fun mostrarTimePickerDialog(editText: TextView) {
         val cal = Calendar.getInstance()
         val hora = cal.get(Calendar.HOUR_OF_DAY)
         val minuto = cal.get(Calendar.MINUTE)
