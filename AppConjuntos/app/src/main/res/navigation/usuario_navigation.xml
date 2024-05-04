@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/nav_profileSelectorFragment"
-        android:name="com.resisafe.appconjuntos.ProfileSelectorFragment"
+        android:name="com.resisafe.appresisafe.ProfileSelectorFragment"
         android:label="fragment_profile_selector"
         tools:layout="@layout/fragment_profile_selector" />
     <fragment
         android:id="@+id/nav_userInfoFragment"
-        android:name="com.resisafe.appconjuntos.UserInfoFragment"
+        android:name="com.resisafe.appresisafe.UserInfoFragment"
         android:label="fragment_user_info"
         tools:layout="@layout/fragment_user_info" />
 

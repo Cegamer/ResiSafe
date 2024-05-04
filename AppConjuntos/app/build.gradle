@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace 'com.resisafe.appconjuntos'
+    namespace 'com.resisafe.appresisafe'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.resisafe.appconjuntos"
+        applicationId "com.resisafe.appresisafe"
         minSdk 21
         targetSdk 33
-        versionCode 4
-        versionName "1.3"
+        versionCode 1
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

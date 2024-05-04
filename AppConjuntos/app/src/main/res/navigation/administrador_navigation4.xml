@@ -7,12 +7,12 @@
 
     <activity
         android:id="@+id/nav_usuarioActivity"
-        android:name="com.resisafe.appconjuntos.UsuarioActivity"
+        android:name="com.resisafe.appresisafe.UsuarioActivity"
         android:label="app_bar_usuario"
         tools:layout="@layout/app_bar_usuario" />
     <fragment
         android:id="@+id/administradorHomeFragment"
-        android:name="com.resisafe.appconjuntos.AdministradorHomeFragment"
+        android:name="com.resisafe.appresisafe.AdministradorHomeFragment"
         android:label="fragment_administrador_home"
         tools:layout="@layout/fragment_administrador_home" >
         <action
@@ -30,12 +30,12 @@
     </fragment>
     <fragment
         android:id="@+id/perfilCrearFragment3"
-        android:name="com.resisafe.appconjuntos.PerfilCrearFragment"
+        android:name="com.resisafe.appresisafe.PerfilCrearFragment"
         android:label="fragment_perfil_crear"
         tools:layout="@layout/fragment_perfil_crear" />
     <fragment
         android:id="@+id/conjuntoAgregarZonacomunFragment3"
-        android:name="com.resisafe.appconjuntos.conjuntoAgregarZonacomunFragment"
+        android:name="com.resisafe.appresisafe.conjuntoAgregarZonacomunFragment"
         android:label="fragment_conjunto_agregar_zonacomun"
         tools:layout="@layout/fragment_conjunto_agregar_zonacomun" >
         <argument
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/conjuntoPerfilesListaFragment2"
-        android:name="com.resisafe.appconjuntos.ConjuntoPerfilesListaFragment"
+        android:name="com.resisafe.appresisafe.ConjuntoPerfilesListaFragment"
         android:label="fragment_conjunto_perfiles_lista"
         tools:layout="@layout/fragment_conjunto_perfiles_lista" >
         <argument
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/conjuntoInfoFragment2"
-        android:name="com.resisafe.appconjuntos.ConjuntoInfoFragment"
+        android:name="com.resisafe.appresisafe.ConjuntoInfoFragment"
         android:label="fragment_conjunto_info"
         tools:layout="@layout/fragment_conjunto_info" >
         <argument android:name="idConjunto"

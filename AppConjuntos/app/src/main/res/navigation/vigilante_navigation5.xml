@@ -7,12 +7,12 @@
 
     <activity
         android:id="@+id/nav_usuarioActivity"
-        android:name="com.resisafe.appconjuntos.UsuarioActivity"
+        android:name="com.resisafe.appresisafe.UsuarioActivity"
         android:label="app_bar_usuario"
         tools:layout="@layout/app_bar_usuario" />
     <fragment
         android:id="@+id/vigilanteHomeFragment"
-        android:name="com.resisafe.appconjuntos.VigilanteHomeFragment"
+        android:name="com.resisafe.appresisafe.VigilanteHomeFragment"
         android:label="fragment_vigilante_home"
         tools:layout="@layout/fragment_vigilante_home" >
         <action
@@ -27,17 +27,17 @@
     </fragment>
     <fragment
         android:id="@+id/vigilanteListaVisitantesFragment"
-        android:name="com.resisafe.appconjuntos.VigilanteListaVisitantesFragment"
+        android:name="com.resisafe.appresisafe.VigilanteListaVisitantesFragment"
         android:label="fragment_vigilante_lista_visitantes"
         tools:layout="@layout/fragment_vigilante_lista_visitantes" />
     <fragment
         android:id="@+id/vigilanteRegistroVisitaFragment"
-        android:name="com.resisafe.appconjuntos.VigilanteRegistroVisitaFragment"
+        android:name="com.resisafe.appresisafe.VigilanteRegistroVisitaFragment"
         android:label="fragment_vigilante_registro_visita"
         tools:layout="@layout/fragment_vigilante_registro_visita" />
     <fragment
         android:id="@+id/vigilanteRegistroVisitanteFragment"
-        android:name="com.resisafe.appconjuntos.VigilanteRegistroVisitanteFragment"
+        android:name="com.resisafe.appresisafe.VigilanteRegistroVisitanteFragment"
         android:label="fragment_vigilante_registro_visitante"
         tools:layout="@layout/fragment_vigilante_registro_visitante" />
 

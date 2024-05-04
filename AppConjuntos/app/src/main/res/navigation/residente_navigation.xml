@@ -7,14 +7,14 @@
 
     <activity
         android:id="@+id/nav_usuarioActivity"
-        android:name="com.resisafe.appconjuntos.UsuarioActivity"
+        android:name="com.resisafe.appresisafe.UsuarioActivity"
         android:label="app_bar_usuario"
         tools:layout="@layout/app_bar_usuario" />
 
 
     <fragment
         android:id="@+id/residenteHomeFragment"
-        android:name="com.resisafe.appconjuntos.ResidenteHomeFragment"
+        android:name="com.resisafe.appresisafe.ResidenteHomeFragment"
         android:label="fragment_residente_home"
         tools:layout="@layout/fragment_residente_home" >
         <action
@@ -26,13 +26,13 @@
     </fragment>
     <fragment
         android:id="@+id/residenteReservarZonacomunFragment"
-        android:name="com.resisafe.appconjuntos.ResidenteReservarZonacomunFragment"
+        android:name="com.resisafe.appresisafe.ResidenteReservarZonacomunFragment"
         android:label="fragment_residente_reservar_zonacomun"
         tools:layout="@layout/fragment_residente_reservar_zonacomun" />
 
     <fragment
         android:id="@+id/residenteQuejasYReclamosFragment"
-        android:name="com.resisafe.appconjuntos.ResidenteQuejasYReclamosFragment"
+        android:name="com.resisafe.appresisafe.ResidenteQuejasYReclamosFragment"
         android:label="fragment_residente_quejas_y_reclamos"
     tools:layout="@layout/fragment_residente_quejas_y_reclamos" >
 
