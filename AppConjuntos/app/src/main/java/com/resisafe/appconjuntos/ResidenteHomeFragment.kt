@@ -38,19 +38,14 @@ class ResidenteHomeFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_residente_home, container, false)
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val quejasyreclamos = view.findViewById<CardView>(R.id.quejasoreclamos)
         quejasyreclamos.setOnClickListener {
             view.findNavController().navigate(
                 R.id.action_residenteHomeFragment_to_residenteQuejasYReclamosFragment2
             )
         }
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         val reservarzonacomun = view.findViewById<CardView>(R.id.reservarzonacomun)
         reservarzonacomun.setOnClickListener {
             view.findNavController().navigate(

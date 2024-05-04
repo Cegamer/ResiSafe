@@ -43,7 +43,7 @@ class ResidenteReservarZonacomunFragment : Fragment() {
 
         val spinnerZonaComun = view.findViewById<Spinner>(R.id.spinnerZonaComun)
 
-        val datos = listOf("aaa", "aaaa")
+        val datos = listOf("Prueba", "aaaa")
         val adapter = ArrayAdapter(
             requireContext(),
             R.layout.spinner_box,

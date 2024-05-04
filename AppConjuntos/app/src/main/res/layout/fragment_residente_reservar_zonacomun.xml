@@ -49,7 +49,7 @@
                 android:background="@drawable/profile_selector_background"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Agregar Zona Comun"
+                android:text="Reservar Zona Comun"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
 
