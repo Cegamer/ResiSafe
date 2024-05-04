@@ -29,7 +29,7 @@ CREATE TABLE `visitante` (
   `CEDULA` int NOT NULL,
   `FOTO` longblob NOT NULL,
   PRIMARY KEY (`ID_VISITANTE`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `visitante` (
 
 LOCK TABLES `visitante` WRITE;
 /*!40000 ALTER TABLE `visitante` DISABLE KEYS */;
+INSERT INTO `visitante` VALUES (1,'Visitante1','Visitante1',1,'');
 /*!40000 ALTER TABLE `visitante` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-01 14:29:37
+-- Dump completed on 2024-05-03 17:12:27

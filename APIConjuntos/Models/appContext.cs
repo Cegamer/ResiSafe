@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using MySqlX.XDevAPI;
 
 namespace APIConjuntos.Models
 {
@@ -35,7 +36,7 @@ namespace APIConjuntos.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySQL("Server=localhost;Port=3306;uid=root;pwd=root;Database=app");
+                optionsBuilder.UseMySQL("Server=databaseresisafe.mysql.database.azure.com;Port=3306;uid=resisafeAdmin;pwd=r3s1s4f34dm1n*;Database=app");
             }
         }
 
@@ -183,15 +184,25 @@ namespace APIConjuntos.Models
 
                 entity.ToTable("quejas_reclamos");
 
+                entity.HasIndex(e => e.IdConjunto, "conjunto_idx");
+
                 entity.HasIndex(e => e.IdTipo, "tipo_idx");
 
                 entity.Property(e => e.IdquejasReclamos).HasColumnName("idquejas_reclamos");
+
+                entity.Property(e => e.IdConjunto).HasColumnName("idConjunto");
 
                 entity.Property(e => e.IdTipo).HasColumnName("idTipo");
 
                 entity.Property(e => e.QuejaReclamo)
                     .HasMaxLength(4500)
                     .HasColumnName("quejaReclamo");
+
+                entity.HasOne(d => d.IdConjuntoNavigation)
+                    .WithMany(p => p.QuejasReclamos)
+                    .HasForeignKey(d => d.IdConjunto)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("conjunto");
 
                 entity.HasOne(d => d.IdTipoNavigation)
                     .WithMany(p => p.QuejasReclamos)

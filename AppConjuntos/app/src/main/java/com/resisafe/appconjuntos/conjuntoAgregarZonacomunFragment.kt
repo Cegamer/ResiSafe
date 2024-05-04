@@ -139,7 +139,6 @@ class conjuntoAgregarZonacomunFragment : Fragment() {
                                     findNavController().popBackStack()
                                     dialog.dismiss() // Cierra el diálogo
                                 }
-
                                 // Crear y mostrar el diálogo
                                 val dialog = builder.create()
                                 dialog.show()

@@ -29,9 +29,16 @@ CREATE TABLE `paquete` (
   `ID_VIGILANTE_RECIBE` int NOT NULL,
   `ESTADO` int NOT NULL,
   `ID_RESIDENTE_RECIBE` int NOT NULL,
+  `Fecha_Entrega` date NOT NULL,
+  `Hora_Entrega` time NOT NULL,
+  `Fecha_Recibido` date DEFAULT NULL,
+  `Hora_Recibido` time DEFAULT NULL,
+  `idConjunto` int NOT NULL,
   PRIMARY KEY (`ID_PAQUETE`),
   KEY `paquete_ibfk_1` (`ID_VIGILANTE_RECIBE`),
   KEY `paquete_ibfk_2` (`ID_RESIDENTE_RECIBE`),
+  KEY `idConjunto_idx` (`idConjunto`),
+  CONSTRAINT `idConjunto` FOREIGN KEY (`idConjunto`) REFERENCES `conjunto` (`ID_CONJUNTO`),
   CONSTRAINT `paquete_ibfk_1` FOREIGN KEY (`ID_VIGILANTE_RECIBE`) REFERENCES `perfil` (`ID_Perfil`),
   CONSTRAINT `paquete_ibfk_2` FOREIGN KEY (`ID_RESIDENTE_RECIBE`) REFERENCES `perfil` (`ID_Perfil`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -55,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-01 14:29:37
+-- Dump completed on 2024-05-03 17:12:27

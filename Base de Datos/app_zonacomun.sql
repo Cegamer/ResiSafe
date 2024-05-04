@@ -37,7 +37,7 @@ CREATE TABLE `zonacomun` (
   KEY `zonacomun_ibfk_2` (`ID_ICONO`),
   CONSTRAINT `zonacomun_ibfk_1` FOREIGN KEY (`ID_CONJUNTO`) REFERENCES `conjunto` (`ID_CONJUNTO`),
   CONSTRAINT `zonacomun_ibfk_2` FOREIGN KEY (`ID_ICONO`) REFERENCES `iconos` (`ID_ICONO`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `zonacomun` (
 
 LOCK TABLES `zonacomun` WRITE;
 /*!40000 ALTER TABLE `zonacomun` DISABLE KEYS */;
-INSERT INTO `zonacomun` VALUES (5,2,'asdfafs','08:56:00','23:57:00',10,0,1,60),(6,3,'safsfdsaf','00:09:00','08:09:00',1,0,1,10),(7,6,'Piscina','21:25:00','06:31:00',12,0,1,60);
+INSERT INTO `zonacomun` VALUES (5,2,'asdfafs','08:56:00','23:57:00',10,0,1,60),(6,3,'safsfdsaf','00:09:00','08:09:00',1,0,1,10),(7,6,'Piscina','21:25:00','06:31:00',12,0,1,60),(8,2,'string','08:56:00','08:56:00',10,0,1,60),(9,4,'piscina','13:00:00','02:00:00',10,11,1,12);
 /*!40000 ALTER TABLE `zonacomun` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-01 14:29:37
+-- Dump completed on 2024-05-03 17:12:26

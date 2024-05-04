@@ -37,7 +37,7 @@ CREATE TABLE `registro_visitantes` (
   CONSTRAINT `registro_visitantes` FOREIGN KEY (`ID_VISITANTE`) REFERENCES `visitante` (`ID_VISITANTE`),
   CONSTRAINT `registro_visitantes_ibfk_2` FOREIGN KEY (`ID_RESIDENTE_VINCULADO`) REFERENCES `perfil` (`ID_Perfil`),
   CONSTRAINT `registro_visitantes_ibfk_3` FOREIGN KEY (`ID_VIGILANTE_QUE_REGISTRA`) REFERENCES `perfil` (`ID_Perfil`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,6 +46,7 @@ CREATE TABLE `registro_visitantes` (
 
 LOCK TABLES `registro_visitantes` WRITE;
 /*!40000 ALTER TABLE `registro_visitantes` DISABLE KEYS */;
+INSERT INTO `registro_visitantes` VALUES (2,1,3,34,'2024-05-02','08:00:00','00:00:00'),(3,1,3,34,'2024-05-31','08:00:00','00:00:00');
 /*!40000 ALTER TABLE `registro_visitantes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-01 14:29:37
+-- Dump completed on 2024-05-03 17:12:26
