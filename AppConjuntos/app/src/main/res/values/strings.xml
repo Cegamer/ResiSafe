@@ -17,4 +17,10 @@
     <string name="title_activity_residente">ResidenteActivity</string>
     <string name="title_activity_administrador">AdministradorActivity</string>
     <string name="title_activity_vigilante">VigilanteActivity</string>
+    <string-array name="complaint_types">
+        <item>Selecciona tu tipo de queja</item>
+        <item>Demora en reservar</item>
+        <item>Zona común en mal estado</item>
+        <item>Problema de paquetería</item>
+    </string-array>
 </resources>

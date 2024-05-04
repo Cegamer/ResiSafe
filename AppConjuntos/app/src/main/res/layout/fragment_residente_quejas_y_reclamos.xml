@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ResidenteQuejasYReclamosFragment">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activityUserRegister">
+        tools:context=".activityUserRegister"
+        android:background="@color/BackgroundColor">
 
         <ImageView
             android:id="@+id/imageView15"
@@ -53,29 +53,50 @@
                     android:text="Quejas o reclamos"
                     android:textAlignment="textStart"
                     android:textColor="@color/colorSecondaryLight"
+
                     android:textSize="28sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="405dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <Spinner
-                    android:id="@+id/complaint_type_spinner"
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp" />
+                    android:layout_margin="16dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
 
-                <EditText
-                    android:id="@+id/complaint_text"
+                    <Spinner
+                        android:id="@+id/complaint_type_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimaryLight"
+                        android:entries="@array/complaint_types"
+                        android:padding="8dp" /><!-- Definimos las opciones del spinner mediante un array -->
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="260dp"
                     android:layout_margin="16dp"
-                    android:hint="Explicanos tu queja"
-                    android:inputType="textMultiLine"
-                    android:minLines="6" />
-            </LinearLayout>
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
 
+                    <EditText
+                        android:id="@+id/complaint_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp"
+                        android:background="@android:color/background_light"
+                        android:hint="Explicanos tu queja"
+                        android:textColor="@color/black"
+                        android:inputType="textMultiLine"
+                        android:minLines="6" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
