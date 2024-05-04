@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,12 +8,10 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activityUserRegister">
+        tools:context=".activityUserRegister"
+        android:background="@color/BackgroundColor">
 
         <ImageView
             android:id="@+id/imageView15"
@@ -54,6 +53,7 @@
                     android:text="Quejas o reclamos"
                     android:textAlignment="textStart"
                     android:textColor="@color/colorSecondaryLight"
+
                     android:textSize="28sp" />
             </LinearLayout>
 
@@ -73,9 +73,9 @@
                         android:id="@+id/complaint_type_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:background="@android:color/transparent"
-                        android:entries="@array/complaint_types" /><!-- Definimos las opciones del spinner mediante un array -->
+                        android:background="@color/colorPrimaryLight"
+                        android:entries="@array/complaint_types"
+                        android:padding="8dp" /><!-- Definimos las opciones del spinner mediante un array -->
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -90,7 +90,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="8dp"
+                        android:background="@android:color/background_light"
                         android:hint="Explicanos tu queja"
+                        android:textColor="@color/black"
                         android:inputType="textMultiLine"
                         android:minLines="6" />
                 </androidx.cardview.widget.CardView>
