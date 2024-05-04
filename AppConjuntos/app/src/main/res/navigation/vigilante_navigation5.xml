@@ -14,6 +14,31 @@
         android:id="@+id/vigilanteHomeFragment"
         android:name="com.resisafe.appconjuntos.VigilanteHomeFragment"
         android:label="fragment_vigilante_home"
-        tools:layout="@layout/fragment_vigilante_home" />
+        tools:layout="@layout/fragment_vigilante_home" >
+        <action
+            android:id="@+id/action_vigilanteHomeFragment_to_vigilanteListaVisitantesFragment"
+            app:destination="@id/vigilanteListaVisitantesFragment" />
+        <action
+            android:id="@+id/action_vigilanteHomeFragment_to_vigilanteRegistroVisitaFragment"
+            app:destination="@id/vigilanteRegistroVisitaFragment" />
+        <action
+            android:id="@+id/action_vigilanteHomeFragment_to_vigilanteRegistroVisitanteFragment"
+            app:destination="@id/vigilanteRegistroVisitanteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/vigilanteListaVisitantesFragment"
+        android:name="com.resisafe.appconjuntos.VigilanteListaVisitantesFragment"
+        android:label="fragment_vigilante_lista_visitantes"
+        tools:layout="@layout/fragment_vigilante_lista_visitantes" />
+    <fragment
+        android:id="@+id/vigilanteRegistroVisitaFragment"
+        android:name="com.resisafe.appconjuntos.VigilanteRegistroVisitaFragment"
+        android:label="fragment_vigilante_registro_visita"
+        tools:layout="@layout/fragment_vigilante_registro_visita" />
+    <fragment
+        android:id="@+id/vigilanteRegistroVisitanteFragment"
+        android:name="com.resisafe.appconjuntos.VigilanteRegistroVisitanteFragment"
+        android:label="fragment_vigilante_registro_visitante"
+        tools:layout="@layout/fragment_vigilante_registro_visitante" />
 
 </navigation>

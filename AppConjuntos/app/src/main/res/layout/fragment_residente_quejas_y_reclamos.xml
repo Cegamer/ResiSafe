@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VigilanteListaVisitantesFragment">
+    tools:context=".ResidenteQuejasYReclamosFragment">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ListaVisitantesFragment">
+        tools:context=".activityUserRegister">
 
         <ImageView
             android:id="@+id/imageView15"
@@ -24,7 +25,6 @@
             app:srcCompat="@drawable/wave" />
 
         <LinearLayout
-            android:id="@+id/linearLayout3"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
@@ -50,71 +50,63 @@
                     android:layout_width="159dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Lista visitantes"
+                    android:text="Quejas o reclamos"
                     android:textAlignment="textStart"
                     android:textColor="@color/colorSecondaryLight"
                     android:textSize="28sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="345dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/profile_selector_background"
-                android:orientation="horizontal"
-                android:padding="0dp"
-                android:translationX="30dp">
-
-                <EditText
-                    android:id="@+id/filtroCedulaUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="405dp"
+                android:orientation="vertical">
+                <Spinner
+                    android:id="@+id/complaint_type_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:ems="10"
-                    android:hapticFeedbackEnabled="true"
-                    android:hint="Cédula"
-                    android:inputType="textPersonName"
-                    android:minHeight="48dp"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:textColor="@color/colorPrimary"
-                    android:textColorHint="@color/colorPrimary"
-                    android:textSize="16sp" />
+                    android:layout_margin="16dp" />
 
-                <ImageView
-                    android:id="@+id/imageView10"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@drawable/search"
-                    app:tint="@color/colorPrimary" />
-
+                <EditText
+                    android:id="@+id/complaint_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="260dp"
+                    android:layout_margin="16dp"
+                    android:hint="Explicanos tu queja"
+                    android:inputType="textMultiLine"
+                    android:minLines="6" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerUsuarios"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:translationY="-70dp">
+                android:orientation="horizontal">
+
 
                 <Button
-                    android:id="@+id/registerButton"
+                    android:id="@+id/regresar"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorPrimary"
                     android:padding="15dp"
                     android:text="REGRESAR"
+                    android:translationX="-10dp"
                     android:translationY="0dp"
                     app:cornerRadius="10dp" />
+
+                <Button
+                    android:id="@+id/enviar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:padding="15dp"
+                    android:text="ENVIAR QUEJA"
+                    android:translationY="0dp"
+                    app:cornerRadius="10dp" />
+
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout

@@ -11,6 +11,7 @@
         android:label="app_bar_usuario"
         tools:layout="@layout/app_bar_usuario" />
 
+
     <fragment
         android:id="@+id/residenteHomeFragment"
         android:name="com.resisafe.appconjuntos.ResidenteHomeFragment"
@@ -25,4 +26,12 @@
         android:name="com.resisafe.appconjuntos.ResidenteReservarZonacomunFragment"
         android:label="fragment_residente_reservar_zonacomun"
         tools:layout="@layout/fragment_residente_reservar_zonacomun" />
+            android:id="@+id/action_residenteHomeFragment_to_residenteQuejasYReclamosFragment2"
+            app:destination="@id/residenteQuejasYReclamosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/residenteQuejasYReclamosFragment"
+        android:name="com.resisafe.appconjuntos.ResidenteQuejasYReclamosFragment"
+        android:label="fragment_residente_quejas_y_reclamos"
+        tools:layout="@layout/fragment_residente_quejas_y_reclamos" />
 </navigation>
