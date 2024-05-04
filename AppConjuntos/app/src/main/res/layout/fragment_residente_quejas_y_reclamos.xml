@@ -6,7 +6,8 @@
     tools:context=".ResidenteQuejasYReclamosFragment">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -58,24 +59,42 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="405dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <Spinner
-                    android:id="@+id/complaint_type_spinner"
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp" />
+                    android:layout_margin="16dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
 
-                <EditText
-                    android:id="@+id/complaint_text"
+                    <Spinner
+                        android:id="@+id/complaint_type_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:background="@android:color/transparent"
+                        android:entries="@array/complaint_types" /><!-- Definimos las opciones del spinner mediante un array -->
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="260dp"
                     android:layout_margin="16dp"
-                    android:hint="Explicanos tu queja"
-                    android:inputType="textMultiLine"
-                    android:minLines="6" />
-            </LinearLayout>
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
 
+                    <EditText
+                        android:id="@+id/complaint_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp"
+                        android:hint="Explicanos tu queja"
+                        android:inputType="textMultiLine"
+                        android:minLines="6" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
