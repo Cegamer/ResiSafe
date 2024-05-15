@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using MySqlX.XDevAPI;
 
 namespace APIConjuntos.Models
 {
@@ -18,6 +17,7 @@ namespace APIConjuntos.Models
         }
 
         public virtual DbSet<Conjunto> Conjuntos { get; set; } = null!;
+        public virtual DbSet<Contacto> Contactos { get; set; } = null!;
         public virtual DbSet<Icono> Iconos { get; set; } = null!;
         public virtual DbSet<Paquete> Paquetes { get; set; } = null!;
         public virtual DbSet<Perfil> Perfils { get; set; } = null!;
@@ -56,6 +56,32 @@ namespace APIConjuntos.Models
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(255)
                     .HasColumnName("NOMBRE");
+            });
+
+            modelBuilder.Entity<Contacto>(entity =>
+            {
+                entity.HasKey(e => e.Idcontacto)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("contacto");
+
+                entity.Property(e => e.Idcontacto).HasColumnName("idcontacto");
+
+                entity.Property(e => e.Asunto)
+                    .HasMaxLength(450)
+                    .HasColumnName("asunto");
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(450)
+                    .HasColumnName("email");
+
+                entity.Property(e => e.Mensaje)
+                    .HasMaxLength(4500)
+                    .HasColumnName("mensaje");
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(450)
+                    .HasColumnName("nombre");
             });
 
             modelBuilder.Entity<Icono>(entity =>
@@ -130,7 +156,6 @@ namespace APIConjuntos.Models
                 entity.HasOne(d => d.IdResidenteRecibeNavigation)
                     .WithMany(p => p.PaqueteIdResidenteRecibeNavigations)
                     .HasForeignKey(d => d.IdResidenteRecibe)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("paquete_ibfk_2");
 
                 entity.HasOne(d => d.IdVigilanteRecibeNavigation)
@@ -186,11 +211,15 @@ namespace APIConjuntos.Models
 
                 entity.HasIndex(e => e.IdConjunto, "conjunto_idx");
 
+                entity.HasIndex(e => e.IdPersonaQueEnvia, "persona_idx");
+
                 entity.HasIndex(e => e.IdTipo, "tipo_idx");
 
                 entity.Property(e => e.IdquejasReclamos).HasColumnName("idquejas_reclamos");
 
                 entity.Property(e => e.IdConjunto).HasColumnName("idConjunto");
+
+                entity.Property(e => e.IdPersonaQueEnvia).HasColumnName("idPersonaQueEnvia");
 
                 entity.Property(e => e.IdTipo).HasColumnName("idTipo");
 
@@ -203,6 +232,12 @@ namespace APIConjuntos.Models
                     .HasForeignKey(d => d.IdConjunto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("conjunto");
+
+                entity.HasOne(d => d.IdPersonaQueEnviaNavigation)
+                    .WithMany(p => p.QuejasReclamos)
+                    .HasForeignKey(d => d.IdPersonaQueEnvia)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("personaEnvia");
 
                 entity.HasOne(d => d.IdTipoNavigation)
                     .WithMany(p => p.QuejasReclamos)
@@ -368,6 +403,9 @@ namespace APIConjuntos.Models
 
                 entity.ToTable("usuario");
 
+                entity.HasIndex(e => e.Cedula, "CEDULA_UNIQUE")
+                    .IsUnique();
+
                 entity.Property(e => e.IdUsuario).HasColumnName("ID_Usuario");
 
                 entity.Property(e => e.Apellido)
@@ -447,7 +485,6 @@ namespace APIConjuntos.Models
                 entity.HasOne(d => d.IdConjuntoNavigation)
                     .WithMany(p => p.Zonacomuns)
                     .HasForeignKey(d => d.IdConjunto)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("zonacomun_ibfk_1");
 
                 entity.HasOne(d => d.IdIconoNavigation)

@@ -1,13 +1,24 @@
 package com.resisafe.appresisafe
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import kotlin.math.log
 
 
 private const val ARG_PARAM1 = "param1"
@@ -34,39 +45,83 @@ class ResidenteQuejasYReclamosFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_residente_quejas_y_reclamos, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Define las opciones del Spinner
-        val complaintTypes = arrayOf(
-            "Selecciona tu tipo de queja",
-            "Demora en reservar",
-            "Zona común en mal estado",
-            "Problema de paquetería"
-        )
-
-        // Crea un ArrayAdapter para el Spinner
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, complaintTypes)
-
-        // Establece el layout del dropdown del Spinner
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        // Obtiene una referencia al Spinner del layout
+        val tiposQuejas : MutableMap<String,Int> = mutableMapOf()
         val complaintTypeSpinner = view.findViewById<Spinner>(R.id.complaint_type_spinner)
+        val textoQueja = view.findViewById<EditText>(R.id.editTextTextMultiLine)
 
-        // Asigna el adapter al Spinner
-        complaintTypeSpinner.adapter = adapter
 
-        // Listener para el Spinner
-        complaintTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                // Manejar la selección del usuario aquí
+        viewLifecycleOwner.lifecycleScope.launch() {
+            val perfilActual = ManejadorDeTokens.cargarPerfilActual(view.context)!!;
+            val botonEnviar = view.findViewById<Button>(R.id.enviar)
+            val apiService = RetrofitClient.apiService
+            val token = ManejadorDeTokens.cargarTokenUsuario(view.context)?.token!!
+            botonEnviar.setOnClickListener(){
+                val datosQuejas = quejaReclamo(
+                    idquejasReclamos = 0,
+                    idTipo = tiposQuejas[complaintTypeSpinner.selectedItem.toString()]!!,
+                    quejaReclamo = textoQueja.text.toString(),
+                    idConjunto = perfilActual.idConjunto,
+                    idPersonaQueEnvia = perfilActual.idPerfil
+                )
+                enviarQuejaReclamo(apiService,datosQuejas,token,view)
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Si no se selecciona nada, puedes manejarlo aquí
-            }
+
+
+
+            apiService.getTiposQUejas().enqueue(object : Callback<List<tiposQuejas>> {
+                override fun onResponse(call: Call<List<tiposQuejas>>, response: Response<List<tiposQuejas>>) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+                        if (responseBody != null) {
+                            for (tipoQueja in responseBody){
+                                tiposQuejas[tipoQueja.nombreTipo] = tipoQueja.idtiposQuejasReclamos
+                                Log.d("aa",tipoQueja.nombreTipo)
+                            }
+                            val arrayTiposQuejas: List<String> =  tiposQuejas.keys.toList();
+
+                            val adapter = ArrayAdapter(requireContext(), R.layout.spinner_box, arrayTiposQuejas)
+                            adapter.setDropDownViewResource(R.layout.spinner_item)
+                            complaintTypeSpinner.adapter = adapter
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<List<tiposQuejas>>, t: Throwable) {
+                    Log.e("Tag", "Failed to make request: ${t.message}", t)
+                }
+            })
         }
+    }
+
+
+     fun enviarQuejaReclamo(apiService: ApiService, quejaReclamo: quejaReclamo, token:String, view: View){
+        apiService.postQuejasReclamos(quejaReclamo,token).enqueue(object : Callback<ApiResponse> {
+            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        val builder = AlertDialog.Builder(view.context)
+                        builder.setMessage("Enviado correctamente")
+                        builder.setPositiveButton("Aceptar") { dialog, _ ->
+                            dialog.dismiss()
+                            view.findNavController().popBackStack()
+                        }
+                        val dialog = builder.create()
+                        dialog.show()
+                    }
+                }
+                else{
+                    Log.e("FALLO", quejaReclamo.toString())
+
+                }
+            }
+            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+                Log.e("Tag", "Failed to make request: ${t.message}", t)
+            }
+        })
     }
 
     companion object {

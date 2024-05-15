@@ -36,6 +36,21 @@ namespace APIConjuntos.Controllers
             return mapper.Map<List<Paquete>, List<PaqueteDTO>>(dbContext.Paquetes.Where(q => q.IdConjunto == idConjunto).ToList());
         }
 
+
+        [HttpGet]
+        [Route("{idConjunto}/{torre}/{apto}")]
+        public List<PaqueteDTO> getPaqueteByTorreyApto([FromRoute] string torre, [FromRoute] string apto, [FromRoute] int idConjunto)
+        {
+            return mapper.Map<List<Paquete>, List<PaqueteDTO>>(dbContext.Paquetes.Where(q => q.Torre == torre && q.Apto == apto).ToList());
+        }
+
+        [HttpGet]
+        [Route("Residente/{idResidente}")]
+        public List<PaqueteDTO> getPaqueteByResidente([FromRoute] int idResidente)
+        {
+            return mapper.Map<List<Paquete>, List<PaqueteDTO>>(dbContext.Paquetes.Where(q => q.IdResidenteRecibe == idResidente).ToList());
+        }
+
         // POST api/<PaquetesController>
         [HttpPost]
         public void Post([FromBody] PaqueteDTO paquete)

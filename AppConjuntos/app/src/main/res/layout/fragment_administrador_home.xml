@@ -62,12 +62,12 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="480dp"
+            android:layout_height="440dp"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
             <androidx.gridlayout.widget.GridLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="450dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +82,7 @@
                     android:orientation="vertical">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/registrarConjuntosCard"
+                        android:id="@+id/infoConjuntoCard"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:backgroundTint="@color/colorSecondaryDark"
@@ -117,7 +117,7 @@
                     app:layout_row="0">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/listaConjuntosCard"
+                        android:id="@+id/vincularUsuariosCard"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:backgroundTint="@color/colorSecondaryDark"
@@ -152,7 +152,7 @@
                     app:layout_row="1">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/vincularUsuariosCard"
+                        android:id="@+id/listaUsuariosCard"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:backgroundTint="@color/colorSecondaryDark"
@@ -176,6 +176,7 @@
                         android:textSize="16sp" />
                 </LinearLayout>
 
+
                 <LinearLayout
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
@@ -186,42 +187,7 @@
                     app:layout_row="1">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/crearUsuariosCard"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:backgroundTint="@color/colorSecondaryDark"
-                        app:cardCornerRadius="20dp">
-
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/habilitar_residentes"
-                            app:tint="@color/colorPrimary" />
-
-                    </androidx.cardview.widget.CardView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="24dp"
-                        android:gravity="center"
-                        android:text="Habilitar Residentes"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_column="0"
-                    app:layout_row="2">
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/listadeperfiles1"
+                        android:id="@+id/cardHistorialPaquetes"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:backgroundTint="@color/colorSecondaryDark"
@@ -251,11 +217,11 @@
                     android:layout_margin="10dp"
                     android:gravity="center"
                     android:orientation="vertical"
-                    app:layout_column="1"
+                    app:layout_column="0"
                     app:layout_row="2">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/listadeperfiles2"
+                        android:id="@+id/cardHistorialVisitantes"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:backgroundTint="@color/colorSecondaryDark"
@@ -274,7 +240,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"
                         android:gravity="center"
-                        android:text="Historial visitantes"
+                        android:text="Historial Visitas"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -285,11 +251,11 @@
                     android:layout_margin="10dp"
                     android:gravity="center"
                     android:orientation="vertical"
-                    app:layout_column="0"
-                    app:layout_row="3">
+                    app:layout_column="1"
+                    app:layout_row="2">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/reservaspendientes"
+                        android:id="@+id/cardZonasComunes"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:backgroundTint="@color/colorSecondaryDark"
@@ -308,7 +274,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"
                         android:gravity="center"
-                        android:text="Reservas pendientes"
+                        android:text="Zonas Comunes"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -318,11 +284,11 @@
                     android:layout_margin="10dp"
                     android:gravity="center"
                     android:orientation="vertical"
-                    app:layout_column="1"
+                    app:layout_column="0"
                     app:layout_row="3">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/agregarzonacomun"
+                        android:id="@+id/cardAgregarZonaComun"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:backgroundTint="@color/colorSecondaryDark"
@@ -345,128 +311,7 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
-
-
             </androidx.gridlayout.widget.GridLayout>
         </ScrollView>
     </LinearLayout>
-    <!--
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:isScrollContainer="true"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/vincularUsuariosCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="25dp"
-            android:backgroundTint="@android:color/holo_blue_light"
-            app:cardCornerRadius="20dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/imageView12"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/ic_baseline_villa_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="261dp"
-                    android:layout_height="24dp"
-                    android:gravity="center"
-                    android:text="Vincular usuarios a conjunto"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView12"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/listaUsuariosCard"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="25dp"
-            android:backgroundTint="@android:color/holo_blue_light"
-            app:cardCornerRadius="20dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/imageView10"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/ic_baseline_villa_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="261dp"
-                    android:layout_height="24dp"
-                    android:gravity="center"
-                    android:text="Lista de Usuarios"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView10"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/crearUsuariosCard"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="25dp"
-            android:backgroundTint="@android:color/holo_blue_light"
-            app:cardCornerRadius="20dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/ic_baseline_villa_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="261dp"
-                    android:layout_height="24dp"
-                    android:gravity="center"
-                    android:text="Crear Usuario"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView5"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

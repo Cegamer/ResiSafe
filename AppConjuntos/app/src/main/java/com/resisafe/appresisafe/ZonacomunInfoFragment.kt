@@ -1,5 +1,6 @@
 package com.resisafe.appresisafe
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -49,71 +50,89 @@ class ZonacomunInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val apiService = RetrofitClient.apiService
         val context = this.requireContext()
-        val token = ManejadorDeTokens.cargarTokenUsuario(context)?.token;
+        val token = ManejadorDeTokens.cargarTokenUsuario(context)?.token!!;
         val args = arguments
         val botonListaReservas = view.findViewById<Button>(R.id.botonListaReservas)
-
-        if(args != null){
-            val idZonaComunArg = args.getInt("idZonaComun")
-
-            botonListaReservas.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putInt("idZonaComun", idZonaComunArg)
-                view.findNavController().navigate(
-                    R.id.action_zonacomunInfoFragment_to_listaReservasFragment,
-                    bundle
-                )
-            }
-
-            /*
-            if (token != null) {
-                apiService.obtenerConjuntos().enqueue(object :
-                    Callback<List<Conjunto>> {
-                    override fun onResponse(
-                        call: Call<List<Conjunto>>,
-                        response: Response<List<Conjunto>>
-                    ) {
-                        if (response.isSuccessful) {
-                            val datos = response.body()!!
-
-                            for (conjunto in datos) {
-                                val cardView = LayoutInflater.from(requireContext())
-                                    .inflate(R.layout.itemconjuntos, null) as CardView
-                                val textViewId = cardView.findViewById<TextView>(R.id.conjuntoId)
-                                val textViewNombre = cardView.findViewById<TextView>(R.id.conjuntoNombre)
-                                val textViewDireccion: TextView =
-                                    cardView.findViewById(R.id.conjuntoDireccion)
-                                val boton = cardView.findViewById<ImageButton>(R.id.imageButton)
+        val buttonEliminar = view.findViewById<Button>(R.id.buttonEliminar)
 
 
-                                textViewId.text = conjunto.idConjunto.toString()
-                                textViewNombre.text = conjunto.nombre
-                                textViewDireccion.text = conjunto.direccion
+        val idZonaComun = args?.getInt("idZonaComun")!!
 
-                                layout.addView(cardView)
-                                boton.setOnClickListener() {
-                                    val bundle = Bundle()
-                                    bundle.putInt("idConjunto", conjunto.idConjunto);
-                                    view.findNavController().navigate(
-                                        R.id.action_nav_appmasterListaConjuntosFragment_to_conjuntoInfoFragment,
-                                        bundle
-                                    )
-                                }
+        obtenerDatosZonaComun(idZonaComun, token, apiService, view)
 
+        buttonEliminar.setOnClickListener(){
+            eliminarZonaComun(idZonaComun, token, apiService, view)
+        }
 
-                            }
-                        } else {
-                            Log.e("Tag", "Response body is null")
-                        }
-                    }
-
-                    override fun onFailure(call: Call<List<Conjunto>>, t: Throwable) {
-                        Log.e("Tag", "Response body is dsafadfafdasf")
-                    }
-                })*/
+        botonListaReservas.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("idZonaComun", idZonaComun)
+            view.findNavController().navigate(
+                R.id.action_zonacomunInfoFragment_to_listaReservasFragment,
+                bundle
+            )
         }
 
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    fun eliminarZonaComun(idZonaComun: Int, token: String, apiService: ApiService, view: View) {
+        val builder = AlertDialog.Builder(view.context)
+        builder.setMessage("¿Está Seguro de eliminar la zona común?\nEsta acción no se puede deshacer")
+        builder.setPositiveButton("Aceptar") { dialog, _ ->
+            apiService.deleteZonaComun(idZonaComun, token).enqueue(object :
+                Callback<ApiResponse> {
+                override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {}
+                override fun onFailure(call: Call<ApiResponse>, t: Throwable) {}
+            })
+
+            dialog.dismiss()
+            view.findNavController().popBackStack()
+        }
+
+        builder.setNegativeButton("Cancelar") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    fun obtenerDatosZonaComun(idZonaComun: Int, token: String, apiService: ApiService, view: View) {
+
+        val idZonaComunText = view.findViewById<TextView>(R.id.idZonaComun)
+        val nombreZonaComun = view.findViewById<TextView>(R.id.nombreZonaComun)
+        val textoAforo = view.findViewById<TextView>(R.id.textoAforo)
+        val textoPrecio = view.findViewById<TextView>(R.id.textoPrecio)
+        val textoApertura = view.findViewById<TextView>(R.id.textoApertura)
+        val textoCierre = view.findViewById<TextView>(R.id.textoCierre)
+        val textoIntervaloMinutos = view.findViewById<TextView>(R.id.textoIntervaloMinutos)
+
+        apiService.getZonaComunData(idZonaComun, token).enqueue(object :
+            Callback<ZonaComun> {
+            override fun onResponse(
+                call: Call<ZonaComun>,
+                response: Response<ZonaComun>
+            ) {
+                if (response.isSuccessful) {
+                    val datos = response.body()!!
+                    idZonaComunText.text = datos.idZonaComun.toString()
+                    nombreZonaComun.text = datos.nombre
+                    textoAforo.text = datos.aforoMaximo.toString()
+                    textoPrecio.text = datos.precio.toString() + "$"
+                    textoApertura.text = datos.horarioCierre.toString()
+                    textoCierre.text = datos.horarioCierre.toString()
+                    textoIntervaloMinutos.text = datos.intervaloTurnos.toString() + " Minutos"
+
+                } else {
+                    Log.e("Tag", "Response body is null")
+                }
+            }
+
+            override fun onFailure(call: Call<ZonaComun>, t: Throwable) {
+                Log.e("Tag", "Response body is dsafadfafdasf")
+            }
+        })
     }
 
     companion object {

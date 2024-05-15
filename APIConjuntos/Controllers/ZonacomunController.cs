@@ -55,17 +55,17 @@ namespace APIConjuntos.Controllers
             var perfilId = Convert.ToInt32(User.FindFirst(ClaimTypes.Role)?.Value);
             Perfil perfilLogeado = dbContext.Perfils.FirstOrDefault(p => p.IdPerfil == perfilId);
 
-            if (perfilLogeado == null)
-                return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
+            //if (perfilLogeado == null)
+               // return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
 
             var zonaComun = dbContext.Zonacomuns.FirstOrDefault(zc => zc.IdZonaComun == id);
 
-            if ((perfilLogeado.IdTipoPerfil == 4) || (perfilLogeado.IdConjunto == zonaComun.IdConjunto))
-            {
-                return new JsonResult(zonaComun);
+           // if ((perfilLogeado.IdTipoPerfil == 4) || (perfilLogeado.IdConjunto == zonaComun.IdConjunto))
+           // {
+                return new JsonResult(mapper.Map<Zonacomun,ZonacomunDTO>(zonaComun));
             
-            }
-            return BadRequest();
+           // }
+           // return BadRequest();
             
         }
 
@@ -128,8 +128,59 @@ namespace APIConjuntos.Controllers
             {
                 dbContext.Zonacomuns.Remove(zonaComun);
                 dbContext.SaveChanges();
+                return Ok("Borrado exitoso");
             }
             return BadRequest();
+        }
+
+       
+        [HttpGet]
+        [Route("HorariosDisponibles/{idZonaComun}/{fecha}")]
+        public IActionResult ObtenerHorariosDisponibles(int idZonaComun, string fecha)
+        {
+            // Convertir la fecha de string a DateTime
+            DateTime fechaSeleccionada = DateTime.Parse(fecha).Date;
+
+            // Obtener la zona común desde la base de datos
+            Zonacomun zonaComun = dbContext.Zonacomuns.FirstOrDefault(zc => zc.IdZonaComun == idZonaComun);
+
+            // Verificar si la zona común existe
+            if (zonaComun == null)
+            {
+                return NotFound("Zona común no encontrada.");
+            }
+
+            // Calcular los horarios disponibles para la zona común y la fecha seleccionada
+            List<object> horariosConCuposDisponibles = new List<object>();
+            DateTime horaInicio = fechaSeleccionada.Add(zonaComun.HorarioApertura);
+            DateTime horaFin = fechaSeleccionada.Add(zonaComun.HorarioCierre);
+
+            // Obtener las reservas para la zona común y la fecha seleccionada
+            List<Reserva> reservas = dbContext.Reservas
+                .Where(r => r.IdZonaComun == idZonaComun && r.Fecha == fechaSeleccionada)
+                .ToList();
+
+            while (horaInicio < horaFin)
+            {
+                DateTime horaFinTemp = horaInicio.AddMinutes(zonaComun.IntervaloTurnos);
+
+                // Calcular el aforo restante para el intervalo de tiempo actual
+                int aforoRestante = zonaComun.AforoMaximo - reservas
+                    .Where(r => (horaInicio.TimeOfDay >= r.HoraInicio && horaInicio.TimeOfDay < r.HoraFin) || (horaFinTemp.TimeOfDay > r.HoraInicio && horaFinTemp.TimeOfDay <= r.HoraFin))
+                    .Sum(r => r.CantidadPersonas);
+
+                horariosConCuposDisponibles.Add(new
+                {
+                    Fecha = fechaSeleccionada.ToString("MM-dd-yyyy"),
+                    HoraInicio = horaInicio.TimeOfDay,
+                    HoraFin = horaFinTemp.TimeOfDay,
+                    CuposDisponibles = aforoRestante
+                });
+
+                horaInicio = horaFinTemp;
+            }
+
+            return new JsonResult(horariosConCuposDisponibles);
         }
     }
 }

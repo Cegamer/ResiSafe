@@ -1,10 +1,18 @@
 package com.resisafe.appresisafe
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.findNavController
+import com.google.android.material.textfield.TextInputEditText
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,6 +45,53 @@ class VigilanteRegistroVisitanteFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_vigilante_registro_visitante, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val cedulaField = view.findViewById<TextInputEditText>(R.id.cedulaField)
+        val nombreField = view.findViewById<TextInputEditText>(R.id.nombreField)
+        val apellidoField = view.findViewById<TextInputEditText>(R.id.apellidoField)
+        val cancelButton = view.findViewById<Button>(R.id.cancelButton)
+        val registerButton = view.findViewById<Button>(R.id.registerButton)
+        val apiService = RetrofitClient.apiService
+        val token = ManejadorDeTokens.cargarTokenUsuario(view.context)?.token!!
+
+
+
+        cancelButton.setOnClickListener(){
+            view.findNavController().popBackStack()
+        }
+
+        registerButton.setOnClickListener(){
+            val visitante = visitante(
+                idVisitante = 0,
+                nombre = nombreField.text.toString(),
+                apellido = apellidoField.text.toString(),
+                cedula = cedulaField.text.toString().toInt(),
+                foto = ""
+            )
+            apiService.registrarVisitante(visitante,token).enqueue(object : Callback<ApiResponse> {
+                override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+                        if (responseBody != null) {
+                            val builder = AlertDialog.Builder(view.context)
+                            builder.setMessage("Visitante Registrado correctamente")
+                            builder.setPositiveButton("Aceptar") { dialog, _ ->
+                                dialog.dismiss()
+                                view.findNavController().popBackStack()
+                            }
+                            val dialog = builder.create()
+                            dialog.show()
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+                    Log.e("Tag", "Failed to make request: ${t.message}", t)
+                }
+            })
+        }
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of

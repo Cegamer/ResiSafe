@@ -1,10 +1,15 @@
 package com.resisafe.appresisafe
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +32,87 @@ class AdministradorHomeFragment : Fragment() {
             param1 = it.getString(com.resisafe.appresisafe.ARG_PARAM1)
             param2 = it.getString(com.resisafe.appresisafe.ARG_PARAM2)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+        val infoConjuntoCard = view.findViewById<CardView>(R.id.infoConjuntoCard)
+        val vincularUsuariosCard = view.findViewById<CardView>(R.id.vincularUsuariosCard)
+        val listaUsuariosCard = view.findViewById<CardView>(R.id.listaUsuariosCard)
+        val cardHistorialPaquetes = view.findViewById<CardView>(R.id.cardHistorialPaquetes)
+        val cardHistorialVisitantes = view.findViewById<CardView>(R.id.cardHistorialVisitantes)
+        val cardZonasComunes = view.findViewById<CardView>(R.id.cardZonasComunes)
+        val cardAgregarZonaComun = view.findViewById<CardView>(R.id.cardAgregarZonaComun)
+
+
+
+        viewLifecycleOwner.lifecycleScope.launch() {
+
+            val PerfilActual = ManejadorDeTokens.cargarPerfilActual(view.context)
+            val idConjunto = PerfilActual?.idConjunto
+
+            infoConjuntoCard.setOnClickListener() {
+                val bundle = Bundle()
+                if (idConjunto != null) {
+                    bundle.putInt("idConjunto", idConjunto)
+                };
+                view.findNavController().navigate(
+                    R.id.action_administradorHomeFragment_to_conjuntoInfoFragment2, bundle
+                )
+
+            }
+            vincularUsuariosCard.setOnClickListener(){
+                val bundle = Bundle()
+                if (idConjunto != null) {
+                    bundle.putInt("idConjunto", idConjunto)
+                };
+                bundle.putInt("tipoUsuarioSolicitante", 1);
+
+                view.findNavController().navigate(
+                    R.id.action_administradorHomeFragment_to_perfilCrearFragment3, bundle
+                )
+
+            }
+
+            listaUsuariosCard.setOnClickListener(){
+                val bundle = Bundle()
+                if (idConjunto != null) {
+                    bundle.putInt("idConjunto", idConjunto)
+                };
+                bundle.putInt("tipoUsuarioSolicitante", 1);
+                view.findNavController().navigate(
+                    R.id.action_administradorHomeFragment_to_conjuntoPerfilesListaFragment2, bundle
+                )
+            }
+
+
+            cardZonasComunes.setOnClickListener(){
+                val bundle = Bundle()
+                if (idConjunto != null) {
+                    bundle.putInt("idConjunto", idConjunto)
+                };
+                bundle.putInt("tipoUsuarioSolicitante", 1);
+                view.findNavController().navigate(
+                    R.id.action_administradorHomeFragment_to_fragmentConjuntoListaZonascomunes2, bundle
+                )
+            }
+
+
+            cardAgregarZonaComun.setOnClickListener(){
+                val bundle = Bundle()
+                if (idConjunto != null) {
+                    bundle.putInt("idConjunto", idConjunto)
+                };
+                bundle.putInt("tipoUsuarioSolicitante", 1);
+                view.findNavController().navigate(
+                    R.id.action_administradorHomeFragment_to_conjuntoAgregarZonacomunFragment3, bundle
+                )
+            }
+
+
+        }
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onCreateView(

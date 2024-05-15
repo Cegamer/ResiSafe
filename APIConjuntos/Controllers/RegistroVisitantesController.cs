@@ -32,13 +32,45 @@ namespace APIConjuntos.Controllers
             return mapper.Map<RegistroVisitante, RegistroVisitanteDTO>(dbContext.RegistroVisitantes.FirstOrDefault(v => v.IdRegistro == id));
         }
 
+
+        [HttpGet]
+        [Route("Residente/{idResidente}")]
+        public List<RegistroVisitanteDTO> getVisitasByResidente([FromRoute] int idResidente) {
+            return mapper.Map<List<RegistroVisitante>, List<RegistroVisitanteDTO>>(dbContext.RegistroVisitantes.Where(rv => rv.IdResidenteVinculado == idResidente).ToList());
+
+        }
+
+
+        [HttpGet]
+        [Route("Conjunto/{idConjunto}")]
+        public IActionResult getVisitasbyConjunto([FromRoute] int idConjunto) {
+            var visitas = (from registro in dbContext.RegistroVisitantes
+                           join visitante in dbContext.Visitantes on registro.IdVisitante equals visitante.IdVisitante
+                           join perfil in dbContext.Perfils on registro.IdResidenteVinculado equals perfil.IdPerfil
+                           where perfil.IdConjunto == idConjunto
+                           select new
+                           {
+                               registro.IdRegistro,
+                               visitante.Nombre,
+                               visitante.Apellido,
+                               visitante.Cedula,
+                               registro.Fecha,
+                               registro.HoraIngreso,
+                               registro.HoraSalida
+                           }).ToList();
+            return new JsonResult( visitas);
+        }
+
         // POST api/<RegistroVisitantesController>
         [HttpPost]
-        public void Post([FromBody] RegistroVisitanteDTO registroVisitante)
+        public IActionResult Post([FromBody] RegistroVisitanteDTO registroVisitante)
         {
             dbContext.RegistroVisitantes.Add((mapper.Map<RegistroVisitanteDTO, RegistroVisitante>(registroVisitante)));
             dbContext.SaveChanges();
+            return new JsonResult(new { message = "Registro Exitoso"} );
 
         }
+
+
     }
 }

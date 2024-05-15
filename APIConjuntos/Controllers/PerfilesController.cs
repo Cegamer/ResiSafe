@@ -9,7 +9,6 @@ using System.Security.Claims;
 
 namespace APIConjuntos.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PerfilesController : ControllerBase
@@ -130,6 +129,33 @@ namespace APIConjuntos.Controllers
 
         }
 
+        [HttpGet]
+        [Route("BuscarCedula/{cedula}/Conjunto/{idConjunto}")]
+        public IActionResult ObtenerPerfilPorCedula([FromRoute] int cedula, [FromRoute] int idConjunto)
+        {
+            var perfil = (from p in dbContext.Perfils
+                          join u in dbContext.Usuarios on p.IdUsuario equals u.IdUsuario
+                          where u.Cedula == cedula && p.IdConjunto == idConjunto
+                          select p).FirstOrDefault();
+
+            if (perfil == null)
+                return NotFound("No se encontró el perfil para la cédula y conjunto especificados.");
+
+            var dataUsuario = dbContext.Usuarios.FirstOrDefault(u => u.IdUsuario == perfil.IdUsuario);
+            if (dataUsuario == null)
+                return NotFound("No se encontraron los datos del usuario asociados al perfil.");
+            
+            var result = new
+            {
+                perfil.IdPerfil,
+                perfil.IdConjunto,
+                nombreApellido = dataUsuario.Nombre + " " + dataUsuario.Apellido
+            };
+
+            return new JsonResult(result);
+
+        }
+
 
         [HttpGet]
         [Route("Conjunto/{idConjunto}")]
@@ -164,6 +190,20 @@ namespace APIConjuntos.Controllers
             return Unauthorized(ErrorsUtilities.sinAccesoAlRecurso);
         }
 
+
+        [HttpGet]
+        [Route("{Cedula}/{idConjunto}")]
+        public IActionResult getPerfilResidenteByCedulayConjunto([FromRoute] int Cedula, [FromRoute] int idConjunto) {
+            var usuario = dbContext.Usuarios.FirstOrDefault(u => u.Cedula == Cedula);
+            
+            if (usuario == null) return NotFound("No existe usuario con cedula especificada");
+
+            var perfilResidente = mapper.Map<Perfil, PerfilesDTO>(dbContext.Perfils.FirstOrDefault(p => p.IdUsuario == usuario.IdUsuario && p.IdConjunto == idConjunto && p.IdTipoPerfil == 2));
+
+            if (perfilResidente == null) return NotFound("No existe perfil de residente con la cedula especificada para este conjunto");
+
+            return new JsonResult(perfilResidente);
+        }
 
         [HttpDelete]
         [Authorize]

@@ -8,6 +8,7 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.resisafe.appresisafe.CardItem
+import com.resisafe.appresisafe.ManejadorDeTokens
 import com.resisafe.appresisafe.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -48,6 +49,7 @@ class AppmasterHomeFragment : Fragment() {
         val vincularUsuariosCard = view.findViewById<CardView>(R.id.vincularUsuariosCard)
         val crearUsuariosCard = view.findViewById<CardView>(R.id.crearUsuariosCard)
         val listaUsuariosCard = view.findViewById<CardView>(R.id.listaUsuariosCard)
+
 
         registrarConjuntosCard.setOnClickListener {
             view.findNavController().navigate(

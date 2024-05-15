@@ -1,6 +1,7 @@
 ﻿using APIConjuntos.DTO;
 using APIConjuntos.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -38,10 +39,11 @@ namespace APIConjuntos.Controllers
 
         // POST api/<QuejasReclamosController>
         [HttpPost]
-        public void Post([FromBody] QuejasReclamosDTO quejaReclamo)
+        public IActionResult Post([FromBody] QuejasReclamosDTO quejaReclamo)
         {
             dbContext.QuejasReclamos.Add(mapper.Map<QuejasReclamosDTO,QuejasReclamo>(quejaReclamo));
             dbContext.SaveChanges();
+            return new JsonResult(new { message = "Enviado Exitosamente" });
         }
     }
 }

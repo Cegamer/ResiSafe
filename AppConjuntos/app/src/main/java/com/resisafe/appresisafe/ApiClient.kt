@@ -14,7 +14,7 @@ import retrofit2.http.Path
 
 
 object RetrofitClient {
-    private const val BASE_URL = "https://resisafe.somee.com/api/"
+    private const val BASE_URL = " https://more-molly-honest.ngrok-free.app/api/"
 
 
     val apiService: ApiService by lazy {
@@ -71,12 +71,17 @@ interface ApiService {
     ): Call<ApiResponse>
 
     @DELETE("Conjuntos/{id}")
-    fun eliminarConjunto(@Path("id") conjuntoId:Int, @Header("Authorization") token: String) : Call<ApiResponse>
+    fun eliminarConjunto(
+        @Path("id") conjuntoId: Int,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse>
 
     @PUT("Conjuntos/{id}")
-    fun eliminarConjunto(@Path("id") conjuntoId:Int,
-                         @Body conjunto: Conjunto,
-                         @Header("Authorization") token: String) : Call<ApiResponse>
+    fun eliminarConjunto(
+        @Path("id") conjuntoId: Int,
+        @Body conjunto: Conjunto,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse>
 
     @GET("Conjuntos")
     fun obtenerConjuntos(): Call<List<Conjunto>>
@@ -134,11 +139,70 @@ interface ApiService {
     ): Call<ApiResponse>
 
     @GET("Zonacomun/Conjunto/{idConjunto}")
-    fun getZonasComunesConjunto(@Path("idConjunto") idConjunto: Int,
-                                @Header("Authorization") token: String) : Call<List<ZonaComun>>
+    fun getZonasComunesConjunto(
+        @Path("idConjunto") idConjunto: Int,
+        @Header("Authorization") token: String
+    ): Call<List<ZonaComun>>
 
+    @GET("Zonacomun/{idZonaComun}")
+    fun getZonaComunData(
+        @Path("idZonaComun") idZonaComun: Int,
+        @Header("Authorization") token: String
+    ): Call<ZonaComun>
+
+    @DELETE("Zonacomun/{idZonaComun}")
+    fun deleteZonaComun(
+        @Path("idZonaComun") idZonaComun: Int,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse>
+
+    @GET("TiposQuejasReclamos")
+    fun getTiposQUejas(): Call<List<tiposQuejas>>
+
+    @POST("QuejasReclamos")
+    fun postQuejasReclamos(
+        @Body body: quejaReclamo,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse>
+
+
+    @POST("Visitantes")
+    fun registrarVisitante(
+        @Body body: visitante,
+        @Header("Authorization") token: String
+    ): Call<ApiResponse>
+
+
+    @GET("Perfiles/BuscarCedula/{cedula}/Conjunto/{idConjunto}")
+    fun getPerfilByCedula( @Path("cedula") cedula: Int,
+                           @Path("idConjunto") idConjunto: Int,
+                           @Header("Authorization") token: String): Call<perfilByCedula>
+    @GET("Visitantes/BuscarCedula/{cedula}")
+    fun getvisitanteByCedula( @Path("cedula") cedula: Int,
+                        @Header("Authorization") token: String): Call<visitante>
+    @POST("RegistroVisitantes")
+    fun registrarVisita(
+        @Body body: Visita,
+        @Header("Authorization") token: String
+    ) : Call<ApiResponse>
 
 }
+
+
+data class  perfilByCedula(
+    var idPerfil: Int,
+    var idConjunto: Int,
+    var nombreApellido: String)
+
+data class Visita(
+    var idRegistro: Int,
+    var idVisitante: Int,
+    var idResidenteVinculado: Int,
+    var idVigilanteQueRegistra: Int,
+    var fecha: String,
+    var horaIngreso: String,
+    var horaSalida: String
+)
 
 data class PerfilesDTO(
     var idPerfil: Int,
@@ -147,6 +211,24 @@ data class PerfilesDTO(
     var idTipoPerfil: Int,
     var activo: Byte = 0
 )
+
+data class tiposQuejas(var idtiposQuejasReclamos: Int, var nombreTipo: String)
+data class quejaReclamo(
+    var idquejasReclamos: Int,
+    var idTipo: Int,
+    var quejaReclamo: String,
+    var idConjunto: Int,
+    var idPersonaQueEnvia: Int
+)
+
+data class visitante(
+    var idVisitante: Int,
+    var nombre: String,
+    var apellido: String,
+    var cedula: Int,
+    var foto: String
+)
+
 data class ApiResponse(val message: String)
 data class LoginResponse(val token: String, val userID: Int)
 data class ErrorResponse(val title: String, val status: Int, val detail: String)

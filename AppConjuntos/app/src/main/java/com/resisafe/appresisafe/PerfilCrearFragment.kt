@@ -51,11 +51,8 @@ class PerfilCrearFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         val spinnerConjunto: Spinner = view.findViewById(R.id.spinnerConjunto)
-
         val mapConjuntos: MutableMap<String, Int> = mutableMapOf()
-
 
         //Definir datos spinner conjuntos
         apiService.obtenerConjuntos().enqueue(object : Callback<List<Conjunto>> {
@@ -88,7 +85,6 @@ class PerfilCrearFragment : Fragment() {
                                 spinnerConjunto.isEnabled = false
                             }
                         }
-
                     } else {
                         Log.e("Tag", "Response body is null")
                     }
@@ -116,8 +112,6 @@ class PerfilCrearFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>) {
             }
         }
-
-
 
         //Buscador por cedula
         val cedulaBuscador = view.findViewById<EditText>(R.id.cedulaBuscador)
@@ -158,8 +152,6 @@ class PerfilCrearFragment : Fragment() {
             cedulaBuscador.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     cargarUsuarioPorCedula()
-
-
                     return@OnEditorActionListener true
                 }
                 false
@@ -225,6 +217,15 @@ class PerfilCrearFragment : Fragment() {
                                         }
                                     })
                                 }
+                            }
+                            else {
+                                val adapter = ArrayAdapter(
+                                    requireContext(),
+                                    R.layout.spinner_box,
+                                    nombresTipos.filter {it !=  "AppMaster"}
+                                )
+                                adapter.setDropDownViewResource(R.layout.spinner_item)
+                                spinnerTipoPerfil.adapter = adapter
                             }
 
                         }

@@ -24,11 +24,11 @@
 
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="183dp"
-                android:layout_height="138dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
-                android:src="@drawable/apartment"
+                android:src="@drawable/park"
                 app:tint="@color/colorPrimary" />
 
             <LinearLayout
@@ -39,7 +39,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/idConjunto"
+                    android:id="@+id/idZonaComun"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -50,7 +50,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/nombreConjunto"
+                    android:id="@+id/nombreZonaComun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nombre zona comun"
@@ -84,6 +84,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/textoAforo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -108,6 +109,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/textoPrecio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -152,7 +154,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/textoApertura"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -177,7 +179,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/textView18"
+                    android:id="@+id/textoCierre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -201,6 +203,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/textoIntervaloMinutos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -220,7 +223,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="20dp"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorPrimaryDanger"
@@ -230,39 +232,27 @@
                     app:cornerRadius="20dp" />
 
                 <Button
-                    android:id="@+id/buttonAgregarZonaComun"
+                    android:id="@+id/botonListaReservas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="20dp"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorPrimary"
-                    android:text="Modificar"
+                    android:gravity="center"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="10dp"
+                    android:text="Lista Reservas"
                     android:textColor="@color/colorSecondaryLight"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     app:cornerRadius="20dp" />
+
             </LinearLayout>
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/botonListaReservas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/colorPrimary"
-            android:gravity="center"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="10dp"
-            android:text="Lista Reservas"
-            android:textColor="@color/colorSecondaryLight"
-            android:textSize="16sp"
-            app:cornerRadius="20dp" />
 
     </LinearLayout>
 

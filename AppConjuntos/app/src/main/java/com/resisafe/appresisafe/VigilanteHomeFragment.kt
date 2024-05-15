@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,29 +40,40 @@ class VigilanteHomeFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_vigilante_home, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val registroVisitantesBinding = view.findViewById<CardView>(R.id.registrovisitantes)
-        registroVisitantesBinding.setOnClickListener {
-            view.findNavController().navigate(
-                R.id.action_vigilanteHomeFragment_to_vigilanteRegistroVisitanteFragment
-            )
-        }
-        val historialvisitas = view.findViewById<CardView>(R.id.historialvisitas)
-        historialvisitas.setOnClickListener {
-            view.findNavController().navigate(
-                R.id.action_vigilanteHomeFragment_to_vigilanteListaVisitantesFragment
-            )
-        }
-        val registrarvisita = view.findViewById<CardView>(R.id.registrarvisita)
-        registrarvisita.setOnClickListener {
-            view.findNavController().navigate(
-                R.id.action_vigilanteHomeFragment_to_vigilanteRegistroVisitaFragment
-            )
+        viewLifecycleOwner.lifecycleScope.launch() {
+
+            val PerfilActual = ManejadorDeTokens.cargarPerfilActual(view.context)
+            val idConjunto = PerfilActual?.idConjunto
+            val registroVisitantesBinding = view.findViewById<CardView>(R.id.registrovisitantes)
+            registroVisitantesBinding.setOnClickListener {
+                view.findNavController().navigate(
+                    R.id.action_vigilanteHomeFragment_to_vigilanteRegistroVisitanteFragment
+                )
+            }
+            val historialvisitas = view.findViewById<CardView>(R.id.historialvisitas)
+            historialvisitas.setOnClickListener {
+                view.findNavController().navigate(
+                    R.id.action_vigilanteHomeFragment_to_vigilanteListaVisitantesFragment
+                )
+            }
+            val registrarvisita = view.findViewById<CardView>(R.id.registrarvisita)
+            registrarvisita.setOnClickListener {
+                val bundle = Bundle()
+                if (idConjunto != null) {
+                    bundle.putInt("idConjunto", idConjunto)
+                };
+                view.findNavController().navigate(
+                    R.id.action_vigilanteHomeFragment_to_vigilanteRegistroVisitaFragment, bundle
+                )
+            }
         }
         super.onViewCreated(view, savedInstanceState)
 
     }
+
     companion object {
         /**
          * Use this factory method to create a new instance of

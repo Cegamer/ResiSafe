@@ -3,13 +3,19 @@ package com.resisafe.appresisafe
 import android.content.Context
 import android.util.Log
 import com.google.gson.Gson
+import com.resisafe.appresisafe.ui.AppMaster.Adapters.PerfilUsuario
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.awaitResponse
 import java.io.File
 
 object ManejadorDeTokens {
-    fun guardarTokenUsuario(context: Context, loginResponse: LoginResponse) {
+    fun guardarTokenUsuario(context: Context, loginResponse: LoginResponse,perfilActual: Int = 0) {
         val jsonObject = mapOf(
             "token" to loginResponse.token,
-            "userID" to loginResponse.userID
+            "userID" to loginResponse.userID,
+            "perfilActualId" to perfilActual
         )
         Log.d("Token:", "${loginResponse.token} - ${loginResponse.userID}")
 
@@ -26,6 +32,31 @@ object ManejadorDeTokens {
         }
     }
 
+     suspend fun cargarPerfilActual(context: Context): PerfilesDTO? {
+        val archivoDatos = File(context.filesDir, "datos.json")
+        if (!archivoDatos.exists()) {
+            return null // El archivo no existe
+        }
+
+        val jsonString = archivoDatos.readText()
+        val jsonObject = Gson().fromJson(jsonString, Map::class.java)
+        val idPerfil = (jsonObject["perfilActualId"] as? Double)?.toInt() ?: return null
+        val apiService = RetrofitClient.apiService
+
+        val token = cargarTokenUsuario(context)?.token ?: return null
+
+        val perfil = try {
+            val response = apiService.getPerfil(idPerfil, token).awaitResponse()
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            null
+        }
+        return perfil
+    }
 
 
     fun cargarTokenUsuario(context: Context): LoginResponse? {

@@ -155,7 +155,7 @@ namespace APIConjuntos.Controllers
 
             if(perfil != null)
             {
-                if (perfil.IdTipoPerfil == 4) {
+                if (perfil.IdTipoPerfil == 4 || perfil.IdTipoPerfil == 1 || perfil.IdTipoPerfil == 3) {
                     Usuario usuario = dbContext.Usuarios.FirstOrDefault(u => u.Cedula == cedula);
                     if (usuario != null)
                     {

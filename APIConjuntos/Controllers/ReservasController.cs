@@ -2,6 +2,8 @@
 using APIConjuntos.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Mysqlx;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,7 +25,7 @@ namespace APIConjuntos.Controllers
 
         [HttpGet]
         [Route("Zonacomun/{idZonaComun}")]
-        public List<ReservasDTO> getReservasByZonaComun ([FromRoute] int idZonaComun)
+        public List<ReservasDTO> getReservasByZonaComun([FromRoute] int idZonaComun)
         {
             return mapper.Map<List<Reserva>, List<ReservasDTO>>(dbContext.Reservas.Where(q => q.IdZonaComun == idZonaComun).ToList());
         }
@@ -34,7 +36,55 @@ namespace APIConjuntos.Controllers
         [HttpGet("{id}")]
         public ReservasDTO Get(int id)
         {
-            return mapper.Map<Reserva,ReservasDTO>(dbContext.Reservas.FirstOrDefault(q => q.IdReserva == id));
+            return mapper.Map<Reserva, ReservasDTO>(dbContext.Reservas.FirstOrDefault(q => q.IdReserva == id));
+        }
+
+        [HttpGet]
+        [Route("Zonacomun/{idZonaComun}/{fecha}")]
+        public List<ReservasDTO> getReservasByZonaComunFechaEspecifica([FromRoute] int idZonaComun, [FromRoute] string fecha) {
+            return mapper.Map<List<Reserva>, List<ReservasDTO>>(dbContext.Reservas.Where(q => q.IdZonaComun == idZonaComun && q.Fecha == DateTime.Parse(fecha)).ToList());
+        }
+
+
+        [HttpGet]
+        [Route("Perfil/{idPerfil}")]
+        public List<ReservasDTO> getReservasByPerfil([FromRoute] int idPerfil)
+        {
+            return mapper.Map<List<Reserva>, List<ReservasDTO>>(dbContext.Reservas.Where(q => q.IdReservante == idPerfil).ToList());
+        }
+
+
+        [HttpGet]
+        [Route("Conjunto/{idConjunto}")]
+        public IActionResult getReservasByConjunto([FromRoute] int idConjunto)
+        {
+            var query = from reserva in dbContext.Reservas
+                        join zonaComun in dbContext.Zonacomuns on reserva.IdZonaComun equals zonaComun.IdZonaComun
+                        join perfil in dbContext.Perfils on reserva.IdReservante equals perfil.IdPerfil
+                        join usuario in dbContext.Usuarios on perfil.IdUsuario equals usuario.IdUsuario
+                        where zonaComun.IdConjunto == idConjunto
+                        select new 
+                        {
+                            IdReserva = reserva.IdReserva,
+                            NombreZonaComun = zonaComun.Nombre,
+                            NombreReservante = usuario.Nombre,
+                            ApellidoReservante = usuario.Nombre,
+                            CedulaReservante = usuario.Cedula,
+                            FechaReserva = reserva.Fecha,
+                            HoraInicio = reserva.HoraInicio,
+                            HoraFin = reserva.HoraFin,
+                            CantidadPersonas = reserva.CantidadPersonas
+                        };
+
+            return new JsonResult(query);
+        }
+
+
+        [HttpGet]
+        [Route("Perfil/{idPerfil}/{fecha}")]
+        public List<ReservasDTO> getReservasByPerfilYFecha([FromRoute] int idPerfil, [FromRoute] string fecha)
+        {
+            return mapper.Map<List<Reserva>, List<ReservasDTO>>(dbContext.Reservas.Where(q => q.IdReservante == idPerfil && q.Fecha == DateTime.Parse(fecha)).ToList());
         }
 
         // POST api/<ReservasController>

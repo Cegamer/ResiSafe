@@ -121,7 +121,8 @@ class ProfileSelectorFragment : Fragment() {
                                                                 val userId = responseBody.userID
                                                                 ManejadorDeTokens.guardarTokenUsuario(
                                                                     context,
-                                                                    responseBody
+                                                                    responseBody,
+                                                                    idPerfil
                                                                 )
                                                                 val intent = Intent(
                                                                     context,
@@ -180,7 +181,8 @@ class ProfileSelectorFragment : Fragment() {
                                                                 val userId = responseBody.userID
                                                                 ManejadorDeTokens.guardarTokenUsuario(
                                                                     context,
-                                                                    responseBody
+                                                                    responseBody,
+                                                                    idPerfil
                                                                 )
                                                                 val intent = Intent(
                                                                     context,
@@ -235,7 +237,7 @@ class ProfileSelectorFragment : Fragment() {
                                                                 val userId = responseBody.userID
                                                                 ManejadorDeTokens.guardarTokenUsuario(
                                                                     context,
-                                                                    responseBody
+                                                                    responseBody,idPerfil
                                                                 )
                                                                 val intent = Intent(
                                                                     context,
@@ -294,7 +296,7 @@ class ProfileSelectorFragment : Fragment() {
                                                                 )
                                                                 ManejadorDeTokens.guardarTokenUsuario(
                                                                     context,
-                                                                    responseBody
+                                                                    responseBody,idPerfil
                                                                 )
                                                                 Log.d("Tag", "Token Guardado")
                                                                 val intent = Intent(

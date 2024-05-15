@@ -13,7 +13,7 @@ namespace APIConjuntos.Controllers
     {
 
         appContext dbContext = new appContext();
-        Mapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<TiposQuejasReclamosController, TiposQuejasReclamosDTO>().ReverseMap()));
+        Mapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<TiposQuejasReclamo, TiposQuejasReclamosDTO>().ReverseMap()));
         // GET: api/<TiposQuejasReclamosController>
         [HttpGet]
         public List<TiposQuejasReclamosDTO> Get()

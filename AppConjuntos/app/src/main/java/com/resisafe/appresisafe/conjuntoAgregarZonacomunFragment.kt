@@ -166,7 +166,7 @@ class conjuntoAgregarZonacomunFragment : Fragment() {
             context,
             TimePickerDialog.OnTimeSetListener { view: TimePicker, horaSeleccionada: Int, minutoSeleccionado: Int ->
                 val horaFormateada =
-                    String.format("%02d:%02d", horaSeleccionada, minutoSeleccionado)
+                    String.format("%02d:%02d:00", horaSeleccionada, minutoSeleccionado)
                 editText.setText(horaFormateada)
             },
             hora,

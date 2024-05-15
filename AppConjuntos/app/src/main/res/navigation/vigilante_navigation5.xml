@@ -34,7 +34,14 @@
         android:id="@+id/vigilanteRegistroVisitaFragment"
         android:name="com.resisafe.appresisafe.VigilanteRegistroVisitaFragment"
         android:label="fragment_vigilante_registro_visita"
-        tools:layout="@layout/fragment_vigilante_registro_visita" />
+        tools:layout="@layout/fragment_vigilante_registro_visita" >
+        <action
+            android:id="@+id/action_vigilanteRegistroVisitaFragment_to_vigilanteRegistroVisitanteFragment"
+            app:destination="@id/vigilanteRegistroVisitanteFragment" />
+        <argument
+            android:name="idConjunto"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/vigilanteRegistroVisitanteFragment"
         android:name="com.resisafe.appresisafe.VigilanteRegistroVisitanteFragment"
