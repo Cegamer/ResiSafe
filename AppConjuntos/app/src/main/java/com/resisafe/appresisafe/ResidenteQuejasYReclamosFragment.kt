@@ -48,57 +48,69 @@ class ResidenteQuejasYReclamosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val tiposQuejas : MutableMap<String,Int> = mutableMapOf()
+        val tiposQuejas: MutableMap<String, Int> = mutableMapOf()
+
         val complaintTypeSpinner = view.findViewById<Spinner>(R.id.complaint_type_spinner)
         val textoQueja = view.findViewById<EditText>(R.id.editTextTextMultiLine)
 
+        val args = arguments
+        val idConjuntoArg = args?.getInt("idConjunto")!!
+        val idPrefilActual = args?.getInt("idPrefilActual")!!
 
-        viewLifecycleOwner.lifecycleScope.launch() {
-            val perfilActual = ManejadorDeTokens.cargarPerfilActual(view.context)!!;
-            val botonEnviar = view.findViewById<Button>(R.id.enviar)
-            val apiService = RetrofitClient.apiService
-            val token = ManejadorDeTokens.cargarTokenUsuario(view.context)?.token!!
-            botonEnviar.setOnClickListener(){
-                val datosQuejas = quejaReclamo(
-                    idquejasReclamos = 0,
-                    idTipo = tiposQuejas[complaintTypeSpinner.selectedItem.toString()]!!,
-                    quejaReclamo = textoQueja.text.toString(),
-                    idConjunto = perfilActual.idConjunto,
-                    idPersonaQueEnvia = perfilActual.idPerfil
-                )
-                enviarQuejaReclamo(apiService,datosQuejas,token,view)
-            }
+        val botonEnviar = view.findViewById<Button>(R.id.enviar)
+        val apiService = RetrofitClient.apiService
+        val token = ManejadorDeTokens.cargarTokenUsuario(view.context)?.token!!
+        botonEnviar.setOnClickListener() {
+            val datosQuejas = quejaReclamo(
+                idquejasReclamos = 0,
+                idTipo = tiposQuejas[complaintTypeSpinner.selectedItem.toString()]!!,
+                quejaReclamo = textoQueja.text.toString(),
+                idConjunto = idConjuntoArg,
+                idPersonaQueEnvia = idPrefilActual
+            )
+            enviarQuejaReclamo(apiService, datosQuejas, token, view)
+        }
 
 
 
 
-            apiService.getTiposQUejas().enqueue(object : Callback<List<tiposQuejas>> {
-                override fun onResponse(call: Call<List<tiposQuejas>>, response: Response<List<tiposQuejas>>) {
-                    if (response.isSuccessful) {
-                        val responseBody = response.body()
-                        if (responseBody != null) {
-                            for (tipoQueja in responseBody){
-                                tiposQuejas[tipoQueja.nombreTipo] = tipoQueja.idtiposQuejasReclamos
-                                Log.d("aa",tipoQueja.nombreTipo)
-                            }
-                            val arrayTiposQuejas: List<String> =  tiposQuejas.keys.toList();
-
-                            val adapter = ArrayAdapter(requireContext(), R.layout.spinner_box, arrayTiposQuejas)
-                            adapter.setDropDownViewResource(R.layout.spinner_item)
-                            complaintTypeSpinner.adapter = adapter
+        apiService.getTiposQUejas().enqueue(object : Callback<List<tiposQuejas>> {
+            override fun onResponse(
+                call: Call<List<tiposQuejas>>,
+                response: Response<List<tiposQuejas>>
+            ) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        for (tipoQueja in responseBody) {
+                            tiposQuejas[tipoQueja.nombreTipo] = tipoQueja.idtiposQuejasReclamos
+                            Log.d("aa", tipoQueja.nombreTipo)
                         }
+                        val arrayTiposQuejas: List<String> = tiposQuejas.keys.toList();
+
+                        val adapter =
+                            ArrayAdapter(requireContext(), R.layout.spinner_box, arrayTiposQuejas)
+                        adapter.setDropDownViewResource(R.layout.spinner_item)
+                        complaintTypeSpinner.adapter = adapter
                     }
                 }
-                override fun onFailure(call: Call<List<tiposQuejas>>, t: Throwable) {
-                    Log.e("Tag", "Failed to make request: ${t.message}", t)
-                }
-            })
-        }
+            }
+
+            override fun onFailure(call: Call<List<tiposQuejas>>, t: Throwable) {
+                Log.e("Tag", "Failed to make request: ${t.message}", t)
+            }
+        })
+
     }
 
 
-     fun enviarQuejaReclamo(apiService: ApiService, quejaReclamo: quejaReclamo, token:String, view: View){
-        apiService.postQuejasReclamos(quejaReclamo,token).enqueue(object : Callback<ApiResponse> {
+    fun enviarQuejaReclamo(
+        apiService: ApiService,
+        quejaReclamo: quejaReclamo,
+        token: String,
+        view: View
+    ) {
+        apiService.postQuejasReclamos(quejaReclamo, token).enqueue(object : Callback<ApiResponse> {
             override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
@@ -112,12 +124,12 @@ class ResidenteQuejasYReclamosFragment : Fragment() {
                         val dialog = builder.create()
                         dialog.show()
                     }
-                }
-                else{
+                } else {
                     Log.e("FALLO", quejaReclamo.toString())
 
                 }
             }
+
             override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
                 Log.e("Tag", "Failed to make request: ${t.message}", t)
             }

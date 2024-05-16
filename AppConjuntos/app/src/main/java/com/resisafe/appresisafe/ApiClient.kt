@@ -186,108 +186,22 @@ interface ApiService {
         @Header("Authorization") token: String
     ) : Call<ApiResponse>
 
+    @GET("RegistroVisitantes/Conjunto/{idConjunto}")
+    fun getVisitantesByConjunto( @Path("idConjunto") idConjunto: Int, @Header("Authorization") token: String): Call<List<VisitaData>>
+    @GET("RegistroVisitantes/Residente/{idResidente}")
+    fun getVisitantesByResidente( @Path("idResidente") idResidente: Int, @Header("Authorization") token: String): Call<List<VisitaData>>
+    @POST("Reservas")
+    fun registrarReserva(@Body reserva: Reserva, @Header("Authorization") token: String) : Call<ApiResponse>
+    @PUT("Reservas/{idReserva}")
+    fun cambiarEstadoReserva(@Path("idReserva") idReserva: Int,@Body estado: Int, @Header("Authorization") token: String) : Call<ApiResponse>
+    @GET("Zonacomun/HorariosDisponibles/{idZonaComun}/{fecha}")
+    fun getHorariosDisponiblesZonaComun(@Path("idZonaComun") idZonaComun: Int, @Path("fecha") fecha:String,@Header("Authorization") token: String) : Call<List<HorarioDisponible>>
+    @GET("Reservas/Zonacomun/{idZonaComun}")
+    fun getReservasByZonaComun(@Path("idZonaComun") idZonaComun: Int,@Header("Authorization") token: String) : Call<List<ReservaLista>>
+    @GET("Reservas/Perfil/{idPerfil}")
+    fun getReservasByUsuario(@Path("idPerfil") idPerfil: Int,@Header("Authorization") token: String) : Call<List<ReservaLista>>
+
+    @POST("Paquetes")
+    fun registrarPaquete(@Body paquete: Paquete, @Header("Authorization") token: String) : Call<ApiResponse>
+
 }
-
-
-data class  perfilByCedula(
-    var idPerfil: Int,
-    var idConjunto: Int,
-    var nombreApellido: String)
-
-data class Visita(
-    var idRegistro: Int,
-    var idVisitante: Int,
-    var idResidenteVinculado: Int,
-    var idVigilanteQueRegistra: Int,
-    var fecha: String,
-    var horaIngreso: String,
-    var horaSalida: String
-)
-
-data class PerfilesDTO(
-    var idPerfil: Int,
-    var idUsuario: Int,
-    var idConjunto: Int,
-    var idTipoPerfil: Int,
-    var activo: Byte = 0
-)
-
-data class tiposQuejas(var idtiposQuejasReclamos: Int, var nombreTipo: String)
-data class quejaReclamo(
-    var idquejasReclamos: Int,
-    var idTipo: Int,
-    var quejaReclamo: String,
-    var idConjunto: Int,
-    var idPersonaQueEnvia: Int
-)
-
-data class visitante(
-    var idVisitante: Int,
-    var nombre: String,
-    var apellido: String,
-    var cedula: Int,
-    var foto: String
-)
-
-data class ApiResponse(val message: String)
-data class LoginResponse(val token: String, val userID: Int)
-data class ErrorResponse(val title: String, val status: Int, val detail: String)
-data class ZonaComun(
-    val idZonaComun: Int,
-    val idConjunto: Int,
-    val nombre: String,
-    val horarioApertura: String,
-    val horarioCierre: String,
-    val aforoMaximo: Int,
-    val precio: Int,
-    val idIcono: Int,
-    val intervaloTurnos: Int
-)
-
-
-data class UserData(
-    val idUsuario: Int,
-    val nombre: String,
-    val apellido: String,
-    val cedula: Int,
-    val contraseña: String,
-    var foto: String
-)
-
-data class ProfileData(
-    val IdPerfil: Int,
-    val IdUsuario: Int,
-    val IdConjunto: Int,
-    val IdTipoPerfil: Int,
-    val Activo: Int
-)
-
-data class CardItem(val idPerfil: Int, val nombreConjunto: String, val nombreTipoPerfil: String)
-data class Conjunto(
-    val idConjunto: Int,
-    val nombre: String,
-    val direccion: String,
-    val activo: Int
-)
-
-data class TipoPerfil(val idTipo: Int, val nombreTipo: String)
-data class Reserva(
-    val idReserva: Int,
-    val idReservante: Int,
-    val idZonaComun: Int,
-    val fecha: String,
-    val horaInicio: String,
-    val horaFin: String,
-    val cantidadPersonas: Int
-)
-
-data class ReservaLista(
-    val idReserva: Int,
-    val nombreReservante: String,
-    val nombreZonaComun: String,
-    val fecha: String,
-    val horaInicio: String,
-    val horaFin: String,
-    val cantidadPersonas: Int,
-    val estado: Int
-)

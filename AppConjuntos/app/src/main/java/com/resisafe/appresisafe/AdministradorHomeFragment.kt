@@ -47,28 +47,22 @@ class AdministradorHomeFragment : Fragment() {
 
 
 
+
         viewLifecycleOwner.lifecycleScope.launch() {
 
             val PerfilActual = ManejadorDeTokens.cargarPerfilActual(view.context)
-            val idConjunto = PerfilActual?.idConjunto
+            val bundle = Bundle()
+            bundle.putInt("idConjunto", PerfilActual?.idConjunto!!)
+            bundle.putInt("idPrefilActual",PerfilActual?.idPerfil!!)
+            bundle.putInt("tipoUsuarioSolicitante", 1);
 
             infoConjuntoCard.setOnClickListener() {
-                val bundle = Bundle()
-                if (idConjunto != null) {
-                    bundle.putInt("idConjunto", idConjunto)
-                };
                 view.findNavController().navigate(
                     R.id.action_administradorHomeFragment_to_conjuntoInfoFragment2, bundle
                 )
 
             }
             vincularUsuariosCard.setOnClickListener(){
-                val bundle = Bundle()
-                if (idConjunto != null) {
-                    bundle.putInt("idConjunto", idConjunto)
-                };
-                bundle.putInt("tipoUsuarioSolicitante", 1);
-
                 view.findNavController().navigate(
                     R.id.action_administradorHomeFragment_to_perfilCrearFragment3, bundle
                 )
@@ -76,11 +70,6 @@ class AdministradorHomeFragment : Fragment() {
             }
 
             listaUsuariosCard.setOnClickListener(){
-                val bundle = Bundle()
-                if (idConjunto != null) {
-                    bundle.putInt("idConjunto", idConjunto)
-                };
-                bundle.putInt("tipoUsuarioSolicitante", 1);
                 view.findNavController().navigate(
                     R.id.action_administradorHomeFragment_to_conjuntoPerfilesListaFragment2, bundle
                 )
@@ -88,11 +77,6 @@ class AdministradorHomeFragment : Fragment() {
 
 
             cardZonasComunes.setOnClickListener(){
-                val bundle = Bundle()
-                if (idConjunto != null) {
-                    bundle.putInt("idConjunto", idConjunto)
-                };
-                bundle.putInt("tipoUsuarioSolicitante", 1);
                 view.findNavController().navigate(
                     R.id.action_administradorHomeFragment_to_fragmentConjuntoListaZonascomunes2, bundle
                 )
@@ -100,13 +84,14 @@ class AdministradorHomeFragment : Fragment() {
 
 
             cardAgregarZonaComun.setOnClickListener(){
-                val bundle = Bundle()
-                if (idConjunto != null) {
-                    bundle.putInt("idConjunto", idConjunto)
-                };
-                bundle.putInt("tipoUsuarioSolicitante", 1);
                 view.findNavController().navigate(
                     R.id.action_administradorHomeFragment_to_conjuntoAgregarZonacomunFragment3, bundle
+                )
+            }
+
+            cardHistorialVisitantes.setOnClickListener(){
+                view.findNavController().navigate(
+                    R.id.action_administradorHomeFragment_to_vigilanteListaVisitantesFragment3, bundle
                 )
             }
 

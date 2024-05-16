@@ -62,10 +62,21 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <Spinner
-                android:id="@+id/spinnerZonaComun"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/profile_selector_background"
+                android:orientation="vertical">
+
+                <Spinner
+                    android:id="@+id/spinnerZonaComun"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:entries="@array/complaint_types"
+                    android:padding="8dp" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textView26"
@@ -84,19 +95,25 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/button5"
-                    android:layout_width="10dp"
+                <TextView
+                    android:id="@+id/textoFecha"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/colorPrimaryLight"
-                    android:text="03/05/2024"
-                    app:cornerRadius="50dp" />
+                    android:background="@drawable/profile_selector_background"
+                    android:gravity="center"
+                    android:hint="AÑO - MES - DIA"
+                    android:padding="10dp"
+                    android:paddingStart="20dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textSize="16dp" />
+
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/botonSeleccionarFecha"
                     android:layout_width="10dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -121,18 +138,25 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
-                    android:layout_width="40dp"
+                <TextView
+                    android:id="@+id/textoHora"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/colorPrimaryLight"
-                    android:text="8:00:00"
-                    app:cornerRadius="50dp" />
+                    android:background="@drawable/profile_selector_background"
+                    android:gravity="center"
+                    android:hint="00:00:00"
+                    android:padding="10dp"
+                    android:paddingStart="20dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textSize="16dp" />
 
                 <Button
-                    android:layout_width="40dp"
+                    android:id="@+id/botonSeleccionarHora"
+                    android:layout_width="10dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorPrimary"
@@ -158,11 +182,11 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView25"
+                    android:id="@+id/textoCuposDisponibles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="1000"
+                    android:text="0"
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -204,7 +228,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/buttonReservar"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

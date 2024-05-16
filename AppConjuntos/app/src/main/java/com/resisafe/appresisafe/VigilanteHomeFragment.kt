@@ -46,7 +46,11 @@ class VigilanteHomeFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch() {
 
             val PerfilActual = ManejadorDeTokens.cargarPerfilActual(view.context)
-            val idConjunto = PerfilActual?.idConjunto
+
+            val bundle = Bundle()
+            bundle.putInt("idConjunto", PerfilActual?.idConjunto!!)
+            bundle.putInt("idPrefilActual",PerfilActual?.idPerfil!!)
+
             val registroVisitantesBinding = view.findViewById<CardView>(R.id.registrovisitantes)
             registroVisitantesBinding.setOnClickListener {
                 view.findNavController().navigate(
@@ -56,18 +60,20 @@ class VigilanteHomeFragment : Fragment() {
             val historialvisitas = view.findViewById<CardView>(R.id.historialvisitas)
             historialvisitas.setOnClickListener {
                 view.findNavController().navigate(
-                    R.id.action_vigilanteHomeFragment_to_vigilanteListaVisitantesFragment
+                    R.id.action_vigilanteHomeFragment_to_vigilanteListaVisitantesFragment,bundle
                 )
             }
             val registrarvisita = view.findViewById<CardView>(R.id.registrarvisita)
             registrarvisita.setOnClickListener {
-                val bundle = Bundle()
-                if (idConjunto != null) {
-                    bundle.putInt("idConjunto", idConjunto)
-                };
+
                 view.findNavController().navigate(
                     R.id.action_vigilanteHomeFragment_to_vigilanteRegistroVisitaFragment, bundle
                 )
+            }
+
+            val registrarPaquete = view.findViewById<CardView>(R.id.registropaqueteria)
+            registrarPaquete.setOnClickListener(){
+                view.findNavController().navigate(R.id.action_vigilanteHomeFragment_to_vigilanteRegistrarPaqueteFragment,bundle)
             }
         }
         super.onViewCreated(view, savedInstanceState)

@@ -25,9 +25,28 @@ namespace APIConjuntos.Controllers
 
         [HttpGet]
         [Route("Zonacomun/{idZonaComun}")]
-        public List<ReservasDTO> getReservasByZonaComun([FromRoute] int idZonaComun)
+        public IActionResult getReservasByZonaComun([FromRoute] int idZonaComun)
         {
-            return mapper.Map<List<Reserva>, List<ReservasDTO>>(dbContext.Reservas.Where(q => q.IdZonaComun == idZonaComun).ToList());
+            var query = from reserva in dbContext.Reservas
+                        join zonaComun in dbContext.Zonacomuns on reserva.IdZonaComun equals zonaComun.IdZonaComun
+                        join perfil in dbContext.Perfils on reserva.IdReservante equals perfil.IdPerfil
+                        join usuario in dbContext.Usuarios on perfil.IdUsuario equals usuario.IdUsuario
+                        where zonaComun.IdZonaComun == idZonaComun
+                        select new
+                        {
+                            IdReserva = reserva.IdReserva,
+                            NombreZonaComun = zonaComun.Nombre,
+                            NombreReservante = usuario.Nombre,
+                            ApellidoReservante = usuario.Nombre,
+                            CedulaReservante = usuario.Cedula,
+                            FechaReserva = reserva.Fecha.Date.ToString("yyyy-MM-dd"),
+                            HoraInicio = reserva.HoraInicio,
+                            HoraFin = reserva.HoraFin,
+                            CantidadPersonas = reserva.CantidadPersonas,
+                            Estado = reserva.Estado
+                        };
+
+            return new JsonResult(query);
         }
 
 
@@ -39,58 +58,41 @@ namespace APIConjuntos.Controllers
             return mapper.Map<Reserva, ReservasDTO>(dbContext.Reservas.FirstOrDefault(q => q.IdReserva == id));
         }
 
-        [HttpGet]
-        [Route("Zonacomun/{idZonaComun}/{fecha}")]
-        public List<ReservasDTO> getReservasByZonaComunFechaEspecifica([FromRoute] int idZonaComun, [FromRoute] string fecha) {
-            return mapper.Map<List<Reserva>, List<ReservasDTO>>(dbContext.Reservas.Where(q => q.IdZonaComun == idZonaComun && q.Fecha == DateTime.Parse(fecha)).ToList());
-        }
-
 
         [HttpGet]
         [Route("Perfil/{idPerfil}")]
-        public List<ReservasDTO> getReservasByPerfil([FromRoute] int idPerfil)
-        {
-            return mapper.Map<List<Reserva>, List<ReservasDTO>>(dbContext.Reservas.Where(q => q.IdReservante == idPerfil).ToList());
-        }
-
-
-        [HttpGet]
-        [Route("Conjunto/{idConjunto}")]
-        public IActionResult getReservasByConjunto([FromRoute] int idConjunto)
+        public IActionResult getReservasByPerfil([FromRoute] int idPerfil)
         {
             var query = from reserva in dbContext.Reservas
                         join zonaComun in dbContext.Zonacomuns on reserva.IdZonaComun equals zonaComun.IdZonaComun
                         join perfil in dbContext.Perfils on reserva.IdReservante equals perfil.IdPerfil
                         join usuario in dbContext.Usuarios on perfil.IdUsuario equals usuario.IdUsuario
-                        where zonaComun.IdConjunto == idConjunto
-                        select new 
+                        where reserva.IdReservante == idPerfil
+                        select new
                         {
                             IdReserva = reserva.IdReserva,
                             NombreZonaComun = zonaComun.Nombre,
                             NombreReservante = usuario.Nombre,
                             ApellidoReservante = usuario.Nombre,
                             CedulaReservante = usuario.Cedula,
-                            FechaReserva = reserva.Fecha,
+                            FechaReserva = reserva.Fecha.Date.ToString("yyyy-MM-dd"),
                             HoraInicio = reserva.HoraInicio,
                             HoraFin = reserva.HoraFin,
-                            CantidadPersonas = reserva.CantidadPersonas
+                            CantidadPersonas = reserva.CantidadPersonas,
+                            Estado = reserva.Estado,
+
                         };
 
             return new JsonResult(query);
         }
 
 
-        [HttpGet]
-        [Route("Perfil/{idPerfil}/{fecha}")]
-        public List<ReservasDTO> getReservasByPerfilYFecha([FromRoute] int idPerfil, [FromRoute] string fecha)
-        {
-            return mapper.Map<List<Reserva>, List<ReservasDTO>>(dbContext.Reservas.Where(q => q.IdReservante == idPerfil && q.Fecha == DateTime.Parse(fecha)).ToList());
-        }
-
         // POST api/<ReservasController>
         [HttpPost]
         public IActionResult Post([FromBody] ReservasDTO reserva)
         {
+
+            //Implementar logica de estado de reserva dependiendo del precio
 
             var reservaACrear = mapper.Map<ReservasDTO, Reserva>(reserva);
             if (nuevaReservaValida(reservaACrear))
@@ -107,25 +109,14 @@ namespace APIConjuntos.Controllers
 
         // PUT api/<ReservasController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] ReservasDTO reserva)
+        public IActionResult Put(int id, [FromBody] int estado)
         {
-            dbContext.Reservas.Update(mapper.Map<ReservasDTO, Reserva>(reserva));
+            var reserva = dbContext.Reservas.FirstOrDefault(r => r.IdReserva == id);
+            if (reserva == null) return NotFound();
+            reserva.Estado = estado;
+            dbContext.Reservas.Update(reserva);
             dbContext.SaveChanges();
-        }
-
-        // DELETE api/<ReservasController>/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var reservaEliminar = dbContext.Reservas.FirstOrDefault(r => r.IdReserva == id);
-            if (reservaEliminar != null)
-            {
-                dbContext.Reservas.Remove(reservaEliminar);
-                dbContext.SaveChanges();
-                return new JsonResult(new { message = "Reserva eliminada con exito" });
-
-            }
-            return BadRequest("No se pudo eliminar la reserva");
+            return new JsonResult(new { message = "estado de reserva cambiado con exito" });
         }
     }
 }

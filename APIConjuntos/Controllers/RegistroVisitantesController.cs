@@ -34,19 +34,12 @@ namespace APIConjuntos.Controllers
 
 
         [HttpGet]
-        [Route("Residente/{idResidente}")]
-        public List<RegistroVisitanteDTO> getVisitasByResidente([FromRoute] int idResidente) {
-            return mapper.Map<List<RegistroVisitante>, List<RegistroVisitanteDTO>>(dbContext.RegistroVisitantes.Where(rv => rv.IdResidenteVinculado == idResidente).ToList());
-
-        }
-
-
-        [HttpGet]
         [Route("Conjunto/{idConjunto}")]
         public IActionResult getVisitasbyConjunto([FromRoute] int idConjunto) {
             var visitas = (from registro in dbContext.RegistroVisitantes
                            join visitante in dbContext.Visitantes on registro.IdVisitante equals visitante.IdVisitante
                            join perfil in dbContext.Perfils on registro.IdResidenteVinculado equals perfil.IdPerfil
+                           join usuario in dbContext.Usuarios on perfil.IdUsuario equals usuario.IdUsuario
                            where perfil.IdConjunto == idConjunto
                            select new
                            {
@@ -54,11 +47,39 @@ namespace APIConjuntos.Controllers
                                visitante.Nombre,
                                visitante.Apellido,
                                visitante.Cedula,
-                               registro.Fecha,
+                               fecha = registro.Fecha.Date.ToString("yyyy-MM-dd"),
                                registro.HoraIngreso,
-                               registro.HoraSalida
+                               NombreResidente = usuario.Nombre,
+                               ApellidoResidente = usuario.Apellido,
+                               CedulaResidente = usuario.Cedula
                            }).ToList();
             return new JsonResult( visitas);
+        }
+
+
+        [HttpGet]
+        [Route("Residente/{idResidente}")]
+        public IActionResult getVisitasbyResidente([FromRoute] int idResidente)
+        {
+            var visitas = (from registro in dbContext.RegistroVisitantes
+                           join visitante in dbContext.Visitantes on registro.IdVisitante equals visitante.IdVisitante
+                           join perfil in dbContext.Perfils on registro.IdResidenteVinculado equals perfil.IdPerfil
+                           join usuario in dbContext.Usuarios on perfil.IdUsuario equals usuario.IdUsuario
+                           where perfil.IdPerfil == idResidente
+                           select new
+                           {
+                               registro.IdRegistro,
+                               visitante.Nombre,
+                               visitante.Apellido,
+                               visitante.Cedula,
+                               fecha = registro.Fecha.Date.ToString("yyyy-MM-dd"),
+                               registro.HoraIngreso,
+                               NombreResidente = usuario.Nombre,
+                               ApellidoResidente = usuario.Apellido,
+                               CedulaResidente = usuario.Cedula
+                           }).ToList();
+            return new JsonResult(visitas);
+            return new JsonResult(visitas);
         }
 
         // POST api/<RegistroVisitantesController>
