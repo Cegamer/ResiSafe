@@ -51,6 +51,8 @@ class ProfileSelectorFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        activity?.actionBar?.title = "Seleccionar Perfil"
+
         super.onViewCreated(view, savedInstanceState)
 
         val cardAddProfile: CardView = view.findViewById(R.id.cardAddProfile)

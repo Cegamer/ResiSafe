@@ -48,6 +48,9 @@ class ZonacomunInfoFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        activity?.actionBar?.title = "Información de Zona Común"
+
         val apiService = RetrofitClient.apiService
         val context = this.requireContext()
         val token = ManejadorDeTokens.cargarTokenUsuario(context)?.token!!;

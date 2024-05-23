@@ -49,7 +49,7 @@ class VigilanteHomeFragment : Fragment() {
 
             val bundle = Bundle()
             bundle.putInt("idConjunto", PerfilActual?.idConjunto!!)
-            bundle.putInt("idPrefilActual",PerfilActual?.idPerfil!!)
+            bundle.putInt("idPrefilActual", PerfilActual?.idPerfil!!)
 
             val registroVisitantesBinding = view.findViewById<CardView>(R.id.registrovisitantes)
             registroVisitantesBinding.setOnClickListener {
@@ -60,7 +60,7 @@ class VigilanteHomeFragment : Fragment() {
             val historialvisitas = view.findViewById<CardView>(R.id.historialvisitas)
             historialvisitas.setOnClickListener {
                 view.findNavController().navigate(
-                    R.id.action_vigilanteHomeFragment_to_vigilanteListaVisitantesFragment,bundle
+                    R.id.action_vigilanteHomeFragment_to_vigilanteListaVisitantesFragment, bundle
                 )
             }
             val registrarvisita = view.findViewById<CardView>(R.id.registrarvisita)
@@ -72,8 +72,18 @@ class VigilanteHomeFragment : Fragment() {
             }
 
             val registrarPaquete = view.findViewById<CardView>(R.id.registropaqueteria)
-            registrarPaquete.setOnClickListener(){
-                view.findNavController().navigate(R.id.action_vigilanteHomeFragment_to_vigilanteRegistrarPaqueteFragment,bundle)
+            registrarPaquete.setOnClickListener() {
+                view.findNavController().navigate(
+                    R.id.action_vigilanteHomeFragment_to_vigilanteRegistrarPaqueteFragment,
+                    bundle
+                )
+            }
+            val historialPaquete = view.findViewById<CardView>(R.id.historialPaquete)
+            historialPaquete.setOnClickListener() {
+                view.findNavController().navigate(
+                    R.id.action_vigilanteHomeFragment_to_historialPaquetesFragment,
+                    bundle
+                )
             }
         }
         super.onViewCreated(view, savedInstanceState)

@@ -15,8 +15,8 @@
     <fragment
         android:id="@+id/residenteHomeFragment"
         android:name="com.resisafe.appresisafe.ResidenteHomeFragment"
-        android:label="fragment_residente_home"
-        tools:layout="@layout/fragment_residente_home" >
+        android:label="Home Residente"
+        tools:layout="@layout/fragment_residente_home">
         <action
             android:id="@+id/action_residenteHomeFragment_to_residenteReservarZonacomunFragment"
             app:destination="@id/residenteReservarZonacomunFragment" />
@@ -25,14 +25,21 @@
             app:destination="@id/residenteQuejasYReclamosFragment" />
         <action
             android:id="@+id/action_residenteHomeFragment_to_vigilanteListaVisitantesFragment2"
-            app:destination="@id/vigilanteListaVisitantesFragment2" >
+            app:destination="@id/vigilanteListaVisitantesFragment2">
             <argument
                 android:name="tipoSolicitante"
                 android:defaultValue="2" />
         </action>
         <action
             android:id="@+id/action_residenteHomeFragment_to_listaReservasFragment3"
-            app:destination="@id/listaReservasFragment3" >
+            app:destination="@id/listaReservasFragment3">
+            <argument
+                android:name="tipoSolicitante"
+                android:defaultValue="2" />
+        </action>
+        <action
+            android:id="@+id/action_residenteHomeFragment_to_historialPaquetesFragment2"
+            app:destination="@id/historialPaquetesFragment2" >
             <argument
                 android:name="tipoSolicitante"
                 android:defaultValue="2" />
@@ -41,16 +48,17 @@
     <fragment
         android:id="@+id/residenteReservarZonacomunFragment"
         android:name="com.resisafe.appresisafe.ResidenteReservarZonacomunFragment"
-        android:label="fragment_residente_reservar_zonacomun"
+        android:label="Reservar Zona Común"
         tools:layout="@layout/fragment_residente_reservar_zonacomun" />
 
     <fragment
         android:id="@+id/residenteQuejasYReclamosFragment"
         android:name="com.resisafe.appresisafe.ResidenteQuejasYReclamosFragment"
-        android:label="fragment_residente_quejas_y_reclamos"
-    tools:layout="@layout/fragment_residente_quejas_y_reclamos" >
+        android:label="Quejas y Reclamos"
+        tools:layout="@layout/fragment_residente_quejas_y_reclamos">
 
-        <argument android:name="idConjunto"
+        <argument
+            android:name="idConjunto"
             app:argType="integer" />
         <argument
             android:name="idPrefilActual"
@@ -59,9 +67,10 @@
     <fragment
         android:id="@+id/vigilanteListaVisitantesFragment2"
         android:name="com.resisafe.appresisafe.VigilanteListaVisitantesFragment"
-        android:label="fragment_vigilante_lista_visitantes"
-        tools:layout="@layout/fragment_vigilante_lista_visitantes" >
-        <argument android:name="idConjunto"
+        android:label="Historial de Visitantes"
+        tools:layout="@layout/fragment_vigilante_lista_visitantes">
+        <argument
+            android:name="idConjunto"
             app:argType="integer" />
         <argument
             android:name="tipoSolicitante"
@@ -73,15 +82,31 @@
     <fragment
         android:id="@+id/listaReservasFragment3"
         android:name="com.resisafe.appresisafe.ListaReservasFragment"
-        android:label="fragment_lista_reservas"
-        tools:layout="@layout/fragment_lista_reservas" >
-        <argument android:name="idConjunto"
+        android:label="Lista de Reservas"
+        tools:layout="@layout/fragment_lista_reservas">
+        <argument
+            android:name="idConjunto"
             app:argType="integer" />
         <argument
             android:name="tipoSolicitante"
             app:argType="integer" />
         <argument
             android:name="idPrefilActual"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/historialPaquetesFragment2"
+        android:name="com.resisafe.appresisafe.HistorialPaquetesFragment"
+        android:label="fragment_historial_paquetes"
+        tools:layout="@layout/fragment_historial_paquetes">
+        <argument
+            android:name="idConjunto"
+            app:argType="integer" />
+        <argument
+            android:name="idPrefilActual"
+            app:argType="integer" />
+        <argument
+            android:name="tipoSolicitante"
             app:argType="integer" />
     </fragment>
 </navigation>

@@ -30,7 +30,7 @@ namespace APIConjuntos.Controllers
 
 
         [HttpGet]
-        [Route("Cojunto/{idConjunto}")]
+        [Route("Conjunto/{idConjunto}")]
         public List<PaqueteDTO> getPaquetesByConjunto([FromRoute] int idConjunto)
         {
             return mapper.Map<List<Paquete>, List<PaqueteDTO>>(dbContext.Paquetes.Where(q => q.IdConjunto == idConjunto).ToList());
@@ -48,23 +48,29 @@ namespace APIConjuntos.Controllers
         [Route("Residente/{idResidente}")]
         public List<PaqueteDTO> getPaqueteByResidente([FromRoute] int idResidente)
         {
-            return mapper.Map<List<Paquete>, List<PaqueteDTO>>(dbContext.Paquetes.Where(q => q.IdResidenteRecibe == idResidente).ToList());
+            var findTorreYApto = dbContext.Paquetes.FirstOrDefault(p => p.IdResidenteRecibe == idResidente);
+            if (findTorreYApto != null)
+                return getPaqueteByTorreyApto(findTorreYApto.Torre, findTorreYApto.Apto, findTorreYApto.IdConjunto);
+            else
+                return mapper.Map<List<Paquete>, List<PaqueteDTO>>(dbContext.Paquetes.Where(q => q.IdResidenteRecibe == idResidente).ToList());
         }
 
         // POST api/<PaquetesController>
         [HttpPost]
-        public void Post([FromBody] PaqueteDTO paquete)
+        public IActionResult Post([FromBody] PaqueteDTO paquete)
         {
             dbContext.Paquetes.Add(mapper.Map<PaqueteDTO, Paquete>(paquete));
             dbContext.SaveChanges();
+            return new JsonResult(new { message = "Registrado con exito" });
         }
 
         // PUT api/<PaquetesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] PaqueteDTO paqueteAModificar)
+        public IActionResult Put(int id, [FromBody] PaqueteDTO paqueteAModificar)
         {
             dbContext.Paquetes.Update(mapper.Map<Paquete>(paqueteAModificar));
             dbContext.SaveChanges();
+            return new JsonResult(new { message = "Editado con exito" });
         }
     }
 }

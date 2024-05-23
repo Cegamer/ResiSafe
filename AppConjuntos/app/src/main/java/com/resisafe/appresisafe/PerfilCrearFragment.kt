@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.TextView.OnEditorActionListener
+import androidx.navigation.findNavController
 import com.resisafe.appresisafe.RetrofitClient.apiService
 import retrofit2.Call
 import retrofit2.Callback
@@ -51,6 +52,14 @@ class PerfilCrearFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        activity?.actionBar?.title = "Vincularse a un conjunto"
+
+        val button2 = view.findViewById<Button>(R.id.button2)
+        button2.setOnClickListener(){
+            view.findNavController().popBackStack()
+        }
+
         val spinnerConjunto: Spinner = view.findViewById(R.id.spinnerConjunto)
         val mapConjuntos: MutableMap<String, Int> = mutableMapOf()
 

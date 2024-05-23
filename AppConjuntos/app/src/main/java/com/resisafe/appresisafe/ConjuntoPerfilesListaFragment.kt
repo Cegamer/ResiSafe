@@ -51,6 +51,10 @@ class ConjuntoPerfilesListaFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        activity?.actionBar?.title = "Lista de Perfiles"
+
+
         val adapter = perfilUsuarioAdapter(mutableListOf(), mutableListOf())
 
         val textFiltro = view.findViewById<EditText>(R.id.filtroCedulaUsuario)
@@ -65,15 +69,7 @@ class ConjuntoPerfilesListaFragment : Fragment() {
         val args = arguments
         val idConjuntoArg = args?.getInt("idConjunto")
 
-        if (args != null) {
-            val idTipoPerfil = args.getInt("filtroInicial")
 
-            when (idTipoPerfil) {
-                1 -> checkbox3.isChecked = true;
-                2 -> checkbox1.isChecked = true;
-                3 -> checkbox2.isChecked = true;
-            }
-        }
 
 
         val botonNuevoPerfilConjunto = view.findViewById<Button>(R.id.botonNuevoUsuario)
@@ -110,7 +106,16 @@ class ConjuntoPerfilesListaFragment : Fragment() {
 
             adapter.actualizar(datosFiltrados.toMutableList())
         }
+        if (args != null) {
+            val idTipoPerfil = args.getInt("filtroInicial")
 
+            when (idTipoPerfil) {
+                1 -> checkbox3.isChecked = true;
+                2 -> checkbox1.isChecked = true;
+                3 -> checkbox2.isChecked = true;
+            }
+            aplicarFiltrado()
+        }
         // Agregar listeners para los checkboxes y el campo de filtro
         checkbox1.setOnCheckedChangeListener { _, _ -> aplicarFiltrado() }
         checkbox2.setOnCheckedChangeListener { _, _ -> aplicarFiltrado() }

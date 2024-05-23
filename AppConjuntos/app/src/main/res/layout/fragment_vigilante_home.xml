@@ -116,7 +116,7 @@
                     app:layout_row="0">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/historialpaquetes"
+                        android:id="@+id/historialPaquete"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:backgroundTint="@color/colorSecondaryDark"

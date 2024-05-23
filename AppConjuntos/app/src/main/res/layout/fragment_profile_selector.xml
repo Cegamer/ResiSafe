@@ -45,7 +45,9 @@
                         android:id="@+id/profilesGrid"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="30dp"
+                        android:layout_gravity="center"
+                        android:foregroundGravity="center"
+                        android:padding="20dp"
                         app:columnCount="2">
 
                         <androidx.cardview.widget.CardView

@@ -51,6 +51,8 @@ class AppmasterRegistrarConjuntoFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        activity?.actionBar?.title = "Registrar Conjunto"
+
         super.onViewCreated(view, savedInstanceState)
         val boton: Button = view.findViewById(R.id.buttonCrearConjunto)
         val buttonCancelar : Button = view.findViewById(R.id.buttonCancelar)

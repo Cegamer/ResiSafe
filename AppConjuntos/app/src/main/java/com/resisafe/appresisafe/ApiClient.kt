@@ -174,9 +174,9 @@ interface ApiService {
 
 
     @GET("Perfiles/BuscarCedula/{cedula}/Conjunto/{idConjunto}")
-    fun getPerfilByCedula( @Path("cedula") cedula: Int,
-                           @Path("idConjunto") idConjunto: Int,
-                           @Header("Authorization") token: String): Call<perfilByCedula>
+    fun getPerfilByCedula(@Path("cedula") cedula: Int,
+                          @Path("idConjunto") idConjunto: Int,
+                          @Header("Authorization") token: String): Call<perfilByCedula>
     @GET("Visitantes/BuscarCedula/{cedula}")
     fun getvisitanteByCedula( @Path("cedula") cedula: Int,
                         @Header("Authorization") token: String): Call<visitante>
@@ -203,5 +203,16 @@ interface ApiService {
 
     @POST("Paquetes")
     fun registrarPaquete(@Body paquete: Paquete, @Header("Authorization") token: String) : Call<ApiResponse>
+    @GET("Paquetes/Residente/{idPerfil}")
+    fun obtenerPaquetesByUsuario(@Path("idPerfil") idPerfil: Int,@Header("Authorization") token: String) : Call<List<Paquete>>
+
+    @GET("Paquetes/Conjunto/{idConjunto}")
+    fun obtenerPaquetesByConjunto(@Path("idConjunto") idConjunto: Int,@Header("Authorization") token: String) : Call<List<Paquete>>
+
+    @GET("Paquetes/{idPaquete}")
+    fun obtenerPaqueteById(@Path("idPaquete") idPaquete: Int,@Header("Authorization") token: String) : Call<Paquete>
+
+    @PUT("Paquetes/{idPaquete}")
+    fun editarEstadoPaquete(@Path("idPaquete") idPaquete: Int,@Body paquete: Paquete,@Header("Authorization") token: String) : Call<ApiResponse>
 
 }

@@ -20,7 +20,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -58,6 +57,8 @@ class VigilanteRegistroVisitaFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        activity?.actionBar?.title = "Registrar Visita"
+
         val buscadorCedulaVisitante = view.findViewById<TextInputEditText>(R.id.cedulaField)
         val botonNuevoVisitante = view.findViewById<ImageButton>(R.id.agregarVisitante)
         val visitanteNombreApellidoText = view.findViewById<TextView>(R.id.visitanteNombreApellidoText)

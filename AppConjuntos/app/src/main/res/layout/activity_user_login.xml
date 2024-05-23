@@ -102,7 +102,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:inputType="number"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,7 +136,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:inputType="textPassword"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -146,8 +148,9 @@
                 android:layout_gravity="center"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="Iniciar Sesion"
+                android:textColor="@color/colorSecondaryLight"
                 app:cornerRadius="10dp"
-                app:rippleColor="#FFE1E1" />
+                app:rippleColor="#FFFFFF" />
         </LinearLayout>
 
         <LinearLayout

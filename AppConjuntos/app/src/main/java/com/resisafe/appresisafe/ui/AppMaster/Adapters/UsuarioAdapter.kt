@@ -13,12 +13,16 @@ import com.resisafe.appresisafe.ManejadorDeTokens
 import com.resisafe.appresisafe.R
 import com.resisafe.appresisafe.RetrofitClient
 import com.resisafe.appresisafe.UserData
+import com.resisafe.appresisafe.Utils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class UsuarioAdapter(var usuarios: MutableList<UserData>, var listaOriginal : MutableList<UserData>) :
+class UsuarioAdapter(
+    var usuarios: MutableList<UserData>,
+    var listaOriginal: MutableList<UserData>
+) :
     RecyclerView.Adapter<UsuarioViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsuarioViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -36,36 +40,37 @@ class UsuarioAdapter(var usuarios: MutableList<UserData>, var listaOriginal : Mu
         holder.render(item)
         val apiService = RetrofitClient.apiService
         holder.botonBorrar.setOnClickListener {
-            if (holder.token != null) {
-                apiService.deleteUser(holder.idUsuario, holder.token).enqueue(object :
-                    Callback<ApiResponse> {
-                    override fun onResponse(
-                        call: Call<ApiResponse>,
-                        response: Response<ApiResponse>
-                    ) {
-                        if (response.isSuccessful) {
-                            val builder = AlertDialog.Builder(holder.context)
-                            builder.setMessage("Se Borró el Usuario")
-                            builder.setPositiveButton("Aceptar") { dialog, _ ->
-                                dialog.dismiss()
+            val builder = AlertDialog.Builder(holder.context)
+            builder.setMessage("¿Seguro que desea borrar el usuario?")
+            builder.setPositiveButton("Aceptar") { dialog, _ ->
+                if (holder.token != null) {
+                    apiService.deleteUser(holder.idUsuario, holder.token).enqueue(object :
+                        Callback<ApiResponse> {
+                        override fun onResponse(
+                            call: Call<ApiResponse>,
+                            response: Response<ApiResponse>
+                        ) {
+                            if (response.isSuccessful) {
+                                Utils.mostrarDialogoInformacion("Se borró el Usuario",holder.itemView)
+
+                                usuarios.removeAt(position)
+                                notifyDataSetChanged()
+
+                            } else {
+                                Utils.mostrarDialogoInformacion("Error al Borrar el Usuario, intente nuevamente",holder.itemView)
                             }
-                            val dialog = builder.create()
-                            dialog.show()
-                            usuarios.removeAt(position)
-                            notifyDataSetChanged()
-
-                        } else {
-                            Log.e("Tag", "Response body is null")
                         }
-                    }
 
-                    override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
-                        Log.e("Tag", "Response body is dsafadfafdasf")
-                    }
-                })
-
-
+                        override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+                            Log.e("Tag", "Response body is dsafadfafdasf")
+                        }
+                    })
+                }
+                dialog.dismiss()
             }
+            builder.setNegativeButton("Cancelar"){dialog,_ -> dialog.dismiss()}
+            val dialog = builder.create()
+            dialog.show()
         }
     }
 
@@ -82,7 +87,7 @@ class UsuarioAdapter(var usuarios: MutableList<UserData>, var listaOriginal : Mu
         return listaOriginal
     }
 
-    fun generarListaOriginal(lista : MutableList<UserData>){
+    fun generarListaOriginal(lista: MutableList<UserData>) {
         listaOriginal = lista;
         usuarios = lista;
         notifyDataSetChanged()
@@ -97,7 +102,7 @@ class UsuarioViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val botonBorrar = view.findViewById<ImageView>(R.id.botonBorrar)
     val token = ManejadorDeTokens.cargarTokenUsuario(view.context)?.token;
     val context = view.context
-    var idUsuario : Int = 0
+    var idUsuario: Int = 0
 
     fun render(Usuario: UserData) {
         textoId.text = Usuario.idUsuario.toString()

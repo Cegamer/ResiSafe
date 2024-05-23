@@ -72,6 +72,11 @@ class ResidenteHomeFragment : Fragment() {
                 view.findNavController().navigate(R.id.action_residenteHomeFragment_to_listaReservasFragment3,bundle)
 
             }
+            val paquetes = view.findViewById<CardView>(R.id.historialpaquetes)
+            paquetes.setOnClickListener(){
+                view.findNavController().navigate(R.id.action_residenteHomeFragment_to_historialPaquetesFragment2,bundle)
+
+            }
         }
         super.onViewCreated(view, savedInstanceState)
     }

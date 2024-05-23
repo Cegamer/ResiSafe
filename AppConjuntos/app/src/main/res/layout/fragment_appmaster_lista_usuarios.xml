@@ -45,6 +45,7 @@
                     android:paddingEnd="30dp"
                     android:text="Nuevo"
                     android:textAllCaps="false"
+                    android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
 

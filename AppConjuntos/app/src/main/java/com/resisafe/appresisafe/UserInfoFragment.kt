@@ -44,6 +44,9 @@ class UserInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        activity?.actionBar?.title = "Mi Información"
+
+
         val tokenResponse = ManejadorDeTokens.cargarTokenUsuario(view.context)
         val apiService = RetrofitClient.apiService
 

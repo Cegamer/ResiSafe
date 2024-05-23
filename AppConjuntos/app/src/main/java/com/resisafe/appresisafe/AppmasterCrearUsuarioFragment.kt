@@ -47,6 +47,7 @@ class AppmasterCrearUsuarioFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        activity?.actionBar?.title = "Crear Nuevo Usuario"
 
         val registerButton: Button = view.findViewById(R.id.registerButton)
         var cedulaCampo: TextView = view.findViewById(R.id.cedulaField);

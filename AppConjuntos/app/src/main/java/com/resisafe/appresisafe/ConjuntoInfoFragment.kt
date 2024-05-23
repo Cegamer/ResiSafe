@@ -47,6 +47,7 @@ class ConjuntoInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.actionBar?.title = "Información del conjunto"
 
         val tokenResponse = ManejadorDeTokens.cargarTokenUsuario(view.context)
         val apiService = RetrofitClient.apiService

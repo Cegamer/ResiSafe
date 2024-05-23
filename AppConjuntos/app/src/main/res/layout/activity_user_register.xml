@@ -87,7 +87,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:inputType="number"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,7 +122,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:inputType="text"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -154,7 +156,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:inputType="text"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -188,7 +191,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:inputType="textPassword"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -207,6 +211,7 @@
                     android:backgroundTint="@color/colorPrimaryDanger"
                     android:padding="15dp"
                     android:text="Cancelar"
+                    android:textColor="@color/colorSecondaryLight"
                     app:cornerRadius="10dp" />
 
                 <Button
@@ -216,6 +221,7 @@
                     android:backgroundTint="@color/colorPrimary"
                     android:padding="15dp"
                     android:text="Registrarse"
+                    android:textColor="@color/colorSecondaryLight"
                     app:cornerRadius="10dp" />
             </LinearLayout>
 

@@ -13,11 +13,11 @@
     <fragment
         android:id="@+id/administradorHomeFragment"
         android:name="com.resisafe.appresisafe.AdministradorHomeFragment"
-        android:label="fragment_administrador_home"
-        tools:layout="@layout/fragment_administrador_home" >
+        android:label="Home Administrador"
+        tools:layout="@layout/fragment_administrador_home">
         <action
             android:id="@+id/action_administradorHomeFragment_to_perfilCrearFragment3"
-            app:destination="@id/perfilCrearFragment3" >
+            app:destination="@id/perfilCrearFragment3">
             <argument
                 android:name="idTipoSolicitante"
                 android:defaultValue="0" />
@@ -30,14 +30,14 @@
             app:destination="@id/conjuntoAgregarZonacomunFragment3" />
         <action
             android:id="@+id/action_administradorHomeFragment_to_conjuntoPerfilesListaFragment2"
-            app:destination="@id/conjuntoPerfilesListaFragment2" >
+            app:destination="@id/conjuntoPerfilesListaFragment2">
             <argument
                 android:name="filtroInicial"
                 android:defaultValue="0" />
         </action>
         <action
             android:id="@+id/action_administradorHomeFragment_to_conjuntoInfoFragment2"
-            app:destination="@id/conjuntoInfoFragment2" >
+            app:destination="@id/conjuntoInfoFragment2">
             <argument
                 android:name="idConjunto"
                 android:defaultValue="0" />
@@ -47,7 +47,7 @@
             app:destination="@id/fragmentConjuntoListaZonascomunes2" />
         <action
             android:id="@+id/action_administradorHomeFragment_to_vigilanteListaVisitantesFragment3"
-            app:destination="@id/vigilanteListaVisitantesFragment3" >
+            app:destination="@id/vigilanteListaVisitantesFragment3">
             <argument
                 android:name="tipoSolicitante"
                 android:defaultValue="1" />
@@ -56,8 +56,8 @@
     <fragment
         android:id="@+id/perfilCrearFragment3"
         android:name="com.resisafe.appresisafe.PerfilCrearFragment"
-        android:label="fragment_perfil_crear"
-        tools:layout="@layout/fragment_perfil_crear" >
+        android:label="Vincular Usuario"
+        tools:layout="@layout/fragment_perfil_crear">
         <argument
             android:name="tipoUsuarioSolicitante"
             app:argType="integer" />
@@ -68,8 +68,8 @@
     <fragment
         android:id="@+id/conjuntoAgregarZonacomunFragment3"
         android:name="com.resisafe.appresisafe.conjuntoAgregarZonacomunFragment"
-        android:label="fragment_conjunto_agregar_zonacomun"
-        tools:layout="@layout/fragment_conjunto_agregar_zonacomun" >
+        android:label="Agregar Zona Común"
+        tools:layout="@layout/fragment_conjunto_agregar_zonacomun">
         <argument
             android:name="idConjunto"
             app:argType="integer" />
@@ -77,14 +77,14 @@
     <fragment
         android:id="@+id/conjuntoPerfilesListaFragment2"
         android:name="com.resisafe.appresisafe.ConjuntoPerfilesListaFragment"
-        android:label="fragment_conjunto_perfiles_lista"
-        tools:layout="@layout/fragment_conjunto_perfiles_lista" >
+        android:label="Lista de Usuarios"
+        tools:layout="@layout/fragment_conjunto_perfiles_lista">
         <argument
             android:name="idConjunto"
             app:argType="integer" />
         <action
             android:id="@+id/action_conjuntoPerfilesListaFragment_to_perfilCrearFragment"
-            app:destination="@id/perfilCrearFragment3" >
+            app:destination="@id/perfilCrearFragment3">
             <argument
                 android:name="tipoUsuarioSolicitante"
                 android:defaultValue="1" />
@@ -96,9 +96,10 @@
     <fragment
         android:id="@+id/conjuntoInfoFragment2"
         android:name="com.resisafe.appresisafe.ConjuntoInfoFragment"
-        android:label="fragment_conjunto_info"
-        tools:layout="@layout/fragment_conjunto_info" >
-        <argument android:name="idConjunto"
+        android:label="Información del conjunto"
+        tools:layout="@layout/fragment_conjunto_info">
+        <argument
+            android:name="idConjunto"
             app:argType="integer" />
         <action
             android:id="@+id/action_conjuntoInfoFragment_to_conjuntoAgregarZonacomunFragment2"
@@ -110,8 +111,8 @@
     <fragment
         android:id="@+id/fragmentConjuntoListaZonascomunes2"
         android:name="com.resisafe.appresisafe.fragmentConjuntoListaZonascomunes"
-        android:label="fragment_conjunto_lista_zonascomunes"
-        tools:layout="@layout/fragment_conjunto_lista_zonascomunes" >
+        android:label="Lista Zonas Comunes"
+        tools:layout="@layout/fragment_conjunto_lista_zonascomunes">
         <argument
             android:name="idConjunto"
             app:argType="integer" />
@@ -125,14 +126,14 @@
     <fragment
         android:id="@+id/zonacomunInfoFragment2"
         android:name="com.resisafe.appresisafe.ZonacomunInfoFragment"
-        android:label="fragment_zonacomun_info"
-        tools:layout="@layout/fragment_zonacomun_info" >
+        android:label="Información Zona Común"
+        tools:layout="@layout/fragment_zonacomun_info">
         <argument
             android:name="idZonaComun"
             app:argType="integer" />
         <action
             android:id="@+id/action_zonacomunInfoFragment_to_listaReservasFragment"
-            app:destination="@id/listaReservasFragment2" >
+            app:destination="@id/listaReservasFragment2">
             <argument
                 android:name="tipoSolicitante"
                 android:defaultValue="1" />
@@ -150,9 +151,10 @@
     <fragment
         android:id="@+id/listaReservasFragment2"
         android:name="com.resisafe.appresisafe.ListaReservasFragment"
-        android:label="fragment_lista_reservas"
-        tools:layout="@layout/fragment_lista_reservas" >
-        <argument android:name="idConjunto"
+        android:label="Lista de Reservas"
+        tools:layout="@layout/fragment_lista_reservas">
+        <argument
+            android:name="idConjunto"
             app:argType="integer" />
         <argument
             android:name="tipoSolicitante"
@@ -167,8 +169,8 @@
     <fragment
         android:id="@+id/vigilanteListaVisitantesFragment3"
         android:name="com.resisafe.appresisafe.VigilanteListaVisitantesFragment"
-        android:label="fragment_vigilante_lista_visitantes"
-        tools:layout="@layout/fragment_vigilante_lista_visitantes" >
+        android:label="Lista de Visitantes"
+        tools:layout="@layout/fragment_vigilante_lista_visitantes">
         <argument
             android:name="idConjunto"
             app:argType="integer" />

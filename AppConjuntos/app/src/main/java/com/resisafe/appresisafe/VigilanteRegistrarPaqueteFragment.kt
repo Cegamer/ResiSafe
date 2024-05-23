@@ -52,6 +52,7 @@ class VigilanteRegistrarPaqueteFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        activity?.actionBar?.title = "Registrar Paquete"
 
 
         val token = ManejadorDeTokens.cargarTokenUsuario(view.context)?.token!!
@@ -96,11 +97,11 @@ class VigilanteRegistrarPaqueteFragment : Fragment() {
                     apto = aptoField.text.toString().uppercase(),
                     idVigilanteRecibe = idPrefilActual,
                     estado = 1,
-                    idResidenteRecibe = null,
-                    fechaEntrega = editTextFecha.toString(),
-                    horaEntrega = editTextHora.toString(),
-                    fechaRecibido = null,
-                    horaRecibido = null,
+                    idResidenteRecibe = idPrefilActual,
+                    fechaEntrega = editTextFecha.text.toString(),
+                    horaEntrega = editTextHora.text.toString(),
+                    fechaRecibido = "2024-01-01",
+                    horaRecibido = "00:00:00",
                     idConjunto = idConjuntoArg
                 )
                 registrarPaquete(paquete,token,apiService,view)
@@ -156,7 +157,7 @@ class VigilanteRegistrarPaqueteFragment : Fragment() {
                     val datos = response.body()
                     if (datos != null) {
                         val builder = AlertDialog.Builder(context)
-                        builder.setMessage("Paquete registrad0 con éxito")
+                        builder.setMessage("Paquete registrado con éxito")
                         builder.setPositiveButton("Aceptar") { dialog, _ ->
                             findNavController().popBackStack()
                             dialog.dismiss()

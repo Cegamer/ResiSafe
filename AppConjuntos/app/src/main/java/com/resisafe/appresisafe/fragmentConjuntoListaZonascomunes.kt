@@ -54,6 +54,7 @@ class fragmentConjuntoListaZonascomunes : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        activity?.actionBar?.title = "Lista de zonas comunes"
 
         val buttonNuevaZonaComun = view.findViewById<Button>(R.id.buttonNuevaZonaComun)
 

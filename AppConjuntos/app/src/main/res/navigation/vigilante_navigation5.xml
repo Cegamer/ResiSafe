@@ -13,11 +13,11 @@
     <fragment
         android:id="@+id/vigilanteHomeFragment"
         android:name="com.resisafe.appresisafe.VigilanteHomeFragment"
-        android:label="fragment_vigilante_home"
-        tools:layout="@layout/fragment_vigilante_home" >
+        android:label="Home Vigilante"
+        tools:layout="@layout/fragment_vigilante_home">
         <action
             android:id="@+id/action_vigilanteHomeFragment_to_vigilanteListaVisitantesFragment"
-            app:destination="@id/vigilanteListaVisitantesFragment" >
+            app:destination="@id/vigilanteListaVisitantesFragment">
             <argument
                 android:name="tipoSolicitante"
                 android:defaultValue="3" />
@@ -30,7 +30,14 @@
             app:destination="@id/vigilanteRegistroVisitanteFragment" />
         <action
             android:id="@+id/action_vigilanteHomeFragment_to_vigilanteRegistrarPaqueteFragment"
-            app:destination="@id/vigilanteRegistrarPaqueteFragment" >
+            app:destination="@id/vigilanteRegistrarPaqueteFragment">
+            <argument
+                android:name="tipoSolicitante"
+                android:defaultValue="3" />
+        </action>
+        <action
+            android:id="@+id/action_vigilanteHomeFragment_to_historialPaquetesFragment"
+            app:destination="@id/historialPaquetesFragment" >
             <argument
                 android:name="tipoSolicitante"
                 android:defaultValue="3" />
@@ -39,8 +46,8 @@
     <fragment
         android:id="@+id/vigilanteListaVisitantesFragment"
         android:name="com.resisafe.appresisafe.VigilanteListaVisitantesFragment"
-        android:label="fragment_vigilante_lista_visitantes"
-        tools:layout="@layout/fragment_vigilante_lista_visitantes" >
+        android:label="Historial de Visitas"
+        tools:layout="@layout/fragment_vigilante_lista_visitantes">
         <argument
             android:name="idConjunto"
             app:argType="integer" />
@@ -54,8 +61,8 @@
     <fragment
         android:id="@+id/vigilanteRegistroVisitaFragment"
         android:name="com.resisafe.appresisafe.VigilanteRegistroVisitaFragment"
-        android:label="fragment_vigilante_registro_visita"
-        tools:layout="@layout/fragment_vigilante_registro_visita" >
+        android:label="Registrar Visitas"
+        tools:layout="@layout/fragment_vigilante_registro_visita">
         <action
             android:id="@+id/action_vigilanteRegistroVisitaFragment_to_vigilanteRegistroVisitanteFragment"
             app:destination="@id/vigilanteRegistroVisitanteFragment" />
@@ -66,13 +73,13 @@
     <fragment
         android:id="@+id/vigilanteRegistroVisitanteFragment"
         android:name="com.resisafe.appresisafe.VigilanteRegistroVisitanteFragment"
-        android:label="fragment_vigilante_registro_visitante"
+        android:label="Registrar Visitante"
         tools:layout="@layout/fragment_vigilante_registro_visitante" />
     <fragment
         android:id="@+id/vigilanteRegistrarPaqueteFragment"
         android:name="com.resisafe.appresisafe.VigilanteRegistrarPaqueteFragment"
-        android:label="fragment_vigilante_registrar_paquete"
-        tools:layout="@layout/fragment_vigilante_registrar_paquete" >
+        android:label="Registrar Paquete"
+        tools:layout="@layout/fragment_vigilante_registrar_paquete">
         <argument
             android:name="idConjunto"
             app:argType="integer" />
@@ -81,6 +88,33 @@
             app:argType="integer" />
         <argument
             android:name="idPrefilActual"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/historialPaquetesFragment"
+        android:name="com.resisafe.appresisafe.HistorialPaquetesFragment"
+        android:label="fragment_historial_paquetes"
+        tools:layout="@layout/fragment_historial_paquetes" >
+        <argument
+            android:name="idConjunto"
+            app:argType="integer" />
+        <argument
+            android:name="idPrefilActual"
+            app:argType="integer" />
+        <argument
+            android:name="tipoSolicitante"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_historialPaquetesFragment_to_editarEstadoDePaqueteFragment"
+            app:destination="@id/editarEstadoDePaqueteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarEstadoDePaqueteFragment"
+        android:name="com.resisafe.appresisafe.EditarEstadoDePaqueteFragment"
+        android:label="fragment_editar_estado_de_paquete"
+        tools:layout="@layout/fragment_editar_estado_de_paquete" >
+        <argument
+            android:name="idPaquete"
             app:argType="integer" />
     </fragment>
 

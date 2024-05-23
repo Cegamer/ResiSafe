@@ -49,6 +49,8 @@ class AppmasterListaUsuariosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val botonNuevoUsuario = view.findViewById<Button>(R.id.botonNuevoUsuario)
 
+        activity?.actionBar?.title = "Lista de Usuarios"
+
         botonNuevoUsuario.setOnClickListener {
             view.findNavController().navigate(
                 R.id.action_appmasterListaUsuariosFragment_to_appmasterCrearUsuarioFragment

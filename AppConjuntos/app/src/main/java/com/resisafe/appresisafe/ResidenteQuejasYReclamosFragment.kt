@@ -47,6 +47,8 @@ class ResidenteQuejasYReclamosFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        activity?.actionBar?.title = "Quejas y Reclamos"
+
         super.onViewCreated(view, savedInstanceState)
         val tiposQuejas: MutableMap<String, Int> = mutableMapOf()
 

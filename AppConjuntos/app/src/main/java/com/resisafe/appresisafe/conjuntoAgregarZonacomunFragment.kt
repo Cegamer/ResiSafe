@@ -54,6 +54,10 @@ class conjuntoAgregarZonacomunFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        activity?.actionBar?.title = "Nueva Zona Común"
+
+
         val editTextNombre = view.findViewById<TextInputEditText>(R.id.editTextNombre)
         val editTextAforoMaximo = view.findViewById<TextInputEditText>(R.id.editTextAforoMaximo)
         val editTextPrecio = view.findViewById<TextInputEditText>(R.id.editTextPrecio)
@@ -75,7 +79,7 @@ class conjuntoAgregarZonacomunFragment : Fragment() {
         }
 
 
-        fun obtenerDatos(): ZonaComun {
+        fun obtenerDatos(): ZonaComun? {
 
             var idConjuntoArg = 0
             val args = arguments
@@ -98,6 +102,7 @@ class conjuntoAgregarZonacomunFragment : Fragment() {
                 }
                 val dialog = builder.create()
                 dialog.show()
+                return  null
             }
 
             val zonaComun = ZonaComun(
@@ -125,6 +130,7 @@ class conjuntoAgregarZonacomunFragment : Fragment() {
 
             if (token != null) {
                 val zonaComun = obtenerDatos()
+                if(zonaComun != null){
                 apiService.crearZonaComun(zonaComun, token).enqueue(object : Callback<ApiResponse> {
                     override fun onResponse(
                         call: Call<ApiResponse>,
@@ -152,6 +158,7 @@ class conjuntoAgregarZonacomunFragment : Fragment() {
                         Log.e("Tag", "Response body is dsafadfafdasf")
                     }
                 })
+                }
             }
         }
         super.onViewCreated(view, savedInstanceState)

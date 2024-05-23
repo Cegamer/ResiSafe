@@ -57,6 +57,9 @@ class ResidenteReservarZonacomunFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        activity?.actionBar?.title = "Reservar Zona Común"
+
+
         val textoFecha = view.findViewById<TextView>(R.id.textoFecha)
         val botonSeleccionarFecha = view.findViewById<Button>(R.id.botonSeleccionarFecha)
         val textoHora = view.findViewById<TextView>(R.id.textoHora)

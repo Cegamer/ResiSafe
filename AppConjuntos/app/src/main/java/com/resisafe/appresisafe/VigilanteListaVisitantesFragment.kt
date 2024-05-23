@@ -39,6 +39,8 @@ class VigilanteListaVisitantesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_vigilante_lista_visitantes, container, false)
+        activity?.actionBar?.title = "Lista de Visitantes"
+
 
         val token = ManejadorDeTokens.cargarTokenUsuario(view.context)?.token!!
         val apiService = RetrofitClient.apiService

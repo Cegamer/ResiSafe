@@ -13,7 +13,7 @@
     <fragment
         android:id="@+id/nav_userInfoFragment"
         android:name="com.resisafe.appresisafe.UserInfoFragment"
-        android:label="fragment_user_info"
+        android:label="Mi informacion"
         tools:layout="@layout/fragment_user_info" />
 
 

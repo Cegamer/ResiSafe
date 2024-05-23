@@ -53,6 +53,10 @@ class ListaReservasFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        activity?.actionBar?.title = "Lista de Reservas"
+
+
         val token = ManejadorDeTokens.cargarTokenUsuario(view.context)?.token!!
         val apiService = RetrofitClient.apiService
         val args = arguments

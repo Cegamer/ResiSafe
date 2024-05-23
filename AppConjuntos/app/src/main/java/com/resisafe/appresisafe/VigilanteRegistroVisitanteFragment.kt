@@ -48,6 +48,8 @@ class VigilanteRegistroVisitanteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        activity?.actionBar?.title = "Registrar Visitante"
+
         val cedulaField = view.findViewById<TextInputEditText>(R.id.cedulaField)
         val nombreField = view.findViewById<TextInputEditText>(R.id.nombreField)
         val apellidoField = view.findViewById<TextInputEditText>(R.id.apellidoField)
