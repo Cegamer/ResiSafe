@@ -8,7 +8,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="1000dp"
@@ -119,6 +120,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorPrimary"
                     android:text="Seleccionar"
+                    android:textColor="@color/white"
                     android:textSize="12sp"
                     app:cornerRadius="10dp" />
             </LinearLayout>
@@ -161,6 +163,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorPrimary"
                     android:text="Seleccionar"
+                    android:textColor="@color/white"
                     android:textSize="12sp"
                     app:cornerRadius="10dp" />
             </LinearLayout>
@@ -224,7 +227,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:inputType="number"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -234,7 +238,8 @@
                 android:layout_gravity="center"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="Reservar"
-                app:cornerRadius="20dp" />
+                app:cornerRadius="20dp"
+                android:textColor="@color/white" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

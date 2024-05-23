@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.DatePicker
 import android.widget.TextView
 import android.widget.TimePicker
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
@@ -76,6 +77,8 @@ class VigilanteRegistrarPaqueteFragment : Fragment() {
         buttonSeleccionarHora.setOnClickListener(){
             mostrarTimePickerDialog(view,editTextHora)
         }
+        val cancelButton = view.findViewById<Button>(R.id.cancelButton)
+        cancelButton.setOnClickListener(){view.findNavController().popBackStack()}
 
 
         registerButton.setOnClickListener(){

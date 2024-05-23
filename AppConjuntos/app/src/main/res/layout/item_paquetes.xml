@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:backgroundTint="@color/white"
     app:cardCornerRadius="0dp"
     app:cardElevation="0dp">
 
@@ -58,8 +59,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingRight="4dp"
-                            app:tint="@color/colorPrimary"
-                            app:srcCompat="@drawable/conjunto" />
+                            app:srcCompat="@drawable/conjunto"
+                            app:tint="@color/colorPrimary" />
 
                         <TextView
                             android:id="@+id/torre"
@@ -81,8 +82,8 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:paddingRight="4dp"
-                            app:tint="@color/colorPrimary"
-                            app:srcCompat="@drawable/habilitar_residentes" />
+                            app:srcCompat="@drawable/habilitar_residentes"
+                            app:tint="@color/colorPrimary" />
 
                         <TextView
                             android:id="@+id/apto"
@@ -124,7 +125,9 @@
                     android:layout_weight="2"
                     android:backgroundTint="@color/ErrorTextColor"
                     android:gravity="center"
+                    android:padding="5sp"
                     android:text="Estado"
+                    android:textColor="@color/white"
                     android:textSize="8sp"
                     app:cornerRadius="20dp"
                     tools:ignore="TouchTargetSizeCheck" />

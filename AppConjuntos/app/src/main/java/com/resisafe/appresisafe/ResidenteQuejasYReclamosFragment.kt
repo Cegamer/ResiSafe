@@ -72,6 +72,8 @@ class ResidenteQuejasYReclamosFragment : Fragment() {
             )
             enviarQuejaReclamo(apiService, datosQuejas, token, view)
         }
+        val regresar = view.findViewById<Button>(R.id.regresar)
+        regresar.setOnClickListener(){view.findNavController().popBackStack()}
 
 
 

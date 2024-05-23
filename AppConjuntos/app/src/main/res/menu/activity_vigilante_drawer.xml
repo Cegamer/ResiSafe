@@ -7,7 +7,31 @@
         <item
             android:id="@+id/residenteHomeFragment"
             android:icon="@drawable/ic_baseline_home_24"
-            android:title="Vigilante" />
+            android:title="Home" />
+
+    </group>
+
+    <group android:id="@+id/grupo">
+        <item
+            android:id="@+id/registrarPaquetes"
+            android:icon="@drawable/paquete"
+            android:title="Registrar Paquetes" />
+        <item
+            android:id="@+id/historialPaquetes"
+            android:icon="@drawable/historialpaquetes"
+            android:title="Historial de Paquetes" />
+        <item
+            android:id="@+id/registroVisitantes"
+            android:icon="@drawable/registrovisitante"
+            android:title="Registrar Visitantes" />
+        <item
+            android:id="@+id/registrarVisita"
+            android:icon="@drawable/historialvisitas"
+            android:title="Registrar Visita" />
+        <item
+            android:id="@+id/HistorialVisitas"
+            android:icon="@drawable/historialpaquetes"
+            android:title="Historial Visitas" />
 
     </group>
     <group android:id="@+id/OpcionesSesion">

@@ -10,6 +10,28 @@
             android:title="@string/menu_home" />
 
     </group>
+    <group android:id="@+id/grupo">
+        <item
+            android:id="@+id/reservarzonacomun"
+            android:icon="@drawable/zonacomun"
+            android:title="Reservar Zona Comun" />
+        <item
+            android:id="@+id/historialPaquetes"
+            android:icon="@drawable/paquete"
+            android:title="Historial de Paquetes" />
+        <item
+            android:id="@+id/QuejasReclamos"
+            android:icon="@drawable/quejas"
+            android:title="Quejas y Reclamos" />
+        <item
+            android:id="@+id/HistorialVisitas"
+            android:icon="@drawable/historialvisitas"
+            android:title="Historial de Visitas" />
+        <item
+            android:id="@+id/reservas"
+            android:icon="@drawable/historialpaquetes"
+            android:title="Reservas" />
+    </group>
     <group android:id="@+id/OpcionesSesion">
         <item
             android:id="@+id/nav_usuarioActivity"

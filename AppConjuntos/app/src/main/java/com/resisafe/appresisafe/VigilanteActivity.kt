@@ -11,7 +11,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.resisafe.appresisafe.databinding.ActivityVigilanteBinding
+import kotlinx.coroutines.launch
 
 class VigilanteActivity : AppCompatActivity() {
 
@@ -38,6 +40,51 @@ class VigilanteActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val context = this
+        lifecycleScope.launch() {
+            val PerfilActual = ManejadorDeTokens.cargarPerfilActual(context)
+
+            val bundle = Bundle()
+            bundle.putInt("idConjunto", PerfilActual?.idConjunto!!)
+            bundle.putInt("idPrefilActual", PerfilActual?.idPerfil!!)
+
+            navView.menu.findItem(R.id.registrarPaquetes).setOnMenuItemClickListener {
+                navController.navigate(
+                    R.id.action_vigilanteHomeFragment_to_vigilanteRegistrarPaqueteFragment,
+                    bundle
+                )
+                true
+            }
+
+            navView.menu.findItem(R.id.historialPaquetes).setOnMenuItemClickListener {
+                navController.navigate(
+                    R.id.action_vigilanteHomeFragment_to_historialPaquetesFragment,
+                    bundle
+                )
+                true
+            }
+            navView.menu.findItem(R.id.registroVisitantes).setOnMenuItemClickListener {
+                navController.navigate(
+                    R.id.action_vigilanteHomeFragment_to_vigilanteRegistroVisitanteFragment,
+                    bundle
+                )
+                true
+            }
+            navView.menu.findItem(R.id.registrarVisita).setOnMenuItemClickListener {
+                navController.navigate(
+                R.id.action_vigilanteHomeFragment_to_vigilanteRegistroVisitaFragment, bundle)
+                true
+            }
+            navView.menu.findItem(R.id.HistorialVisitas).setOnMenuItemClickListener {
+                navController.navigate(
+                    R.id.action_vigilanteHomeFragment_to_vigilanteListaVisitantesFragment, bundle
+
+                )
+                true
+
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

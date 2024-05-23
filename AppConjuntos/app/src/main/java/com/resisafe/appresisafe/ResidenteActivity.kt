@@ -1,6 +1,8 @@
 package com.resisafe.appresisafe
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -11,7 +13,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import com.resisafe.appresisafe.databinding.ActivityResidenteBinding
+import kotlinx.coroutines.launch
 
 class ResidenteActivity : AppCompatActivity() {
 
@@ -38,6 +45,50 @@ class ResidenteActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
+        val context = this
+        lifecycleScope.launch() {
+            val PerfilActual = ManejadorDeTokens.cargarPerfilActual(context)
+
+            val bundle = Bundle()
+            bundle.putInt("idConjunto", PerfilActual?.idConjunto!!)
+            bundle.putInt("idPrefilActual", PerfilActual?.idPerfil!!)
+
+            navView.menu.findItem(R.id.QuejasReclamos).setOnMenuItemClickListener {
+                navController.navigate(
+                    R.id.action_residenteHomeFragment_to_residenteQuejasYReclamosFragment2, bundle
+                )
+                true
+            }
+
+            navView.menu.findItem(R.id.reservarzonacomun).setOnMenuItemClickListener {
+                navController.navigate(
+                    R.id.action_residenteHomeFragment_to_residenteReservarZonacomunFragment, bundle
+                )
+                true
+            }
+            navView.menu.findItem(R.id.HistorialVisitas).setOnMenuItemClickListener {
+                navController.navigate(
+                    R.id.action_residenteHomeFragment_to_vigilanteListaVisitantesFragment2,
+                    bundle
+                )
+                true
+            }
+            navView.menu.findItem(R.id.reservas).setOnMenuItemClickListener {
+                navController
+                    .navigate(R.id.action_residenteHomeFragment_to_listaReservasFragment3, bundle)
+                true
+            }
+            navView.menu.findItem(R.id.historialPaquetes).setOnMenuItemClickListener {
+                navController.navigate(
+                    R.id.action_residenteHomeFragment_to_historialPaquetesFragment2,
+                    bundle
+                )
+                true
+
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

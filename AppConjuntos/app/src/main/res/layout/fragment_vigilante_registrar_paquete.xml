@@ -17,7 +17,7 @@
             android:id="@+id/imageView15"
             android:layout_width="1000dp"
             android:layout_height="864dp"
-            android:layout_marginTop="-370dp"
+            android:layout_marginTop="-350dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -60,6 +60,7 @@
                 android:layout_width="315dp"
                 android:layout_height="521dp"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -76,9 +77,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
                             android:textColor="@color/colorPrimary"
-                            tools:text="Torre" />
+                            android:textStyle="bold"
+                            android:visibility="visible"
+                            android:text="Torre" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/torreInput"
@@ -103,6 +105,7 @@
                                 android:layout_height="wrap_content"
                                 android:inputType="number"
                                 android:singleLine="true"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="14sp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -119,7 +122,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:textColor="@color/colorPrimary"
-                            tools:text="Apartamento" />
+                            android:textStyle="bold"
+                            android:visibility="visible"
+                            android:text="Apartamento" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="150dp"
@@ -143,6 +148,7 @@
                                 android:layout_height="wrap_content"
                                 android:inputType="number"
                                 android:singleLine="true"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="14sp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -152,12 +158,13 @@
 
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/textView17"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:text="Fecha de Entrega"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/colorPrimary"
-                    tools:text="Fecha de Entrega" />
+                    android:textStyle="bold"></TextView>
 
                 <LinearLayout
                     android:id="@+id/layoutFecha"
@@ -194,8 +201,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="Hora de Entrega"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:id="@+id/layoutApertura"
@@ -232,6 +241,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
@@ -244,6 +254,7 @@
                         android:backgroundTint="@color/colorPrimaryDanger"
                         android:padding="15dp"
                         android:text="Cancelar"
+                        android:textColor="@color/white"
                         app:cornerRadius="10dp" />
 
                     <Button
@@ -253,6 +264,7 @@
                         android:backgroundTint="@color/colorPrimary"
                         android:padding="15dp"
                         android:text="Registrar"
+                        android:textColor="@color/white"
                         app:cornerRadius="10dp" />
 
                 </LinearLayout>

@@ -17,7 +17,7 @@
             android:id="@+id/imageView15"
             android:layout_width="1000dp"
             android:layout_height="864dp"
-            android:layout_marginTop="-360dp"
+            android:layout_marginTop="-355dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +52,7 @@
                     android:layout_weight="1"
                     android:text="Quejas o reclamos"
                     android:textAlignment="textStart"
-                    android:textColor="@color/colorSecondaryLight"
+                    android:textColor="@color/white"
 
                     android:textSize="28sp" />
             </LinearLayout>
@@ -89,7 +89,9 @@
                     android:gravity="start|top"
                     android:hint="Escriba aquí su queja o reclamo"
                     android:inputType="textMultiLine"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/colorPrimaryLight" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -106,6 +108,7 @@
                         android:backgroundTint="@color/colorPrimary"
                         android:padding="15dp"
                         android:text="REGRESAR"
+                        android:textColor="@color/white"
                         android:translationX="-10dp"
                         android:translationY="0dp"
                         app:cornerRadius="10dp" />
@@ -117,6 +120,7 @@
                         android:backgroundTint="@color/colorPrimary"
                         android:padding="15dp"
                         android:text="  ENVIAR  "
+                        android:textColor="@color/white"
                         android:translationY="0dp"
                         app:cornerRadius="10dp" />
 

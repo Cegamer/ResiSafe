@@ -152,6 +152,7 @@
                     android:backgroundTint="@color/colorPrimary"
                     android:padding="15dp"
                     android:text="REGRESAR"
+                    android:textColor="@color/white"
                     android:translationY="0dp"
                     app:cornerRadius="10dp" />
             </LinearLayout>
