@@ -52,6 +52,13 @@
                 android:name="tipoSolicitante"
                 android:defaultValue="1" />
         </action>
+        <action
+            android:id="@+id/action_administradorHomeFragment_to_historialPaquetesFragment3"
+            app:destination="@id/historialPaquetesFragment3" >
+            <argument
+                android:name="tipoSolicitante"
+                android:defaultValue="1" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/perfilCrearFragment3"
@@ -107,6 +114,9 @@
         <action
             android:id="@+id/action_conjuntoInfoFragment_to_conjuntoPerfilesListaFragment"
             app:destination="@id/conjuntoPerfilesListaFragment2" />
+        <action
+            android:id="@+id/action_conjuntoInfoFragment_to_fragmentConjuntoListaZonascomunes"
+            app:destination="@id/fragmentConjuntoListaZonascomunes2" />
     </fragment>
     <fragment
         android:id="@+id/fragmentConjuntoListaZonascomunes2"
@@ -179,6 +189,33 @@
             app:argType="integer" />
         <argument
             android:name="idPrefilActual"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/historialPaquetesFragment3"
+        android:name="com.resisafe.appresisafe.HistorialPaquetesFragment"
+        android:label="Historial de Paquetes"
+        tools:layout="@layout/fragment_historial_paquetes">
+        <argument
+            android:name="idConjunto"
+            app:argType="integer" />
+        <argument
+            android:name="idPrefilActual"
+            app:argType="integer" />
+        <argument
+            android:name="tipoSolicitante"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_historialPaquetesFragment_to_editarEstadoDePaqueteFragment"
+            app:destination="@id/editarEstadoDePaqueteFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarEstadoDePaqueteFragment2"
+        android:name="com.resisafe.appresisafe.EditarEstadoDePaqueteFragment"
+        android:label="Editar Paquete"
+        tools:layout="@layout/fragment_editar_estado_de_paquete">
+        <argument
+            android:name="idPaquete"
             app:argType="integer" />
     </fragment>
 

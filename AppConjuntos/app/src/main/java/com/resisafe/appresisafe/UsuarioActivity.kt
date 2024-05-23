@@ -70,8 +70,10 @@ class UsuarioActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val post = response.body()
                             val a: TextView = findViewById(R.id.headerMenuName)
+                            val textView = findViewById<TextView>(R.id.textView)
                             if (post != null) {
-                                a.text = "${post.cedula} , ${post.nombre}, ${post.apellido}"
+                                a.text = post.nombre + " " + post.apellido
+                                textView.text = post.cedula.toString()
                             } else {
                                 a.text = post
                             }

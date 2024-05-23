@@ -95,6 +95,13 @@ class AdministradorHomeFragment : Fragment() {
                 )
             }
 
+            cardHistorialPaquetes.setOnClickListener() {
+                view.findNavController().navigate(
+                    R.id.action_administradorHomeFragment_to_historialPaquetesFragment3,
+                    bundle
+                )
+            }
+
 
         }
         super.onViewCreated(view, savedInstanceState)

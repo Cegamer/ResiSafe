@@ -93,8 +93,8 @@
     <fragment
         android:id="@+id/historialPaquetesFragment"
         android:name="com.resisafe.appresisafe.HistorialPaquetesFragment"
-        android:label="fragment_historial_paquetes"
-        tools:layout="@layout/fragment_historial_paquetes" >
+        android:label="Historial de Paquetes"
+        tools:layout="@layout/fragment_historial_paquetes">
         <argument
             android:name="idConjunto"
             app:argType="integer" />
@@ -111,8 +111,8 @@
     <fragment
         android:id="@+id/editarEstadoDePaqueteFragment"
         android:name="com.resisafe.appresisafe.EditarEstadoDePaqueteFragment"
-        android:label="fragment_editar_estado_de_paquete"
-        tools:layout="@layout/fragment_editar_estado_de_paquete" >
+        android:label="Editar Paquete"
+        tools:layout="@layout/fragment_editar_estado_de_paquete">
         <argument
             android:name="idPaquete"
             app:argType="integer" />

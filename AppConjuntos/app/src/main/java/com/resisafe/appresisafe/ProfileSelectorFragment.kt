@@ -62,6 +62,9 @@ class ProfileSelectorFragment : Fragment() {
         val apiService = RetrofitClient.apiService
         val context = this.requireContext()
 
+
+        cardAddProfile.setOnClickListener(){Utils.mostrarDialogoInformacion("Comuníquese con el administrador de su conjunto para vincularse como Residente o Vigilante",view)}
+
         if (tokenResponse != null) {
             Log.d("Tag", "Token: ${tokenResponse.token}, UserID: ${tokenResponse.userID}")
 

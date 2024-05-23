@@ -12,10 +12,6 @@
             android:id="@+id/nav_profileSelectorFragment"
             android:icon="@drawable/ic_baseline_person_24"
             android:title="Perfiles" />
-        <item
-            android:id="@+id/nav_userInfoFragment"
-            android:icon="@drawable/ic_baseline_badge_24"
-            android:title="Mi información" />
     </group>
     <group android:id="@+id/OpcionesSesion">
         <item

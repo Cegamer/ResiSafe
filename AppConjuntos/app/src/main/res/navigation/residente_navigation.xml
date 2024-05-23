@@ -97,7 +97,7 @@
     <fragment
         android:id="@+id/historialPaquetesFragment2"
         android:name="com.resisafe.appresisafe.HistorialPaquetesFragment"
-        android:label="fragment_historial_paquetes"
+        android:label="Historial de Paquetes"
         tools:layout="@layout/fragment_historial_paquetes">
         <argument
             android:name="idConjunto"
